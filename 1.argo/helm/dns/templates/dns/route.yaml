@@ -1,3 +1,4 @@
+{{if .Values.route.enabled}}
 ## IngressRouteTCP for ns.4.weebo.fr
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -15,3 +16,5 @@ spec:
           port: 443
   tls:
     passthrough: true
+
+{{end}}

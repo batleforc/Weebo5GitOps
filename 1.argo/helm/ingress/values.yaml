@@ -1,0 +1,15 @@
+certManager:
+  enabled: true
+  version: 1.20.0
+  installCRDs: true
+
+traefik:
+  enabled: true
+  version: 39.0.7
+  ips: ""
+  kubeCRD:
+    enabled: true
+  kubeIngress:
+    enabled: true
+  gatewayAPI:
+    enabled: false

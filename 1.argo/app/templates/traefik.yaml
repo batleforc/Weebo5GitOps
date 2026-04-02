@@ -1,0 +1,33 @@
+{{- if .Values.ingress.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: '{{ .Values.repo }}'
+    path: '1.argo/helm/ingress'
+    helm:
+      releaseName: ingress
+      valuesObject:
+        traefik:
+          ips: "{{ .Values.traefik.ips }}"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'argocd'
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+{{- end -}}

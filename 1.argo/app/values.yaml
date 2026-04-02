@@ -4,5 +4,8 @@ dns:
   ns: dns
   enabled: true
 
+ingress:
+  enabled: true
+
 traefik:
   ips: ""

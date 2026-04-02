@@ -5,8 +5,7 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
   labels:
     app: dns-server
-  annotations:
-    {{ toYaml .Values.annotations | nindent 4 }}
+  annotations: { { toYaml .Values.annotations | nindent 4 } }
 spec:
   ports:
     - name: tcp
@@ -21,11 +20,6 @@ spec:
       protocol: UDP
       port: 53
       targetPort: 53
-    - name: tls
-      protocol: TCP
-      port: 443
-      targetPort: 443
   selector:
     app: dns-server
-  type: ClusterIP
-  clusterIP: 10.96.0.11
+  type: LoadBalancer
