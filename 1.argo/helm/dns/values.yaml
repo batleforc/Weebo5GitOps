@@ -1,0 +1,36 @@
+zone:
+  "db.batleforc":
+    zone: "batleforc.fr."
+    file: |
+      $TTL 1h ;
+      $ORIGIN batleforc.fr.
+      @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
+                              2024011941; serial
+                              7200; refresh
+                              3600; retry
+                              1209600; expire
+                              38400 ) ; minimum
+              IN      NS                              batleforc.net.
+              IN      NS                              ns3082912.ip-94-23-38.eu.
+      @       3600    CAA         0             issue "letsencrypt.org"
+      batleforc.fr.       3600    A                   94.23.38.81
+      batleforc.fr.       3600    AAAA                2001:41d0:2:2751::1
+
+forwarders:
+  - 10.96.0.10
+  #- 8.8.8.8
+  #- 1.1.1.1
+
+bind9:
+  image: ubuntu/bind9
+  tag: 9.20-24.10_beta
+
+bind9Version: 9.20-26.04_edge
+
+externalDns:
+  version: v0.20.0
+
+annotations:
+  metallb.universe.tf/address-pool: one
+  metallb.io/ip-allocated-from-pool: one
+  metallb.universe.tf/allow-shared-ip: one
