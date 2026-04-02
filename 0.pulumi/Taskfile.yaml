@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  init:
+    desc: "Init pulumi by login to pulumi and install dependencies"
+    cmds:
+      - mkdir -p .tmp/pulumi
+      - pulumi login file://$PWD/.tmp/pulumi
+      - pulumi stack init prod
+  base:
+    dir: ./0.pulumi
+    env:
+      PULUMI_CONFIG_PASSPHRASE: ""
+      KUBECONFIG: ../0.config/kubeconfig.yaml
+    cmds:
+      - pulumi {{ .CLI_ARGS }}
+  up:
+    desc: "Update the infrastructure by running pulumi up"
+    cmds:
+      - task pulumi:base -- up --yes

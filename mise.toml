@@ -1,0 +1,17 @@
+[tools]
+task = "latest"
+helm = "latest"
+krew = "latest"
+talosctl = "latest"
+yq = "latest"
+opentofu = "latest"
+shellcheck = "latest"
+gitleaks = "latest"
+cocogitto = "latest"
+k9s = "latest"
+argocd = "latest"
+pulumi = "latest"
+openbao = { version = "latest", exe = "bao" }
+popeye = "latest"
+gh = "latest"
+go = "latest"

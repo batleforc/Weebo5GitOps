@@ -1,0 +1,41 @@
+version: "3"
+
+dotenv:
+  - .env
+  - .env.global
+
+includes:
+  pulumi: 0.pulumi/Taskfile.yaml
+
+tasks:
+  init:
+    desc: "Initialize the project"
+    silent: true
+    cmds:
+      - cog install-hook -a -o
+      - mkdir -p .tmp
+  recu:
+    desc: "Run pre-commit hooks on all files, including submodules"
+    cmds:
+      - gitleaks git --pre-commit --redact --staged --verbose
+  talosctl:
+    desc: "Run talosctl commands on the cluster"
+    silent: true
+    env:
+      TALOSCONFIG: 0.config/talosconfig.yaml
+    cmds:
+      - talosctl {{ .CLI_ARGS }}
+  k:
+    desc: "Run kubectl commands on the cluster"
+    silent: true
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - kubectl {{ .CLI_ARGS }}
+  k9s:
+    desc: "Run k9s on the cluster"
+    silent: true
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - k9s
