@@ -25,12 +25,6 @@ spec:
           podAnnotations:
             coroot.com/scrape-metrics: 'true'
             coroot.com/metrics-port: '9100'
-        ports:
-          transport:
-            respondingTimeouts:
-              readTimeout: 180s   # @schema type:[string, integer, null]
-              writeTimeout: 180s   # @schema type:[string, integer, null]
-              idleTimeout: 180s   # @schema type:[string, integer, null]
         ingressRoute:
           dashboard:
             enabled: false
