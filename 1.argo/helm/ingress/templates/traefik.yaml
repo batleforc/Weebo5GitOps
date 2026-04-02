@@ -33,13 +33,10 @@ spec:
               idleTimeout: 180s   # @schema type:[string, integer, null]
         ingressRoute:
           dashboard:
-            enabled: true
-            matchRule: Host(`4.weebo.fr`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
-            middlewares:
-              - name: vpn-only
-                namespace: traefik
+            enabled: false
+            matchRule: Host(`dashboard.batleforc.fr`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
             entryPoints:
-            - web
+            - websecure
         service:
           annotations:
             lbipam.cilium.io/sharing-key: "weebo-gate"
