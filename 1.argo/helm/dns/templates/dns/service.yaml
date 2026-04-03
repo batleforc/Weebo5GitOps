@@ -5,7 +5,7 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
   labels:
     app: dns-server
-  annotations: { { toYaml .Values.annotations | nindent 4 } }
+  annotations: {{ toYaml .Values.annotations | nindent 4 }}
 spec:
   ports:
     - name: tcp

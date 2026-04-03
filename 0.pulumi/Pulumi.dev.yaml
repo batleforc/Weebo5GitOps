@@ -1,4 +1,4 @@
-encryptionsalt: v1:sWTh8HFuiQ8=:v1:ucRybkYRo+zt+nSb:gnPDVk9qat9EA/ojlcX3CekpU+MzOQ==
+encryptionsalt: v1:uf5utzcY+xM=:v1:mF0qvQkF5RWyhKb/:x6zvJQZS491TX1hhjdQ9DcXPmOMmqA==
 config:
   0.pulumi:talosVersion: v1.12.6
   0.pulumi:kubeVersion: v1.35.3
