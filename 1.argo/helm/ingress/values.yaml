@@ -4,7 +4,7 @@ certManager:
   installCRDs: true
 
 traefik:
-  enabled: false
+  enabled: true
   version: 39.0.7
   ips: ""
   kubeCRD:
