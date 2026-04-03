@@ -14,7 +14,7 @@ spec:
     - CreateNamespace=true
   source:
     chart: traefik
-    repoURL: https://traefik.github.io/charts
+    repoURL: oci://ghcr.io/traefik/helm/traefik
     targetRevision: {{ .Values.traefik.version }}
     helm:
       releaseName: traefik
@@ -32,6 +32,8 @@ spec:
             entryPoints:
             - websecure
         service:
+          spec:
+            type: ClusterIP
           annotations:
             lbipam.cilium.io/sharing-key: "weebo-gate"
             lbipam.cilium.io/ips: "{{ .Values.traefik.ips }}"
