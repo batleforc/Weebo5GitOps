@@ -54,7 +54,7 @@ func main() {
 		_, err = yamlv2.NewConfigGroup(ctx, "ciliumIpPool", &yamlv2.ConfigGroupArgs{
 			Objs: pulumi.Array{
 				pulumi.Any(map[string]interface{}{
-					"apiVersion": "cilium.io/v2alpha1",
+					"apiVersion": "cilium.io/v2",
 					"kind":       "CiliumLoadBalancerIPPool",
 					"metadata": map[string]interface{}{
 						"name": "ip-pool",
@@ -197,7 +197,7 @@ g, authentik Admins, role:admin`),
 						"project": "default",
 						"source": map[string]interface{}{
 							"repoURL": gitRepo,
-							"path":    "1.argo/app",
+							"path":    "1.argo/app2",
 							"helm": map[string]interface{}{
 								"releaseName": "main",
 								"valuesObject": map[string]interface{}{
