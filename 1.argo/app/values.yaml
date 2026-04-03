@@ -5,7 +5,7 @@ dns:
   enabled: false
 
 ingress:
-  enabled: false
+  enabled: true
 
 traefik:
   ips: ""

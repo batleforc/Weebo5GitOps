@@ -197,7 +197,7 @@ g, authentik Admins, role:admin`),
 						"project": "default",
 						"source": map[string]interface{}{
 							"repoURL": gitRepo,
-							"path":    "1.argo/app2",
+							"path":    "1.argo/app",
 							"helm": map[string]interface{}{
 								"releaseName": "main",
 								"valuesObject": map[string]interface{}{
