@@ -202,7 +202,7 @@ g, authentik Admins, role:admin`),
 								"releaseName": "main",
 								"valuesObject": map[string]interface{}{
 									"traefik": map[string]interface{}{
-										"ips": fmt.Sprintf("%s,%s", serverNetwork.Routing.Ipv4.Ip, strings.ReplaceAll(serverNetwork.Routing.Ipv6.Ip, "/128", "")),
+										"ips": serverNetwork.Routing.Ipv4.Ip, //fmt.Sprintf("%s,%s", serverNetwork.Routing.Ipv4.Ip, strings.ReplaceAll(serverNetwork.Routing.Ipv6.Ip, "/128", "")),
 									},
 								},
 							},

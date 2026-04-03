@@ -33,7 +33,11 @@ spec:
             - websecure
         service:
           spec:
-            type: ClusterIP
+            type: LoadBalancer
+            ipFamilyPolicy: PreferDualStack
+            ipFamilies:
+              - IPv4
+              - IPv6
           annotations:
             lbipam.cilium.io/sharing-key: "weebo-gate"
             lbipam.cilium.io/ips: "{{ .Values.traefik.ips }}"
