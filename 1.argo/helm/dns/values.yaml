@@ -12,12 +12,10 @@ zone:
                               38400 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
-      @                   IN      NS                  dns14.ovh.net.
-      @                   IN      NS                  ns14.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       ns1                 IN      A                   94.23.38.81
       ns1                 IN      AAAA                2001:41d0:2:2751::1
-      ns2                 IN      A                   94.23.38.82
+      ns2                 IN      A                   94.23.38.81
       ns2                 IN      AAAA                2001:41d0:2:2751::2
       batleforc.fr.       3600    A                   94.23.38.81
       batleforc.fr.       3600    AAAA                2001:41d0:2:2751::1
