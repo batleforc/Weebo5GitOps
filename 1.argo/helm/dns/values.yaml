@@ -5,7 +5,7 @@ zone:
       $TTL 1h ;
       $ORIGIN batleforc.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2024011941; serial
+                              2024011942; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
