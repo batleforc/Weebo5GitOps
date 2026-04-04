@@ -1,0 +1,15 @@
+{{- if .Values.httpsNsServeur.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns-server-https
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    app: dns-server
+  type: ClusterIP
+  ports:
+    - name: https
+      port: 443
+      targetPort: 443
+{{- end -}}

@@ -11,7 +11,7 @@ spec:
   routes:
     - match: HostSNI(`{{ .Values.httpsNsServeur.nsName }}`)
       services:
-        - name: dns-server-in
+        - name: dns-server-https
           namespace: "{{ .Release.Namespace }}"
           port: 443
   tls:
