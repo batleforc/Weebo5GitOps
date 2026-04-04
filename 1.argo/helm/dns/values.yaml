@@ -25,7 +25,9 @@ bind9:
   image: ubuntu/bind9
   tag: 9.20-24.10_beta
 
-bind9Version: 9.20-26.04_edge
+tsig:
+  secretCreatorImage: alpine/k8s:1.35.3
+  bind9Version: 9.20-26.04_edge
 
 externalDns:
   version: v0.20.0
