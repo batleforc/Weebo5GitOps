@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: tsig-key-generator
-        image: ubuntu/bind9:{{ .Values.tsig.bind9Version }}
+        image: {{ .Values.tsig.bind9Image }}
         command: ["/bin/sh", "-c"]
         args:
           - |

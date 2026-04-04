@@ -23,11 +23,11 @@ forwarders:
 
 bind9:
   image: ubuntu/bind9
-  tag: 9.20-24.10_beta
+  tag: 9.20-26.04_edge
 
 tsig:
   secretCreatorImage: alpine/k8s:1.35.3
-  bind9Version: 9.20-26.04_edge
+  bind9Image: ubuntu/bind9:9.20-24.10_beta
 
 externalDns:
   version: v0.20.0
