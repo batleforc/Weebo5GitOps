@@ -30,7 +30,6 @@ spec:
     namespace: '{{ .Values.dns.ns }}'
   syncPolicy:
     automated:
-      prune: false
       selfHeal: true
     retry:
       limit: 5
