@@ -10,11 +10,19 @@ zone:
                               3600; retry
                               1209600; expire
                               38400 ) ; minimum
-              IN      NS                              batleforc.fr.
-              IN      NS                              ns3082912.ip-94-23-38.eu.
-      @       3600    CAA         0             issue "letsencrypt.org"
+      @                   IN      NS                  batleforc.fr.
+      @                   IN      NS                  ns3082912.ip-94-23-38.eu.
+      @                   IN      NS                  dns14.ovh.net.
+      @                   IN      NS                  ns14.ovh.net.
+      @                   3600    CAA       0  issue "letsencrypt.org"
       batleforc.fr.       3600    A                   94.23.38.81
       batleforc.fr.       3600    AAAA                2001:41d0:2:2751::1
+      argo                3600    A                   94.23.38.81
+      argo                3600    AAAA                2001:41d0:2:2751::1
+      ns                  3600    A                   94.23.38.81
+      ns                  3600    AAAA                2001:41d0:2:2751::1
+      auth                3600    A                   94.23.38.81
+      auth                3600    AAAA                2001:41d0:2:2751::1
 
 forwarders:
   - 10.96.0.10
@@ -31,6 +39,7 @@ tsig:
 
 externalDns:
   version: v0.20.0
+  zone: batleforc.fr
 
 httpsNsServeur:
   enabled: false
