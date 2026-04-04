@@ -8,6 +8,10 @@ metadata:
   annotations:
     {{ toYaml .Values.annotations | nindent 4 }}
 spec:
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   ports:
     - name: tcp
       protocol: TCP
