@@ -84,6 +84,10 @@ func main() {
 		if dnsName == "" {
 			return fmt.Errorf("DNS_NAME environment variable is not set")
 		}
+		dnsAltName := os.Getenv("DNS_ALT_NAME")
+		if dnsAltName == "" {
+			return fmt.Errorf("DNS_ALT_NAME environment variable is not set")
+		}
 
 		// Reinstall the server with Talos
 		reinstall, err := dedicated.NewServerReinstallTask(ctx, "reinstallTalos", &dedicated.ServerReinstallTaskArgs{
@@ -183,8 +187,9 @@ func main() {
 					"apiServer": map[string]interface{}{
 						"certSANs": []string{
 							serverNetwork.Routing.Ipv4.Ip,
-							strings.Replace(serverNetwork.Routing.Ipv6.Ip, "/128", "", -1),
+							strings.ReplaceAll(serverNetwork.Routing.Ipv6.Ip, "/128", ""),
 							dnsName,
+							dnsAltName,
 						},
 					},
 				},
@@ -213,6 +218,11 @@ func main() {
 					"install": map[string]interface{}{
 						"image": installerUrl,
 						"disk":  "/dev/sda",
+					},
+					"nodeLabels": map[string]interface{}{
+						"node.kubernetes.io/exclude-from-external-load-balancers": map[string]interface{}{
+							"$patch": "delete",
+						},
 					},
 					"network": map[string]interface{}{
 						"nameservers": []string{

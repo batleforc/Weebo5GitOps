@@ -24,6 +24,9 @@ cgroup:
     enabled: false
   hostRoot: /sys/fs/cgroup
 k8sServicePort: 6443
+operator:
+  replicas: 1
+rollOutCiliumPods: true
 k8s:
   requireIPv4PodCIDR: true
   requireIPv6PodCIDR: true
@@ -33,6 +36,3 @@ ipv6:
   enabled: true
 commonLabels:
   pod-security.kubernetes.io/enforce: privileged
-socketLB:
-  enabled: true
-  hostNamespaceOnly: true

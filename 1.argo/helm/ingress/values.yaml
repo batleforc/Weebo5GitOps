@@ -8,7 +8,7 @@ traefik:
   version: 39.0.7
   ips: ""
   kubeCRD:
-    enabled: false
+    enabled: true
   kubeIngress:
     enabled: true
   gatewayAPI:

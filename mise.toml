@@ -15,3 +15,5 @@ openbao = { version = "latest", exe = "bao" }
 popeye = "latest"
 gh = "latest"
 go = "latest"
+cilium-cli = "latest"
+cilium-hubble = "latest"

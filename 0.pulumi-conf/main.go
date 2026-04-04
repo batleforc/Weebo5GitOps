@@ -51,6 +51,12 @@ func main() {
 		}
 
 		// Create Cilium IpPool
+		// Note: CiliumL2AnnouncementPolicy is intentionally omitted.
+		// This single-node setup reuses the node's own public IP for LoadBalancer services.
+		// L2 announcement sends gratuitous ARPs for that IP, which conflicts with the node's
+		// native ARP on eth0 and disrupts all traffic to the IP (including the kube-apiserver
+		// on port 6443). Cilium's kube-proxy eBPF replacement handles LoadBalancer DNAT
+		// without needing L2 ARP since the IP is already reachable via the node's interface.
 		_, err = yamlv2.NewConfigGroup(ctx, "ciliumIpPool", &yamlv2.ConfigGroupArgs{
 			Objs: pulumi.Array{
 				pulumi.Any(map[string]interface{}{
@@ -62,14 +68,23 @@ func main() {
 					"spec": map[string]interface{}{
 						"blocks": []map[string]interface{}{
 							{
-								"start": serverNetwork.Routing.Ipv4.Ip,
-								"stop":  serverNetwork.Routing.Ipv4.Ip,
+								"cidr": serverNetwork.Routing.Ipv4.Ip + "/32",
 							},
 							{
-								"start": strings.Replace(serverNetwork.Routing.Ipv6.Ip, "/128", "", -1),
-								"stop":  strings.Replace(serverNetwork.Routing.Ipv6.Ip, "/128", "", -1),
+								"cidr": serverNetwork.Routing.Ipv6.Ip,
 							},
 						},
+					},
+				}),
+				pulumi.Any(map[string]interface{}{
+					"apiVersion": "cilium.io/v2alpha1",
+					"kind":       "CiliumL2AnnouncementPolicy",
+					"metadata": map[string]interface{}{
+						"name": "policy1",
+					},
+					"spec": map[string]interface{}{
+						"externalIPs":     true,
+						"loadBalancerIPs": true,
 					},
 				}),
 			},
@@ -202,7 +217,7 @@ g, authentik Admins, role:admin`),
 								"releaseName": "main",
 								"valuesObject": map[string]interface{}{
 									"traefik": map[string]interface{}{
-										"ips": serverNetwork.Routing.Ipv4.Ip, //fmt.Sprintf("%s,%s", serverNetwork.Routing.Ipv4.Ip, strings.ReplaceAll(serverNetwork.Routing.Ipv6.Ip, "/128", "")),
+										"ips": fmt.Sprintf("%s,%s", serverNetwork.Routing.Ipv4.Ip, strings.ReplaceAll(serverNetwork.Routing.Ipv6.Ip, "/128", "")),
 									},
 								},
 							},
