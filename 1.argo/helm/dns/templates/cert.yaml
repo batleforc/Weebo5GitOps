@@ -1,0 +1,15 @@
+{{- if .Values.httpsNsServeur.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ns-server-tls
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: ns-server-tls
+  issuerRef:
+    name: outbound
+    kind: ClusterIssuer
+  commonName: {{ .Values.httpsNsServeur.nsName }}
+  dnsNames:
+    - {{ .Values.httpsNsServeur.nsName }}
+{{- end -}}

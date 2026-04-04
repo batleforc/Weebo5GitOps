@@ -32,10 +32,11 @@ tsig:
 externalDns:
   version: v0.20.0
 
+httpsNsServeur:
+  enabled: false
+  nsName: ns.batleforc.fr
+
 annotations:
   metallb.universe.tf/address-pool: one
   metallb.io/ip-allocated-from-pool: one
   metallb.universe.tf/allow-shared-ip: one
-
-route:
-  enabled: false

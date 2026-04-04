@@ -1,15 +1,15 @@
-{{if .Values.route.enabled}}
+{{if .Values.httpsNsServeur.enabled}}
 ## IngressRouteTCP for ns.4.weebo.fr
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
 metadata:
-  name: ns-4-weebo-fr
+  name: ns-server
   namespace: {{ .Release.Namespace }}
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostSNI(`ns.4.weebo.fr`)
+    - match: HostSNI(`{{ .Values.httpsNsServeur.nsName }}`)
       services:
         - name: dns-server-in
           namespace: "{{ .Release.Namespace }}"
