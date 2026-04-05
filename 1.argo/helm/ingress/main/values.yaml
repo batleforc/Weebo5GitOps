@@ -23,3 +23,8 @@ traefik:
     enabled: true
   gatewayAPI:
     enabled: false
+
+repo: ""
+
+subApp:
+  enabled: true

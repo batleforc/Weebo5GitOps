@@ -1,29 +1,31 @@
-{{- if .Values.ingress.enabled -}}
+{{- if .Values.subApp.enabled -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress
+  name: vault-app
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
   source:
     repoURL: '{{ .Values.repo }}'
-    path: '1.argo/helm/ingress/main'
+    path: '1.argo/helm/ingress/sub'
     helm:
-      releaseName: ingress
+      releaseName: ingress-app
       valuesObject:
-        repo: "{{ .Values.repo }}"
-        traefik:
-          ips: "{{ .Values.traefik.ips }}"
+        {{- with .Values }}
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: 'argocd'
   syncPolicy:
     automated:
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
     retry:
       limit: 5
       backoff:

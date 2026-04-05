@@ -15,6 +15,7 @@ spec:
     helm:
       releaseName: auth
       valuesObject:
+        repo: "{{ .Values.repo }}"
         traefik:
           ips: "{{ .Values.traefik.ips }}"
   destination:
