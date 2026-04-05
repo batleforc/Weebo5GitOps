@@ -19,7 +19,7 @@ spec:
           ips: "{{ .Values.traefik.ips }}"
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: 'argocd'
+    namespace: 'kaniop'
   syncPolicy:
     automated:
       selfHeal: true
