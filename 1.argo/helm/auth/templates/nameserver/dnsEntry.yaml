@@ -1,0 +1,25 @@
+{{- if .Values.dns.createWithCRD -}}
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: auth-dns
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpoints:
+  {{- if .Values.dns.ipv4.enabled -}}
+    - dnsName: {{ $.Values.dns.domain }}
+      recordType: A
+      targets:
+        {{- range .Values.dns.ipv4.addresses }}
+        - {{ . }}
+        {{- end }}
+  {{- end }}
+  {{- if .Values.dns.ipv6.enabled -}}
+    - dnsName: {{ $.Values.dns.domain }}
+      recordType: AAAA
+      targets:
+      {{- range .Values.dns.ipv6.addresses }}
+        - {{ . }}
+      {{- end }}
+  {{- end }}
+{{- end -}}

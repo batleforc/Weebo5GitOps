@@ -16,7 +16,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] Git Stack
   - OLD: [Gitea](https://gitea.io/) x [Tekton](https://tekton.dev/)
   - NEW: [Gitea](https://gitea.io/) or [Forgejo](https://forgejo.org/) ? X [Tekton](https://tekton.dev/) or [ArgoEvents](https://argoproj.github.io/argo-events/) ?
-- [ ] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
+- [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
 - [ ] Registry - [Harbor](https://goharbor.io/)
 - [ ] VPN
   - OLD : [WireGuard](https://www.wireguard.com/)
@@ -24,12 +24,12 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] DNS
   - OLD: [Bind9](https://www.isc.org/bind/)
   - NEW:
-    - Public : [Bind9](https://www.isc.org/bind/) x [ExternalDNS](https://github.com/kubernetes-sigs/external-dns)
-    - Private : [AdGuard](https://adguard.com/en/welcome.html)
+    - [x] Public : [Bind9](https://www.isc.org/bind/) x [ExternalDNS](https://github.com/kubernetes-sigs/external-dns)
+    - [ ] Private : [AdGuard](https://adguard.com/en/welcome.html)
 - [ ] Ingress
   - OLD: [HaProxy](https://www.haproxy.com/)
   - NEW: [Traefik](https://traefik.io/)
-- [ ] CNI - [Cilium](https://cilium.io/)
+- [x] CNI - [Cilium](https://cilium.io/)
 - [ ] [Eclipse Che](https://www.eclipse.org/che/)
 - [ ] Tofu Hooks
 - [ ] [CertManager](https://cert-manager.io/) x DNS01-rfc2136

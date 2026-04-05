@@ -2,6 +2,16 @@ certManager:
   enabled: true
   version: 1.20.0
   installCRDs: true
+  certIssuer:
+    enabled: true
+    name: outbound
+    email: "maxleriche.60@gmail.com"
+  certIssuerDNS01:
+    enabled: false
+    name: dns-01
+    email: "maxleriche.60@gmail.com"
+    nameservers: "dns-server-in.dns.svc.cluster.local"
+    namespace: "dns"
 
 traefik:
   enabled: true
