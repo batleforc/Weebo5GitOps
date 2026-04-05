@@ -40,7 +40,7 @@ tasks:
     env:
       KUBECONFIG: 0.config/kubeconfig.yaml
     cmds:
-      - k9s
+      - k9s {{ .CLI_ARGS }}
   cilium:
     desc: "Run cilium-cli commands on the cluster"
     silent: true

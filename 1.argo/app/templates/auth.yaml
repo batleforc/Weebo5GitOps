@@ -19,7 +19,7 @@ spec:
           ips: "{{ .Values.traefik.ips }}"
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: 'kaniop'
+    namespace: 'auth'
   syncPolicy:
     automated:
       selfHeal: true

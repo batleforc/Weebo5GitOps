@@ -1,5 +1,5 @@
 kaniop:
-  enabled: true
+  enabled: false
   version: 0.5.7
   instanceName: batleforc-kaniop
 

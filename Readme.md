@@ -30,6 +30,7 @@ This is the base project for the Weebo 5 production upgrade.
   - OLD: [HaProxy](https://www.haproxy.com/)
   - NEW: [Traefik](https://traefik.io/)
 - [x] CNI - [Cilium](https://cilium.io/)
+  - [ ] !TODO: Message a moi meme pour demain, passer en netpol strict avec zero ouverture by default, et n'ouvrir que ce qui est nécessaire
 - [ ] [Eclipse Che](https://www.eclipse.org/che/)
 - [ ] Tofu Hooks
 - [ ] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
