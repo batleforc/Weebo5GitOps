@@ -4,6 +4,8 @@ kind: DNSEndpoint
 metadata:
   name: auth-dns
   namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   endpoints:
   {{- if .Values.dns.ipv4.enabled -}}

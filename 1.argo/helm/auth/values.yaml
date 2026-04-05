@@ -1,6 +1,7 @@
 kaniop:
   enabled: true
   version: v0.5.7
+  instanceName: batleforc-kaniop
 
 dns:
   domain: auth.batleforc.fr

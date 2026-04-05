@@ -1,0 +1,15 @@
+{{- if .Values.kanidm.enabled -}}
+apiVersion: kaniop.rs/v1beta1
+kind: Kanidm
+metadata:
+  name: {{ .Values.kaniop.instanceName }}
+  namespace: {{ .Release.Namespace }}
+    annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  domain: {{ .Values.dns.domain }}
+  replicaGroups:
+    - name: default
+      replicas: 1
+  tlsSecretName: {{ .Values.dns.certificate.name }}
+{{- end -}}
