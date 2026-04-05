@@ -1,4 +1,4 @@
-{{- if .Values.traefik.enabled -}}
+{{- if .Values.authentik.enabled -}}
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:

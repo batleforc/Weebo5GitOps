@@ -24,6 +24,9 @@ traefik:
   gatewayAPI:
     enabled: false
 
+authentik:
+  enabled: false
+
 repo: ""
 
 subApp:
