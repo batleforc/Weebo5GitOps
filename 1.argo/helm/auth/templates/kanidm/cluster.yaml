@@ -12,11 +12,4 @@ spec:
     - name: default
       replicas: 1
   tlsSecretName: {{ .Values.dns.certificate.name }}
-  ingress:
-    ingressClassName: traefik
-    tlsSecretName: {{ .Values.dns.certificate.name }}
-    annotations:
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 {{- end -}}
