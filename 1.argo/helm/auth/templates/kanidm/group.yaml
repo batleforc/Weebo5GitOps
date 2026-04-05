@@ -4,6 +4,8 @@ kind: KanidmGroup
 metadata:
   name: admins
   namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   kanidmRef:
     name: {{ .Values.kaniop.instanceName }}
