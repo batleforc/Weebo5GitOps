@@ -12,8 +12,8 @@ vaultApp:
 
 vaultInstance:
   enabled: true
-  version: 2.5.2 #"1.21.4"
-  image: ghcr.io/openbao/openbao #hashicorp/vault
+  version: "1.21.4"
+  image: hashicorp/vault
   hook:
     enabled: true
     version: 1.22.2
