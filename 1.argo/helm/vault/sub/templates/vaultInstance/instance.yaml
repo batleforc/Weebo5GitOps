@@ -9,7 +9,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   size: 1
-  image: hashicorp/vault:{{ .Values.vaultInstance.version }}
+  image: {{ .Values.vaultInstance.image }}:{{ .Values.vaultInstance.version }}
 
   # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
   serviceAccount: vault
