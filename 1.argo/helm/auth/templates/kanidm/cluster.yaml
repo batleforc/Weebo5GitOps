@@ -4,7 +4,7 @@ kind: Kanidm
 metadata:
   name: {{ .Values.kaniop.instanceName }}
   namespace: {{ .Release.Namespace }}
-    annotations:
+  annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   domain: {{ .Values.dns.domain }}
