@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: '{{ .Values.repo }}'
-    path: '1.argo/helm/ingress'
+    path: '1.argo/helm/ingress/main'
     helm:
       releaseName: ingress
       valuesObject:

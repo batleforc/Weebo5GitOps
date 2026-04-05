@@ -9,15 +9,15 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   size: 1
-  image: hashicorp/vault:1.19
+  image: hashicorp/vault:{{ .Values.vaultInstance.version }}
 
   # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
   serviceAccount: vault
 
   tlsAdditionalHosts:
-    - vault.weebo.poc
+    - vault.weebo.internal
     - vault.vault
-    - vault.4.weebo.fr
+    - vault.batleforc.fr
   # Specify the Service's type where the Vault Service is exposed
   # Please note that some Ingress controllers like https://github.com/kubernetes/ingress-gce
   # forces you to expose your Service on a NodePort
@@ -62,7 +62,7 @@ spec:
       # This is 3 by default
       secretThreshold: 3
     kubernetes:
-      secretNamespace: vault
+      secretNamespace: {{ .Release.Namespace }}
 
   # A YAML representation of a final vault config file.
   # See https://www.vaultproject.io/docs/configuration/ for more information.
@@ -105,18 +105,6 @@ spec:
           path "pki/*" { capabilities = ["read", "list"] }
       - name: allow_pki
         rules: path "pki_int/*" { capabilities = ["create", "read", "update", "delete", "list"] }
-      - name: cluster_creator
-        rules: |
-          path "sys/auth/*" { capabilities = ["create", "update", "delete", "sudo"] }
-          path "sys/auth" { capabilities = ["read", "list"] }
-          path "sys/policies/acl/*" { capabilities = ["create", "update", "delete", "sudo"] }
-          path "sys/policies/acl" { capabilities = ["read", "list"] }
-          path "auth/token/create" { capabilities = ["create", "read", "list"] }
-          path "auth/token/lookup-self" { capabilities = ["read", "list", "create"] }
-          path "auth/token/renew-self" { capabilities = ["update", "read"] }
-          path "sys/mounts" { capabilities = ["read","list"] }
-          path "sys/mounts/*" { capabilities = ["read","list"] }
-          path "auth/*" { capabilities = ["read","list", "update", "create", "delete", "sudo"] }
     auth:
       - type: kubernetes
         roles:
@@ -129,11 +117,6 @@ spec:
             bound_service_account_names: ["cert-manager", "vault-issuer"]
             bound_service_account_namespaces: ["cert-manager"]
             policies: allow_pki
-            ttl: 1h
-          - name: cluster_creator
-            bound_service_account_names: ["default", "vault"]
-            bound_service_account_namespaces: ["default", "che", "vault"]
-            policies: cluster_creator
             ttl: 1h
 
     secrets:
