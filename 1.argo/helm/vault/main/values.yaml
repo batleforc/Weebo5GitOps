@@ -2,9 +2,6 @@ bankVault:
   enabled: true
   ns: vault-operator
   version: 1.23.4
-  hook:
-    enabled: true
-    version: 1.22.2
 
 externalSecrets:
   enabled: true
@@ -17,5 +14,8 @@ vaultInstance:
   enabled: true
   version: "1.21.4"
   image: hashicorp/vault
+  hook:
+    enabled: true
+    version: 1.22.2
 
 repo: ""
