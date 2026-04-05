@@ -172,7 +172,7 @@ g, authentik Admins, role:admin`),
 				"global": pulumi.Map{
 					"domain": pulumi.String(argoDNSName),
 					"networkPolicy": pulumi.Map{
-						"enabled": pulumi.Bool(true),
+						"create": pulumi.Bool(true),
 					},
 				},
 				"server": pulumi.Map{
