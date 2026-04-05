@@ -126,56 +126,6 @@ spec:
         description: General secrets.
         options:
           version: 2
-      - path: pki
-        type: pki
-        description: Weebo SI CA.
-        config:
-          default_lease_ttl: 744h
-          max_lease_ttl: 87600h
-        configuration:
-          config:
-            - name: urls
-              issuing_certificates: https://vault.weebo.poc/v1/pki/ca
-              crl_distribution_points: https://vault.weebo.poc/v1/pki/crl
-          root/generate:
-            - name: internal
-              common_name: weebo.poc
-              ttl: 87600h
-          roles:
-            - name: default
-              allowed_domains: weebo.poc
-              allow_subdomains: true
-              generate_lease: true
-              ttl: 1m
-      - path: pki_int
-        type: pki
-        description: Intermediate CA.
-        config:
-          default_lease_ttl: 744h
-          max_lease_ttl: 43800h
-        configuration:
-          config:
-            - name: urls
-              issuing_certificates: https://vault.weebo.poc/v1/pki_int/ca
-              crl_distribution_points: https://vault.weebo.poc/v1/pki_int/crl
-          intermediate/generate:
-            - name: example-dot-com-intermediate
-              common_name: weebo.poc Intermediate CA
-              ttl: 43800h
-          roles:
-            - name: default
-              allowed_domains: weebo.poc
-              allow_subdomains: true
-              require_cn: false
-              ttl: 1m
-    # Allows writing some secrets to Vault (useful for development purposes).
-    # See https://www.vaultproject.io/docs/secrets/kv/index.html for more information.
-    startupSecrets:
-      - type: kv
-        path: secret/data/mysql
-        data:
-          data:
-            MYSQL_ROOT_PASSWORD: s3cr3t
 
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL

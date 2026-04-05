@@ -156,6 +156,7 @@ connectors:
         - "email"
         - "groups"`),
 						"url": pulumi.String(fmt.Sprintf("https://%s", argoDNSName)),
+						"exec.enabled": pulumi.Bool(true),
 					},
 					"params": pulumi.Map{
 						"server.insecure": pulumi.Bool(deployed),
