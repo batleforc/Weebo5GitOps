@@ -1,4 +1,4 @@
-{{- if .Values.kanidm.enabled -}}
+{{- if .Values.kaniop.enabled -}}
 apiVersion: kaniop.rs/v1beta1
 kind: KanidmPersonAccount
 metadata:
