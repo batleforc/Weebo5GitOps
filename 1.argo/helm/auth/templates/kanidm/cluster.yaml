@@ -12,4 +12,6 @@ spec:
     - name: default
       replicas: 1
   tlsSecretName: {{ .Values.dns.certificate.name }}
+  ingress:
+    ingressClassName: traefik
 {{- end -}}

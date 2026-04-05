@@ -12,9 +12,7 @@ spec:
   entryManagedBy: batleforc
   members:
     - batleforc
-  groupAttributes:
-    displayname: Admins
-    mail:
+  mail:
     - admins@{{ .Values.dns.domain }}
 
 {{- end -}}
