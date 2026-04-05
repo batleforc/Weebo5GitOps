@@ -39,6 +39,14 @@ spec:
           protocol: UDP
         - port: 53
           protocol: TCP
+    # Redis
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: argocd-redis
+      ports:
+        - port: 6379
+          protocol: TCP
     # Git repos over HTTPS
     - to:
         - ipBlock:
