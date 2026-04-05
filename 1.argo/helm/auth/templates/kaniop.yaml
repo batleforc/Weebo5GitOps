@@ -14,6 +14,7 @@ spec:
     automated: {}
     syncOptions:
     - CreateNamespace=true
+    - ServerSideApply=true
   source:
     chart: kaniop
     repoURL: oci://ghcr.io/pando85/helm-charts/kaniop
