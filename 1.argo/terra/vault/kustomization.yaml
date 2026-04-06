@@ -11,7 +11,6 @@ resources:
   - job.yaml
   - volume.yaml
 
-
 configMapGenerator:
   - name: terra-vault-config
     namespace: vault
@@ -20,7 +19,6 @@ configMapGenerator:
       - ./terra-map/auth-base.tf
       - ./terra-map/auth-bootstrap.tf
       - ./terra-map/auth-vpn.tf
-      - ./terra-map/auth-cluster-che-cluster.tf
       - ./terra-map/auth-monitoring.tf
       - ./terra-map/harbor.tf
       - ./terra-map/auth-harbor.tf
