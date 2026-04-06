@@ -4,7 +4,7 @@ kaniop:
   instanceName: batleforc-kaniop
 
 authentik:
-  enabled: false
+  enabled: true
   version: 2026.2.1
 
 dns:

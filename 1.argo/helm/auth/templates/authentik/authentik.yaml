@@ -49,13 +49,11 @@ spec:
           ingress:
             ingressClassName: traefik
             enabled: true
-            annotations:
-              cert-manager.io/cluster-issuer: "outbound"
             hosts:
             - {{ .Values.dns.domain }}
             https: false
             tls:
-            - secretName: authentik-tls
+            - secretName: {{ .Values.dns.certificate.name }}
               hosts:
               - {{ .Values.dns.domain }}
         postgresql:
