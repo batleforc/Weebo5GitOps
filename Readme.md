@@ -10,6 +10,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] Secret Storage
   - OLD: [Vault](https://www.vaultproject.io/) x [BankVault](https://www.bank-vaults.io/)
   - NEW: [OpenBao](https://openbao.io/) or [Vault](https://www.vaultproject.io/) x [BankVault](https://www.bank-vaults.io/) x [Kubernetes External Secrets](https://external-secrets.io/)
+    - Add support for [numberly/vault-db-injector](https://github.com/numberly/vault-db-injector) and migrate existing connection to it
 - [ ] Monitoring X Logging
   - OLD: [PromStack](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack) x [Loki](https://grafana.com/oss/loki/)
   - NEW: [Coroot](https://coroot.com/) X [Grafana](https://grafana.com/)

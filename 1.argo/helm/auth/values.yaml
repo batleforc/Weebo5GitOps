@@ -3,6 +3,10 @@ kaniop:
   version: 0.5.7
   instanceName: batleforc-kaniop
 
+authentik:
+  enabled: false
+  version: 2026.2.1
+
 dns:
   domain: auth.batleforc.fr
   certificate:

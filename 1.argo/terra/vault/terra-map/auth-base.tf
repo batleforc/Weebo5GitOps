@@ -58,7 +58,7 @@ EOT
 resource "vault_kubernetes_auth_backend_role" "auth-write" {
   role_name                        = "auth"
   bound_service_account_names      = ["authentik", "default"]
-  bound_service_account_namespaces = ["authentik"]
+  bound_service_account_namespaces = ["auth"]
   token_ttl                        = 3600
   token_policies                   = [vault_policy.mv_policy.name]
 }
@@ -66,7 +66,7 @@ resource "vault_kubernetes_auth_backend_role" "auth-write" {
 resource "vault_kubernetes_auth_backend_role" "auth-read" {
   role_name                        = "auth-read"
   bound_service_account_names      = ["authentik", "default"]
-  bound_service_account_namespaces = ["authentik", "argocd", "netbird", "che", "grafana", "harbor"]
+  bound_service_account_namespaces = ["auth", "argocd", "netbird", "che", "grafana", "harbor"]
   token_ttl                        = 3600
   token_policies                   = [vault_policy.mv_reader_policy.name]
 }
