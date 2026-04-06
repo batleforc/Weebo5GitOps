@@ -23,6 +23,15 @@ traefik:
     enabled: true
   gatewayAPI:
     enabled: false
+  middleware:
+    ipAllowList:
+      sourceRange:
+        - 10.244.0.0/16
+        - fd00:10:244::/56
+        - 10.96.0.0/12
+        - fd00:10:96::/112
+        - 86.239.204.179/32
+        - 2a01:cb18:ccb:aa00:efa0:6903:9a7b:5b5/128
 
 authentik:
   enabled: false

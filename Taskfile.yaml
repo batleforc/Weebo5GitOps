@@ -8,6 +8,7 @@ includes:
   pulumi: 0.pulumi/Taskfile.yaml
   pulumi-conf: 0.pulumi-conf/Taskfile.yaml
   argo: .task/argo.yaml
+  vault: .task/vault.yaml
 
 tasks:
   init:

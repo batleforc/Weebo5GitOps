@@ -1,0 +1,15 @@
+version: "3"
+
+tasks:
+  forward:
+    desc: "Forward the port to access to Vault UI"
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - kubectl port-forward svc/vault -n vault 8200:8200
+  pwd:
+    desc: "Get the initial root token for Vault"
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - kubectl -n vault get secret vault-unseal-keys -o jsonpath="{.data.vault-root}" | base64 -d && echo
