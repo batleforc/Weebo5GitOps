@@ -6,6 +6,8 @@ kaniop:
 authentik:
   enabled: true
   version: 2026.2.1
+  argoAuth:
+    enabled: true
 
 dns:
   domain: auth.batleforc.fr
