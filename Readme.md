@@ -4,7 +4,7 @@ This is the base project for the Weebo 5 production upgrade.
 
 ## Exist in V4 and need to be upgraded in V5
 
-- [ ] SSO Provider
+- [x] SSO Provider
   - OLD: [Zitadel](https://zitadel.com/)
   - NEW: [Zitadel](https://zitadel.com/) or [Authentik](https://goauthentik.io/) or [Kanidm](https://github.com/pando85/kaniop)
 - [ ] Secret Storage

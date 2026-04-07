@@ -1,0 +1,19 @@
+{{- if .Values.managementTokenSecretJob.enabled -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "netbird.managementTokenSecretJob.serviceAccountName" . }}
+  namespace: {{ include "netbird.namespace" . }}
+  labels:
+    {{- include "netbird.managementTokenSecretJob.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ include "netbird.managementTokenSecretJob.serviceAccountName" . }}
+      containers:
+        - name: token-create
+          image: {{ .Values.managementTokenSecretJob.image.repository }}:{{ .Values.managementTokenSecretJob.image.tag }}
+          imagePullPolicy: {{ .Values.managementTokenSecretJob.image.pullPolicy }}
+          command: {{ toJson .Values.managementTokenSecretJob.command }}
+      restartPolicy: Never
+{{- end }}

@@ -1,0 +1,15 @@
+{{- if .Values.netbird.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "vpn-certificate"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  commonName: "{{ .Values.netbird.domain }}"
+  secretName: "vpn-certificate"
+  dnsNames:
+    - "{{ .Values.netbird.domain }}"
+  issuerRef:
+    kind: ClusterIssuer
+    name: "outbound"
+{{- end -}}

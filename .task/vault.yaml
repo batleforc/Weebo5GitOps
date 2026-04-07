@@ -13,3 +13,19 @@ tasks:
       KUBECONFIG: 0.config/kubeconfig.yaml
     cmds:
       - kubectl -n vault get secret vault-unseal-keys -o jsonpath="{.data.vault-root}" | base64 -d && echo
+  get-ca:
+    desc: "Get the CA certificate for Vault"
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - kubectl -n vault get secret vault-tls -o jsonpath="{.data.ca\.crt}" | base64 -d > .tmp/vault-ca.crt
+  default:
+    desc: "Login to Vault CLI"
+    env:
+      VAULT_ADDR: "https://localhost:8200"
+      VAULT_CACERT: ".tmp/vault-ca.crt"
+    vars:
+      VAULT_TOKEN:
+        sh: task vault:pwd
+    cmds:
+      - VAULT_TOKEN={{.VAULT_TOKEN}}  bao {{ .CLI_ARGS }}

@@ -1,0 +1,5 @@
+repo: ""
+
+netbird:
+  enabled: true
+  domain: vpn.batleforc.fr
