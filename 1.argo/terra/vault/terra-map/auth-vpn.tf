@@ -31,8 +31,8 @@ EOT
 
 resource "vault_kubernetes_auth_backend_role" "auth-vpn" {
   role_name                        = "vpn"
-  bound_service_account_names      = ["netbird", "default"]
-  bound_service_account_namespaces = ["netbird"]
+  bound_service_account_names      = ["vpn", "default"]
+  bound_service_account_namespaces = ["vpn"]
   token_ttl                        = 3600
   token_policies                   = [vault_policy.vpn_policy.name]
 }

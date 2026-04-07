@@ -1,9 +1,9 @@
 # Value based from the authentik documentation:
-# https://integrations.goauthentik.io/integrations/services/netbird/
+# https://integrations.goauthentik.io/integrations/services/vpn/
 
-resource "authentik_provider_oauth2" "netbird" {
-  name               = "netbird"
-  client_id          = "netbird"
+resource "authentik_provider_oauth2" "vpn" {
+  name               = "vpn"
+  client_id          = "vpn"
   client_type        = "public"
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   authorization_flow = data.authentik_flow.default-authorization-flow.id
@@ -11,7 +11,7 @@ resource "authentik_provider_oauth2" "netbird" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://netbird.batleforc.fr",
+      url           = "https://vpn.batleforc.fr",
     },
     {
       matching_mode = "strict",
@@ -19,7 +19,7 @@ resource "authentik_provider_oauth2" "netbird" {
     },
     {
       matching_mode = "regex",
-      url           = "https://netbird.batleforc.fr.*",
+      url           = "https://vpn.batleforc.fr.*",
     }
   ]
   property_mappings = [
@@ -33,22 +33,22 @@ resource "authentik_provider_oauth2" "netbird" {
   sub_mode             = "user_id"
 }
 
-resource "random_password" "netbird_sa_password" {
+resource "random_password" "vpn_sa_password" {
   length           = 32
   special          = true
   override_special = "_-"
 }
 
-resource "authentik_user" "netbird_sa" {
-  username = "netbird"
+resource "authentik_user" "vpn_sa" {
+  username = "vpn"
   type     = "service_account"
   groups   = [authentik_group.weebo_admin.id]
-  password = random_password.netbird_sa_password.result
+  password = random_password.vpn_sa_password.result
 }
 
-resource "authentik_token" "netbird_sa" {
-  identifier   = "netbird"
-  user         = authentik_user.netbird_sa.id
+resource "authentik_token" "vpn_sa" {
+  identifier   = "vpn"
+  user         = authentik_user.vpn_sa.id
   description  = "My super token"
   retrieve_key = true
   intent       = "app_password"
@@ -56,10 +56,10 @@ resource "authentik_token" "netbird_sa" {
 }
 
 
-resource "authentik_application" "netbird" {
-  name              = "netbird"
-  slug              = "netbird"
-  protocol_provider = authentik_provider_oauth2.netbird.id
+resource "authentik_application" "vpn" {
+  name              = "vpn"
+  slug              = "vpn"
+  protocol_provider = authentik_provider_oauth2.vpn.id
 }
 
 resource "random_string" "encryption_key" {
@@ -67,39 +67,31 @@ resource "random_string" "encryption_key" {
   special = true
 }
 
-resource "random_password" "netbird_turn_server_password" {
+resource "random_password" "vpn_relay_password" {
   length           = 32
   special          = true
   override_special = "_-"
 }
 
-resource "random_password" "netbird_relay_password" {
-  length           = 32
-  special          = true
-  override_special = "_-"
-}
-
-resource "vault_kv_secret_v2" "netbird" {
+resource "vault_kv_secret_v2" "vpn" {
   mount = "mv"
-  name  = "netbird/auth"
+  name  = "vpn/auth"
   data_json = jsonencode(
     {
-      NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT = "https://auth.batleforc.fr/application/o/${authentik_application.netbird.slug}/.well-known/openid-configuration",
-      NETBIRD_AUTH_BASE_URL                    = "https://auth.batleforc.fr/application/o/${authentik_application.netbird.slug}",
+      NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT = "https://auth.batleforc.fr/application/o/${authentik_application.vpn.slug}/.well-known/openid-configuration",
+      NETBIRD_AUTH_BASE_URL                    = "https://auth.batleforc.fr/application/o/${authentik_application.vpn.slug}",
       NETBIRD_USE_AUTH0                        = "false",
-      NETBIRD_AUTH_CLIENT_ID                   = authentik_provider_oauth2.netbird.client_id,
+      NETBIRD_AUTH_CLIENT_ID                   = authentik_provider_oauth2.vpn.client_id,
       NETBIRD_AUTH_SUPPORTED_SCOPES            = "openid profile email offline_access api",
-      NETBIRD_AUTH_AUDIENCE                    = authentik_provider_oauth2.netbird.client_secret,
-      NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID       = authentik_provider_oauth2.netbird.client_id,
-      NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE        = authentik_provider_oauth2.netbird.client_id,
+      NETBIRD_AUTH_AUDIENCE                    = authentik_provider_oauth2.vpn.client_secret,
+      NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID       = authentik_provider_oauth2.vpn.client_id,
+      NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE        = authentik_provider_oauth2.vpn.client_id,
       NETBIRD_MGMT_IDP                         = "authentik",
-      NETBIRD_IDP_MGMT_CLIENT_ID               = authentik_provider_oauth2.netbird.client_id,
-      NETBIRD_IDP_MGMT_EXTRA_USERNAME          = authentik_user.netbird_sa.username,
-      NETBIRD_IDP_MGMT_EXTRA_PASSWORD          = authentik_token.netbird_sa.key,
+      NETBIRD_IDP_MGMT_CLIENT_ID               = authentik_provider_oauth2.vpn.client_id,
+      NETBIRD_IDP_MGMT_EXTRA_USERNAME          = authentik_user.vpn_sa.username,
+      NETBIRD_IDP_MGMT_EXTRA_PASSWORD          = authentik_token.vpn_sa.key,
       NETBIRD_DATASTORE_ENCRYPTION_KEY         = base64encode(random_string.encryption_key.result),
-      NETBIRD_TURN_SERVER_USER                 = "netbirdturnserveruser"
-      NETBIRD_TURN_SERVER_PASSWORD             = random_password.netbird_turn_server_password.result,
-      NETBIRD_REPLAY_PASSWORD                  = random_password.netbird_relay_password.result,
+      NETBIRD_REPLAY_PASSWORD                  = random_password.vpn_relay_password.result,
     }
   )
 }
