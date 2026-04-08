@@ -22,28 +22,27 @@ spec:
             tag: "{{ .Values.netbird.server.version }}"
           configYaml:
             server:
-              server:
-                listenAddress: :80
-                exposedAddress: https://{{ .Values.netbird.domain }}:443
-                stunPorts: [3478]
-                metricsPort: 9090
-                healthcheckAddress: :9000
-                logLevel: info
-                logFile: console
-                authSecret: "${NETBIRD_RELAY_AUTH_SECRET}"
-                dataDir: /var/lib/netbird
-                auth:
-                  issuer: https://{{ .Values.netbird.domain }}/oauth2
-                  signKeyRefreshEnabled: true
-                  dashboardRedirectURIs:
-                    - https://{{ .Values.netbird.domain }}/nb-auth
-                    - https://{{ .Values.netbird.domain }}/nb-silent-auth
-                  cliRedirectURIs:
-                    - http://localhost:53000/
-                store:
-                  engine: "sqlite"  # sqlite, postgres, or mysql
-                  dsn: ""  # Connection string for postgres or mysql
-                  encryptionKey: "${NETBIRD_DATASTORE_ENCRYPTION_KEY}"
+              listenAddress: :80
+              exposedAddress: https://{{ .Values.netbird.domain }}:443
+              stunPorts: [3478]
+              metricsPort: 9090
+              healthcheckAddress: :9000
+              logLevel: info
+              logFile: console
+              authSecret: "${NETBIRD_RELAY_AUTH_SECRET}"
+              dataDir: /var/lib/netbird
+              auth:
+                issuer: https://{{ .Values.netbird.domain }}/oauth2
+                signKeyRefreshEnabled: true
+                dashboardRedirectURIs:
+                  - https://{{ .Values.netbird.domain }}/nb-auth
+                  - https://{{ .Values.netbird.domain }}/nb-silent-auth
+                cliRedirectURIs:
+                  - http://localhost:53000/
+              store:
+                engine: "sqlite"  # sqlite, postgres, or mysql
+                dsn: ""  # Connection string for postgres or mysql
+                encryptionKey: "${NETBIRD_DATASTORE_ENCRYPTION_KEY}"
           persistentVolume:
             enabled: true
           env:
