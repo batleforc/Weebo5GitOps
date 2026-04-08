@@ -146,7 +146,7 @@ spec:
                       port: 80
                       scheme: h2c
               tls:
-                secretName: "netbird-certificate"
+                secretName: "vpn-certificate"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: vpn
