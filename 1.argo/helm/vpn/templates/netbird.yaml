@@ -98,7 +98,6 @@ spec:
           envFromSecret:
             NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: vpn-auth/oidcConfigEndpoint
             NETBIRD_AUTH_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_RELAY_AUTH_SECRET: vpn-auth/relayPassword
             NETBIRD_IDP_MGMT_CLIENT_ID: vpn-auth/idpClientID
             NETBIRD_IDP_MGMT_EXTRA_USERNAME: vpn-auth/idpServiceAccountUser
             NETBIRD_IDP_MGMT_EXTRA_PASSWORD: vpn-auth/idpServiceAccountPassword
