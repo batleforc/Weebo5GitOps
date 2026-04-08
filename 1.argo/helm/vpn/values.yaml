@@ -4,6 +4,6 @@ netbird:
   enabled: true
   domain: vpn.batleforc.fr
   dashboard:
-    version: "2.36.0"
+    version: "v2.36.0"
   server:
     version: "0.68.0"

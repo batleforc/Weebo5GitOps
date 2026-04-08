@@ -11,10 +11,8 @@ spec:
   syncPolicy:
     automated: {}
   source:
-    chart: netbird
-    repoURL: https://netbirdio.github.io/helms
-    # https://github.com/bank-vaults/vault-operator/pkgs/container/helm-charts%2Fvault-operator
-    targetRevision: 1.9.0
+    repoURL: '{{ .Values.repo }}'
+    path: '1.helm/netbird'
     helm:
       releaseName: netbird
       valuesObject:
@@ -56,18 +54,18 @@ spec:
             USE_AUTH0: false
             NETBIRD_MGMT_IDP: "authentik"
           envFromSecret:
-            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: netbird-auth/oidcConfigEndpoint
-            NETBIRD_AUTH_CLIENT_ID: netbird-auth/idpClientID
-            NETBIRD_RELAY_AUTH_SECRET: netbird-auth/relayPassword
-            NETBIRD_IDP_MGMT_CLIENT_ID: netbird-auth/idpClientID
-            NETBIRD_IDP_MGMT_EXTRA_USERNAME: netbird-auth/idpServiceAccountUser
-            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: netbird-auth/idpServiceAccountPassword
-            NETBIRD_DATASTORE_ENCRYPTION_KEY: netbird-auth/datastoreEncryptionKey
-            NETBIRD_AUTH_AUDIENCE: netbird-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: netbird-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: netbird-auth/idpClientID
-            OIDC_CONFIG_ENDPOINT: netbird-auth/oidcConfigEndpoint
-            IDP_CLIENT_SECRET: netbird-auth/clientSecret
+            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: vpn-auth/oidcConfigEndpoint
+            NETBIRD_AUTH_CLIENT_ID: vpn-auth/idpClientID
+            NETBIRD_RELAY_AUTH_SECRET: vpn-auth/relayPassword
+            NETBIRD_IDP_MGMT_CLIENT_ID: vpn-auth/idpClientID
+            NETBIRD_IDP_MGMT_EXTRA_USERNAME: vpn-auth/idpServiceAccountUser
+            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: vpn-auth/idpServiceAccountPassword
+            NETBIRD_DATASTORE_ENCRYPTION_KEY: vpn-auth/datastoreEncryptionKey
+            NETBIRD_AUTH_AUDIENCE: vpn-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: vpn-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: vpn-auth/idpClientID
+            OIDC_CONFIG_ENDPOINT: vpn-auth/oidcConfigEndpoint
+            IDP_CLIENT_SECRET: vpn-auth/clientSecret
 
         dashboard:
           image:
@@ -85,17 +83,17 @@ spec:
             USE_AUTH0: false
             NETBIRD_MGMT_IDP: "authentik"
           envFromSecret:
-            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: netbird-auth/oidcConfigEndpoint
-            NETBIRD_AUTH_CLIENT_ID: netbird-auth/idpClientID
-            NETBIRD_RELAY_AUTH_SECRET: netbird-auth/relayPassword
-            NETBIRD_IDP_MGMT_CLIENT_ID: netbird-auth/idpClientID
-            NETBIRD_IDP_MGMT_EXTRA_USERNAME: netbird-auth/idpServiceAccountUser
-            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: netbird-auth/idpServiceAccountPassword
-            NETBIRD_DATASTORE_ENCRYPTION_KEY: netbird-auth/datastoreEncryptionKey
-            NETBIRD_AUTH_AUDIENCE: netbird-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: netbird-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: netbird-auth/idpClientID
-            OIDC_CONFIG_ENDPOINT: netbird-auth/oidcConfigEndpoint
+            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: vpn-auth/oidcConfigEndpoint
+            NETBIRD_AUTH_CLIENT_ID: vpn-auth/idpClientID
+            NETBIRD_RELAY_AUTH_SECRET: vpn-auth/relayPassword
+            NETBIRD_IDP_MGMT_CLIENT_ID: vpn-auth/idpClientID
+            NETBIRD_IDP_MGMT_EXTRA_USERNAME: vpn-auth/idpServiceAccountUser
+            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: vpn-auth/idpServiceAccountPassword
+            NETBIRD_DATASTORE_ENCRYPTION_KEY: vpn-auth/datastoreEncryptionKey
+            NETBIRD_AUTH_AUDIENCE: vpn-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: vpn-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: vpn-auth/idpClientID
+            OIDC_CONFIG_ENDPOINT: vpn-auth/oidcConfigEndpoint
 
         extraManifests:
           - apiVersion: traefik.io/v1alpha1
