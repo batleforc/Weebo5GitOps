@@ -5,7 +5,7 @@ zone:
       $TTL 1h ;
       $ORIGIN batleforc.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2024011942; serial
+                              2024011944; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
@@ -25,6 +25,8 @@ zone:
       ns                  3600    AAAA                2001:41d0:2:2751::1
       auth                3600    A                   94.23.38.81
       auth                3600    AAAA                2001:41d0:2:2751::1
+      vpn                 3600    A                   94.23.38.81
+      vpn                 3600    AAAA                2001:41d0:2:2751::1
 
   "38.23.94.in-addr.arpa":
     zone: "38.23.94.in-addr.arpa."
