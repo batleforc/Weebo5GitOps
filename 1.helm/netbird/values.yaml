@@ -164,6 +164,31 @@ management:
     ##
     annotations: {}
 
+  serviceStun:
+    ## @param management.serviceStun.enabled Enable or disable the management STUN service.
+    ##
+    enabled: true
+
+    ## @param management.serviceStun.type Service type for the management STUN component.
+    ##
+    type: ClusterIP
+
+    ## @param management.serviceStun.port Port for the management STUN service.
+    ##
+    port: 3478
+
+    ## @param management.serviceStun.name Name for the management STUN service port.
+    ##
+    name: stun
+
+    ## @param management.serviceStun.externalIPs External IPs for the management STUN service.
+    ##
+    externalIPs: []
+
+    ## @param management.serviceStun.annotations Annotations for the management STUN service.
+    ##
+    annotations: {}
+
   ## @param management.grpcContainerPort [Deprecated] Legacy GRPC container port for the management service for management.useBackwardsGrpcService.
   ##
   grpcContainerPort: 80

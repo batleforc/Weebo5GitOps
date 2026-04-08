@@ -68,6 +68,13 @@ spec:
             NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: vpn-auth/idpClientID
             OIDC_CONFIG_ENDPOINT: vpn-auth/oidcConfigEndpoint
             IDP_CLIENT_SECRET: vpn-auth/clientSecret
+          serviceStun:
+            enabled: true
+            type: LoadBalancer
+            annotations:
+              lbipam.cilium.io/sharing-key: "weebo-gate"
+              lbipam.cilium.io/ips: "{{ .Values.traefik.ips }}"
+              lbipam.cilium.io/sharing-cross-namespace: "*"
 
         dashboard:
           image:
@@ -109,42 +116,63 @@ spec:
                 - websecure
               routes:
                 - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && !PathPrefix(`/api`) && !PathPrefix(`/management`) && !PathPrefix(`/signalexchange`) && !PathPrefix(`/relay`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && !PathPrefix(`/api`) && !PathPrefix(`/oauth2`) && !PathPrefix(`/ws-proxy/signal`) && !PathPrefix(`/ws-proxy/management`) && !PathPrefix(`/management`) && !PathPrefix(`/signalexchange`) && !PathPrefix(`/relay`)
                   services:
                     - name: netbird-dashboard
-                      namespace: netbird
+                      namespace: vpn
                       passHostHeader: true
                       port: 80
                 - kind: Rule
                   match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/api`)
                   services:
                     - name: netbird-management
-                      namespace: netbird
+                      namespace: vpn
                       passHostHeader: true
                       port: 80
                 - kind: Rule
                   match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/relay`)
                   services:
-                    - name: netbird-relay
-                      namespace: netbird
+                    - name: netbird-management
+                      namespace: vpn
                       passHostHeader: true
-                      port: 33080
+                      port: 80
                 - kind: Rule
                   match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/management`)
                   services:
                     - name: netbird-management
-                      namespace: netbird
+                      namespace: vpn
                       passHostHeader: true
                       port: 80
                       scheme: h2c
                 - kind: Rule
                   match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/signalexchange`)
                   services:
-                    - name: netbird-signal
-                      namespace: netbird
+                    - name: netbird-management
+                      namespace: vpn
                       passHostHeader: true
                       port: 80
                       scheme: h2c
+                - kind: Rule
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/ws-proxy/signal`)
+                  services:
+                    - name: netbird-management
+                      namespace: vpn
+                      passHostHeader: true
+                      port: 80
+                - kind: Rule
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/ws-proxy/management`)
+                  services:
+                    - name: netbird-management
+                      namespace: vpn
+                      passHostHeader: true
+                      port: 80
+                - kind: Rule
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/oauth2`)
+                  services:
+                    - name: netbird-management
+                      namespace: vpn
+                      passHostHeader: true
+                      port: 80
               tls:
                 secretName: "vpn-certificate"
   destination:
