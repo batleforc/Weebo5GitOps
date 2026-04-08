@@ -355,7 +355,7 @@ managementTokenSecretJob:
   image:
     repository: alpine/k8s
     pullPolicy: Always
-    tag: "1.37.3"
+    tag: "1.35.3"
 
   ## @param managementTokenSecretJob.serviceAccount Service account for the management token secret job.
   ##

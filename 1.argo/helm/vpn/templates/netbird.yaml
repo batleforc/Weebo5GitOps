@@ -109,28 +109,28 @@ spec:
                 - websecure
               routes:
                 - kind: Rule
-                  match: Host(`netbird.4.weebo.fr`) && !PathPrefix(`/api`) && !PathPrefix(`/management`) && !PathPrefix(`/signalexchange`) && !PathPrefix(`/relay`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && !PathPrefix(`/api`) && !PathPrefix(`/management`) && !PathPrefix(`/signalexchange`) && !PathPrefix(`/relay`)
                   services:
                     - name: netbird-dashboard
                       namespace: netbird
                       passHostHeader: true
                       port: 80
                 - kind: Rule
-                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/api`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/api`)
                   services:
                     - name: netbird-management
                       namespace: netbird
                       passHostHeader: true
                       port: 80
                 - kind: Rule
-                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/relay`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/relay`)
                   services:
                     - name: netbird-relay
                       namespace: netbird
                       passHostHeader: true
                       port: 33080
                 - kind: Rule
-                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/management`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/management`)
                   services:
                     - name: netbird-management
                       namespace: netbird
@@ -138,7 +138,7 @@ spec:
                       port: 80
                       scheme: h2c
                 - kind: Rule
-                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/signalexchange`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/signalexchange`)
                   services:
                     - name: netbird-signal
                       namespace: netbird
