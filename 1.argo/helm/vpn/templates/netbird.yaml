@@ -1,0 +1,154 @@
+{{- if .Values.netbird.enabled -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netbird-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    chart: netbird
+    repoURL: https://netbirdio.github.io/helms
+    # https://github.com/bank-vaults/vault-operator/pkgs/container/helm-charts%2Fvault-operator
+    targetRevision: 1.9.0
+    helm:
+      releaseName: netbird
+      valuesObject:
+        fullnameOverride: netbird
+        management:
+          image:
+            tag: "{{ .Values.netbird.server.version }}"
+          configYaml:
+            server:
+              server:
+                listenAddress: :80
+                exposedAddress: https://{{ .Values.netbird.domain }}:443
+                stunPorts: [3478]
+                metricsPort: 9090
+                healthcheckAddress: :9000
+                logLevel: info
+                logFile: console
+                authSecret: "${NETBIRD_RELAY_AUTH_SECRET}"
+                dataDir: /var/lib/netbird
+                auth:
+                  issuer: https://{{ .Values.netbird.domain }}/oauth2
+                  signKeyRefreshEnabled: true
+                  dashboardRedirectURIs:
+                    - https://{{ .Values.netbird.domain }}/nb-auth
+                    - https://{{ .Values.netbird.domain }}/nb-silent-auth
+                  cliRedirectURIs:
+                    - http://localhost:53000/
+                store:
+                  engine: "sqlite"  # sqlite, postgres, or mysql
+                  dsn: ""  # Connection string for postgres or mysql
+                  encryptionKey: "${NETBIRD_DATASTORE_ENCRYPTION_KEY}"
+          persistentVolume:
+            enabled: true
+          env:
+            NETBIRD_AUTH_PKCE_DISABLE_PROMPT_LOGIN: "true"
+            NETBIRD_AUTH_REDIRECT_URI: "/auth"
+            NETBIRD_AUTH_SILENT_REDIRECT_URI: "/silent-auth"
+            AUTH_SUPPORTED_SCOPES: openid profile email offline_access api
+            USE_AUTH0: false
+            NETBIRD_MGMT_IDP: "authentik"
+          envFromSecret:
+            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: netbird-auth/oidcConfigEndpoint
+            NETBIRD_AUTH_CLIENT_ID: netbird-auth/idpClientID
+            NETBIRD_RELAY_AUTH_SECRET: netbird-auth/relayPassword
+            NETBIRD_IDP_MGMT_CLIENT_ID: netbird-auth/idpClientID
+            NETBIRD_IDP_MGMT_EXTRA_USERNAME: netbird-auth/idpServiceAccountUser
+            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: netbird-auth/idpServiceAccountPassword
+            NETBIRD_DATASTORE_ENCRYPTION_KEY: netbird-auth/datastoreEncryptionKey
+            NETBIRD_AUTH_AUDIENCE: netbird-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: netbird-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: netbird-auth/idpClientID
+            OIDC_CONFIG_ENDPOINT: netbird-auth/oidcConfigEndpoint
+            IDP_CLIENT_SECRET: netbird-auth/clientSecret
+
+        dashboard:
+          image:
+            tag: "{{ .Values.netbird.dashboard.version }}"
+          enabled: true
+          env:
+            # Endpoints
+            NETBIRD_MGMT_API_ENDPOINT: https://{{ .Values.netbird.domain }}:443
+            NETBIRD_MGMT_GRPC_API_ENDPOINT: https://{{ .Values.netbird.domain }}:443
+            # OIDC
+            NETBIRD_AUTH_PKCE_DISABLE_PROMPT_LOGIN: "true"
+            NETBIRD_AUTH_REDIRECT_URI: "/auth"
+            NETBIRD_AUTH_SILENT_REDIRECT_URI: "/silent-auth"
+            AUTH_SUPPORTED_SCOPES: openid profile email offline_access api
+            USE_AUTH0: false
+            NETBIRD_MGMT_IDP: "authentik"
+          envFromSecret:
+            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: netbird-auth/oidcConfigEndpoint
+            NETBIRD_AUTH_CLIENT_ID: netbird-auth/idpClientID
+            NETBIRD_RELAY_AUTH_SECRET: netbird-auth/relayPassword
+            NETBIRD_IDP_MGMT_CLIENT_ID: netbird-auth/idpClientID
+            NETBIRD_IDP_MGMT_EXTRA_USERNAME: netbird-auth/idpServiceAccountUser
+            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: netbird-auth/idpServiceAccountPassword
+            NETBIRD_DATASTORE_ENCRYPTION_KEY: netbird-auth/datastoreEncryptionKey
+            NETBIRD_AUTH_AUDIENCE: netbird-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: netbird-auth/idpClientID
+            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: netbird-auth/idpClientID
+            OIDC_CONFIG_ENDPOINT: netbird-auth/oidcConfigEndpoint
+
+        extraManifests:
+          - apiVersion: traefik.io/v1alpha1
+            kind: IngressRoute
+            metadata:
+              name: netbird
+              labels:
+                argocd.argoproj.io/instance: netbird
+            spec:
+              entryPoints:
+                - websecure
+              routes:
+                - kind: Rule
+                  match: Host(`netbird.4.weebo.fr`) && !PathPrefix(`/api`) && !PathPrefix(`/management`) && !PathPrefix(`/signalexchange`) && !PathPrefix(`/relay`)
+                  services:
+                    - name: netbird-dashboard
+                      namespace: netbird
+                      passHostHeader: true
+                      port: 80
+                - kind: Rule
+                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/api`)
+                  services:
+                    - name: netbird-management
+                      namespace: netbird
+                      passHostHeader: true
+                      port: 80
+                - kind: Rule
+                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/relay`)
+                  services:
+                    - name: netbird-relay
+                      namespace: netbird
+                      passHostHeader: true
+                      port: 33080
+                - kind: Rule
+                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/management`)
+                  services:
+                    - name: netbird-management
+                      namespace: netbird
+                      passHostHeader: true
+                      port: 80
+                      scheme: h2c
+                - kind: Rule
+                  match: Host(`netbird.4.weebo.fr`) && PathPrefix(`/signalexchange`)
+                  services:
+                    - name: netbird-signal
+                      namespace: netbird
+                      passHostHeader: true
+                      port: 80
+                      scheme: h2c
+              tls:
+                secretName: "netbird-certificate"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: vpn
+
+{{- end -}}

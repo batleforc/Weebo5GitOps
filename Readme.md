@@ -43,5 +43,7 @@ This is the base project for the Weebo 5 production upgrade.
 - .* - Global folder
 - 0.* - Install folder
 - 1.* - Infra folder
+  - 1.argo - ArgoCD folder, dedicated to infra related ressources deployed directly by ArgoCD
+  - 1.helm - Helm folder, dedicated to special Helm charts rewriting public one that i don't like/too limited for my use case/too long to be merged in the original one
 - 2.* - Apps folder
 - 3.* - Post-install folder

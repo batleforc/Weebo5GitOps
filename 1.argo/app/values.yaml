@@ -13,3 +13,6 @@ traefik:
 storage:
   local:
     enabled: true
+
+vpn:
+  enabled: true
