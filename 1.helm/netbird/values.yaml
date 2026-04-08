@@ -398,7 +398,7 @@ managementTokenSecretJob:
   command:
     - "/bin/sh"
     - "-c"
-    - "kubectl -n ${NAMESPACE} exec -it deploy/netbird-management -- netbird-mgmt token create | kubectl -n ${NAMESPACE} create secret generic ${SECRET_NAME} --from-literal=${TOKEN_KEY}=$(cat -) --dry-run=client -o yaml | kubectl apply -f -"
+    - "kubectl -n ${NAMESPACE} exec -it deploy/netbird-management -- /go/bin/netbird-server token create -c /etc/netbird/config.yaml | kubectl -n ${NAMESPACE} create secret generic ${SECRET_NAME} --from-literal=${TOKEN_KEY}=$(cat -) --dry-run=client -o yaml | kubectl apply -f -"
 
 ## @section NetBird Signal
 
