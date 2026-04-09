@@ -400,7 +400,7 @@ managementTokenSecretJob:
     - "-c"
     - |-
       set -eu
-      TOKEN="$(kubectl -n "${NAMESPACE}" exec deploy/netbird-management -- /go/bin/netbird-server token create -c /etc/netbird/config.yaml --name terraform | tr -d '\r' | tail -n1)"
+      TOKEN="$(kubectl -n "${NAMESPACE}" exec deploy/netbird-management -- /go/bin/netbird-server token create -c /etc/netbird/config.yaml --name terraform | grep 'Token:' | awk '{print $2}' | tr -d '\r')"
       [ -n "${TOKEN}" ] && kubectl -n "${NAMESPACE}" create secret generic "${SECRET_NAME}" --from-literal="${TOKEN_KEY}=${TOKEN}" --dry-run=client -o yaml | kubectl apply -f - && echo "Management token secret created successfully" && exit 0 || (echo "Failed to create management token secret" >&2 && exit 1)
       [ ! -n "${TOKEN}" ] && echo "Failed to create management token secret: token is empty" >&2 && exit 1
 
