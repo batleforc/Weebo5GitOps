@@ -33,7 +33,7 @@ spec:
               terraform apply -auto-approve
           env:
             - name: TF_VAR_netbird_token
-              value: "vault:mv/data/netbird/config#TERRAFORM_TOKEN"
+              value: "vault:mv/data/vpn/config#TERRAFORM_TOKEN"
             - name: TF_VAR_vault_addr
               value: "https://vault.vault:8200"
           volumeMounts:
