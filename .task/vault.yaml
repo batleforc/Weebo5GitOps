@@ -34,4 +34,4 @@ tasks:
     vars:
       TOKEN: "{{ .TOKEN }}"
     cmds:
-      - task vault -- kv put -tls-skip-verify -mount=mv netbird/config TERRAFORM_TOKEN={{ .TOKEN }}
+      - task vault -- kv put -tls-skip-verify -mount=mv vpn/config TERRAFORM_TOKEN={{ .TOKEN }}
