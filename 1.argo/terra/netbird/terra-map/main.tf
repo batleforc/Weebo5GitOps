@@ -21,7 +21,7 @@ variable "netbird_token" {
 
 variable "netbird_management_url" {
   description = "NetBird Management URL"
-  default     = "https://netbird.4.weebo.fr"
+  default     = "https://vpn.batleforc.fr"
 }
 
 provider "vault" {
@@ -48,4 +48,6 @@ resource "netbird_account_settings" "example" {
   jwt_groups_claim_name      = "groups"
   groups_propagation_enabled = true
   jwt_groups_enabled         = true
+  network_range              = "100.64.0.0/16"
+  dns_domain                 = "batleforc.int"
 }

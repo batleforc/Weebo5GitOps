@@ -4,7 +4,7 @@
 resource "authentik_provider_oauth2" "vpn" {
   name               = "vpn"
   client_id          = "vpn"
-  client_type        = "public"
+  client_type        = "private"
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   signing_key        = data.authentik_certificate_key_pair.generated.id
@@ -29,8 +29,7 @@ resource "authentik_provider_oauth2" "vpn" {
     data.authentik_property_mapping_provider_scope.scope-offline.id,
     data.authentik_property_mapping_provider_scope.scope-api.id,
   ]
-  access_code_validity = "minutes=10"
-  sub_mode             = "user_id"
+  include_claims_in_id_token = true
 }
 
 resource "random_password" "vpn_sa_password" {
@@ -84,6 +83,7 @@ resource "vault_kv_secret_v2" "vpn" {
       NETBIRD_AUTH_CLIENT_ID                   = authentik_provider_oauth2.vpn.client_id,
       NETBIRD_AUTH_SUPPORTED_SCOPES            = "openid profile email offline_access api",
       NETBIRD_AUTH_AUDIENCE                    = authentik_provider_oauth2.vpn.client_secret,
+      NETBIRD_AUTH_CLIENT_SECRET               = authentik_provider_oauth2.vpn.client_secret,
       NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID       = authentik_provider_oauth2.vpn.client_id,
       NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE        = authentik_provider_oauth2.vpn.client_id,
       NETBIRD_MGMT_IDP                         = "authentik",
