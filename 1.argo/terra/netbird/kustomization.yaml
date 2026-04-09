@@ -16,6 +16,7 @@ configMapGenerator:
     namespace: netbird
     files:
       - ./terra-map/main.tf
+      - ./terra-map/idp.tf
       - ./terra-map/group.tf
-      - ./terra-map/kubernetes-peer.tf
-      - ./terra-map/dns.tf
+      # - ./terra-map/kubernetes-peer.tf
+      # - ./terra-map/dns.tf
