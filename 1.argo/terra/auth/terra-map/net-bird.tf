@@ -4,7 +4,7 @@
 resource "authentik_provider_oauth2" "vpn" {
   name               = "vpn"
   client_id          = "vpn"
-  client_type        = "private"
+  client_type        = "confidential"
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   signing_key        = data.authentik_certificate_key_pair.generated.id
