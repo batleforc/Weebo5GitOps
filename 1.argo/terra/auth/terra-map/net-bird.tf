@@ -78,7 +78,7 @@ resource "vault_kv_secret_v2" "vpn" {
   data_json = jsonencode(
     {
       NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT = "https://auth.batleforc.fr/application/o/${authentik_application.vpn.slug}/.well-known/openid-configuration",
-      NETBIRD_AUTH_BASE_URL                    = "https://auth.batleforc.fr/application/o/${authentik_application.vpn.slug}",
+      NETBIRD_AUTH_BASE_URL                    = "https://auth.batleforc.fr/application/o/${authentik_application.vpn.slug}/",
       NETBIRD_USE_AUTH0                        = "false",
       NETBIRD_AUTH_CLIENT_ID                   = authentik_provider_oauth2.vpn.client_id,
       NETBIRD_AUTH_SUPPORTED_SCOPES            = "openid profile email offline_access api",
