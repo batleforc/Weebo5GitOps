@@ -398,8 +398,11 @@ managementTokenSecretJob:
   command:
     - "/bin/sh"
     - "-c"
-    - "kubectl -n ${NAMESPACE} exec -it deploy/netbird-management -- bash -c '/go/bin/netbird-server token create -c /etc/netbird/config.yaml --name terraform' > /tmp/token && cat /tmp/token'"
-    - kubectl -n ${NAMESPACE} create secret generic ${SECRET_NAME} --from-literal=${TOKEN_KEY}=$(cat -) --dry-run=client -o yaml | kubectl apply -f -
+    - |-
+      set -eu
+      TOKEN="$(kubectl -n "${NAMESPACE}" exec deploy/netbird-management -- /go/bin/netbird-server token create -c /etc/netbird/config.yaml --name terraform | tr -d '\r' | tail -n1)"
+      [ -n "${TOKEN}" ] && kubectl -n "${NAMESPACE}" create secret generic "${SECRET_NAME}" --from-literal="${TOKEN_KEY}=${TOKEN}" --dry-run=client -o yaml | kubectl apply -f -
+      [! -n "${TOKEN}" ] && echo "Failed to create management token secret: token is empty" >&2 && exit 1
 
 ## @section NetBird Signal
 
