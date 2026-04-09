@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "terra-job-netbird"
+  name: "terra-job-vpn"
   annotations:
     argocd.argoproj.io/hook: PostSync
 spec:
@@ -50,10 +50,10 @@ spec:
       volumes:
         - name: "script-vol"
           configMap:
-            name: "terra-netbird-config"
+            name: "terra-vpn-config"
         - name: terra-job
           persistentVolumeClaim:
-            claimName: "terra-job-netbird"
+            claimName: "terra-job-vpn"
         - name: vault-tls
           secret:
             secretName: "vault-tls"
@@ -61,7 +61,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "terra-job-netbird-empty"
+  name: "terra-job-vpn-empty"
 spec:
   backoffLimit: 10
   template:
@@ -83,4 +83,4 @@ spec:
       volumes:
         - name: terra-job
           persistentVolumeClaim:
-            claimName: "terra-job-netbird"
+            claimName: "terra-job-vpn"
