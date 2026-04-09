@@ -29,3 +29,9 @@ tasks:
         sh: task vault:pwd
     cmds:
       - VAULT_TOKEN={{.VAULT_TOKEN}}  bao {{ .CLI_ARGS }}
+  vpn:
+    desc: "Create entry in vault for VPN terraform provider"
+    vars:
+      TOKEN: "{{ .TOKEN }}"
+    cmds:
+      - task vault -- kv put -tls-skip-verify -mount=mv netbird/config TERRAFORM_TOKEN={{ .TOKEN }}
