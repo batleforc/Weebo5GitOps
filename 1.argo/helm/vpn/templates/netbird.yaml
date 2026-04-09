@@ -34,13 +34,17 @@ spec:
               authSecret: "${NETBIRD_DATASTORE_ENCRYPTION_KEY}"
               dataDir: /var/lib/netbird
               auth:
-                issuer: https://{{ .Values.netbird.domain }}/oauth2
+                issuer: "https://vpn.batleforc.fr/oauth2"
                 signKeyRefreshEnabled: true
                 dashboardRedirectURIs:
-                  - https://{{ .Values.netbird.domain }}/nb-auth
-                  - https://{{ .Values.netbird.domain }}/nb-silent-auth
+                  - "https://vpn.batleforc.fr/nb-auth"
+                  - "https://vpn.batleforc.fr/nb-silent-auth"
                 cliRedirectURIs:
-                  - http://localhost:53000/
+                  - "http://localhost:53000/"
+              reverseProxy:
+                trustedHTTPProxies:
+                  - "10.244.0.0/16"
+                  - "fd00:10:244::/56"
               store:
                 engine: "sqlite"  # sqlite, postgres, or mysql
                 dsn: ""  # Connection string for postgres or mysql
@@ -51,29 +55,6 @@ spec:
             enabled: true
             envFromSecret:
               NETBIRD_DATASTORE_ENCRYPTION_KEY: vpn-auth/datastoreEncryptionKey
-          env:
-            # Endpoints
-            NETBIRD_MGMT_API_ENDPOINT: https://{{ .Values.netbird.domain }}:443
-            NETBIRD_MGMT_GRPC_API_ENDPOINT: https://{{ .Values.netbird.domain }}:443
-            # OIDC
-            NETBIRD_AUTH_PKCE_DISABLE_PROMPT_LOGIN: "true"
-            NETBIRD_AUTH_REDIRECT_URI: "/auth"
-            NETBIRD_AUTH_SILENT_REDIRECT_URI: "/silent-auth"
-            NETBIRD_AUTH_SUPPORTED_SCOPES: openid profile email offline_access api
-            NETBIRD_USE_AUTH0: false
-            NETBIRD_MGMT_IDP: "authentik"
-          envFromSecret:
-            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: vpn-auth/oidcConfigEndpoint
-            NETBIRD_AUTH_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_IDP_MGMT_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_IDP_MGMT_EXTRA_USERNAME: vpn-auth/idpServiceAccountUser
-            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: vpn-auth/idpServiceAccountPassword
-            NETBIRD_DATASTORE_ENCRYPTION_KEY: vpn-auth/datastoreEncryptionKey
-            NETBIRD_AUTH_AUDIENCE: vpn-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: vpn-auth/idpClientID
-            OIDC_CONFIG_ENDPOINT: vpn-auth/oidcConfigEndpoint
-            IDP_CLIENT_SECRET: vpn-auth/clientSecret
           serviceStun:
             enabled: true
             type: LoadBalancer
@@ -88,26 +69,21 @@ spec:
           enabled: true
           env:
             # Endpoints
-            NETBIRD_MGMT_API_ENDPOINT: https://{{ .Values.netbird.domain }}:443
-            NETBIRD_MGMT_GRPC_API_ENDPOINT: https://{{ .Values.netbird.domain }}:443
-            # OIDC
-            NETBIRD_AUTH_PKCE_DISABLE_PROMPT_LOGIN: "true"
-            NETBIRD_AUTH_REDIRECT_URI: "/auth"
-            NETBIRD_AUTH_SILENT_REDIRECT_URI: "/silent-auth"
-            NETBIRD_AUTH_SUPPORTED_SCOPES: openid profile email offline_access api
-            NETBIRD_USE_AUTH0: false
-            NETBIRD_MGMT_IDP: "authentik"
-          envFromSecret:
-            NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT: vpn-auth/oidcConfigEndpoint
-            NETBIRD_AUTH_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_IDP_MGMT_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_IDP_MGMT_EXTRA_USERNAME: vpn-auth/idpServiceAccountUser
-            NETBIRD_IDP_MGMT_EXTRA_PASSWORD: vpn-auth/idpServiceAccountPassword
-            NETBIRD_DATASTORE_ENCRYPTION_KEY: vpn-auth/datastoreEncryptionKey
-            NETBIRD_AUTH_AUDIENCE: vpn-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID: vpn-auth/idpClientID
-            NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE: vpn-auth/idpClientID
-            OIDC_CONFIG_ENDPOINT: vpn-auth/oidcConfigEndpoint
+            NETBIRD_MGMT_API_ENDPOINT: https://{{ .Values.netbird.domain }}
+            NETBIRD_MGMT_GRPC_API_ENDPOINT: https://{{ .Values.netbird.domain }}
+            # OIDC - using embedded IdP
+            AUTH_AUDIENCE: netbird-dashboard
+            AUTH_CLIENT_ID: netbird-dashboard
+            AUTH_CLIENT_SECRET:
+            AUTH_AUTHORITY: https://{{ .Values.netbird.domain }}/oauth2
+            USE_AUTH0: false
+            AUTH_SUPPORTED_SCOPES: openid profile email groups
+            AUTH_REDIRECT_URI: /nb-auth
+            AUTH_SILENT_REDIRECT_URI: /nb-silent-auth
+            # SSL
+            NGINX_SSL_PORT: 443
+            # Letsencrypt
+            LETSENCRYPT_DOMAIN: none
 
         extraManifests:
           - apiVersion: traefik.io/v1alpha1
