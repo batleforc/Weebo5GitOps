@@ -58,3 +58,18 @@ blocky:
       enable: true
       # url path, optional (default '/metrics')
       path: /metrics
+    ports:
+      # optional: Port(s) and bind ip address(es) for DoT (DNS-over-TLS) listener.
+      #           Supports the same formats as `dns` above.
+      # default: none
+      # example: [853, :853, 127.0.0.1:853, [::1]:853]
+      tls: 853
+      # optional: Port(s) and optional bind ip address(es) to serve HTTPS used for prometheus metrics, pprof, REST API, DoH...
+      # example: [443, :443, 127.0.0.1:443, [::1]:443]
+      https: 443
+      # optional: Port(s) and optional bind ip address(es) to serve HTTP used for prometheus metrics, pprof, REST API, DoH...
+      # example: [4000, :4000, 127.0.0.1:4000, [::1]:4000]
+      http: 4000
+      # optional: URL path for DoH queries.
+      # default: /dns-query
+      dohPath: /dns-query

@@ -31,7 +31,6 @@ spec:
             {{- range .Values.blocky.service.port }}
             - containerPort: {{ .port }}
               protocol: {{ .protocol }}
-              name: {{ .name }}
             {{- end }}
           env:
             - name: "BLOCKY_CONFIG_FILE"
