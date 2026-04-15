@@ -58,6 +58,9 @@ blocky:
       enable: true
       # url path, optional (default '/metrics')
       path: /metrics
+    bootstrapDns:
+      - tcp+udp:1.1.1.1
+      - https://1.1.1.1/dns-query
     ports:
       # optional: Port(s) and bind ip address(es) for DoT (DNS-over-TLS) listener.
       #           Supports the same formats as `dns` above.
