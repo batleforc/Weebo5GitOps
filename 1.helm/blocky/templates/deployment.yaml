@@ -34,11 +34,11 @@ spec:
             {{- end }}
           env:
             - name: "BLOCKY_CONFIG_FILE"
-              value: "/config/blocky"
+              value: "/config/blocky/config.yml"
           volumeMounts:
             - name: config
               mountPath: /config/blocky
-              subPath: config.yaml
+              subPath: config.yml
       volumes:
         - name: config
           configMap:
