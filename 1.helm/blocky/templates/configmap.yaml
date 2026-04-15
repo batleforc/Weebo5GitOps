@@ -5,6 +5,6 @@ metadata:
   name: blocky-{{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 data:
-  config.yaml: |-
+  config.yml: |-
     {{- .Values.blocky.config | toYaml | nindent 4 }}
 {{- end -}}
