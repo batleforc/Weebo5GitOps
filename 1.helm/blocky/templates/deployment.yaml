@@ -32,9 +32,8 @@ spec:
             - containerPort: {{ .port }}
               protocol: {{ .protocol }}
             {{- end }}
-          env:
-            - name: "BLOCKY_CONFIG_FILE"
-              value: "/config/blocky"
+          args:
+            - "--config=/config/blocky/config.yml"
           volumeMounts:
             - name: config
               mountPath: /config/blocky
