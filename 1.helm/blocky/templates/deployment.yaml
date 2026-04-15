@@ -1,0 +1,43 @@
+{{- if .Values.blocky.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blocky-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    coroot.io/monitor: "true"
+    coroot.io/port: "4000"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blocky
+  template:
+    metadata:
+      labels:
+        app: blocky
+    spec:
+      containers:
+        - name: blocky
+          image: "{{ .Values.blocky.image.repository }}:{{ .Values.blocky.image.tag }}"
+          resources:
+            limits:
+              cpu: {{ .Values.blocky.resources.limits.cpu }}
+              memory: {{ .Values.blocky.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.blocky.resources.requests.cpu }}
+              memory: {{ .Values.blocky.resources.requests.memory }}
+          ports:
+            {{- range .Values.blocky.service.port }}
+            - containerPort: {{ .port }}
+              protocol: {{ .protocol }}
+            {{- end }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/blocky
+              subPath: config.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: blocky-{{ .Release.Name }}
+{{- end -}}

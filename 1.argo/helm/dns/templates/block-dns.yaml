@@ -1,0 +1,33 @@
+{{- if .Values.blocky.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blocky
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  project: default
+  source:
+    repoURL: '{{ .Values.repo }}'
+    path: '1.argo/helm/blocky'
+    helm:
+      releaseName: blocky
+      valuesObject:
+        repo: "{{ .Values.repo }}"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'blocky'
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+{{- end -}}

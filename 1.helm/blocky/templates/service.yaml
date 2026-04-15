@@ -1,0 +1,25 @@
+{{- if .Values.blocky.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: blocky-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- range $key, $value := .Values.blocky.service.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+spec:
+  type: {{ .Values.blocky.service.type }}
+  ipFamily: {{ .Values.blocky.service.ipFamily }}
+  selector:
+    app: blocky
+  {{- if .Values.blocky.service.clusterIP }}
+  clusterIP: {{ .Values.blocky.service.clusterIP }}
+  {{- end }}
+  ports:
+    {{- range .Values.blocky.service.port }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      protocol: {{ .protocol }}
+    {{- end }}
+{{- end -}}

@@ -7,6 +7,7 @@ blocky:
     type: ClusterIP
     ipFamily: DualStack
     annotations: {}
+    clusterIP: 10.96.0.11
     port:
       - port: 53
         targetPort: 53
@@ -17,6 +18,9 @@ blocky:
       - port: 4000
         targetPort: 4000
         protocol: TCP
+      - port: 853
+        targetPort: 853
+        protocol: TCP
   resources:
     limits:
       cpu: 100m
@@ -24,3 +28,29 @@ blocky:
     requests:
       cpu: 100m
       memory: 128Mi
+  config:
+    upstreams:
+      init:
+        # Configure startup behavior.
+        # accepted: blocking, failOnError, fast
+        # default: blocking
+        strategy: fast
+      groups:
+        default:
+          - 1.1.1.1
+          - 9.9.9.9
+          - 2620:fe::fe
+    strategy: parallel_best
+    blocking:
+      denylists:
+        ads:
+          - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+          - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+          - https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+          - https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+    prometheus:
+      # enabled if true
+      enable: true
+      # url path, optional (default '/metrics')
+      path: /metrics
