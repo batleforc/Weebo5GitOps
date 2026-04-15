@@ -33,9 +33,12 @@ spec:
               protocol: {{ .protocol }}
               name: {{ .name }}
             {{- end }}
+          env:
+            - name: "BLOCKY_CONFIG_FILE"
+              value: "/config/blocky/config.yaml"
           volumeMounts:
             - name: config
-              mountPath: /app
+              mountPath: /config/blocky
               subPath: config.yaml
       volumes:
         - name: config
