@@ -10,7 +10,7 @@ metadata:
     {{- end }}
 spec:
   type: {{ .Values.blocky.service.type }}
-  ipFamily: {{ .Values.blocky.service.ipFamily }}
+  ipFamilyPolicy: {{ .Values.blocky.service.ipFamily }}
   selector:
     app: blocky
   {{- if .Values.blocky.service.clusterIP }}

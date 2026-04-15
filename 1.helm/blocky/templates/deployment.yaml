@@ -35,7 +35,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: config
-              mountPath: /etc/blocky
+              mountPath: /app
               subPath: config.yaml
       volumes:
         - name: config
