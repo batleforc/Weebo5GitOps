@@ -21,5 +21,6 @@ spec:
     - port: {{ .port }}
       targetPort: {{ .targetPort }}
       protocol: {{ .protocol }}
+      name: {{ .name }}
     {{- end }}
 {{- end -}}

@@ -12,15 +12,19 @@ blocky:
       - port: 53
         targetPort: 53
         protocol: UDP
+        name: dns-udp
       - port: 53
         targetPort: 53
         protocol: TCP
+        name: dns-tcp
       - port: 4000
         targetPort: 4000
         protocol: TCP
+        name: web
       - port: 853
         targetPort: 853
         protocol: TCP
+        name: dns-tls
   resources:
     limits:
       cpu: 100m

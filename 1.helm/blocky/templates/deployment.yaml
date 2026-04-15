@@ -31,6 +31,7 @@ spec:
             {{- range .Values.blocky.service.port }}
             - containerPort: {{ .port }}
               protocol: {{ .protocol }}
+              name: {{ .name }}
             {{- end }}
           volumeMounts:
             - name: config
