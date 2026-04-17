@@ -15,6 +15,7 @@ spec:
     automated: {}
     syncOptions:
     - CreateNamespace=true
+    - ServerSideApply=true
   source:
     chart: rybbit
     repoURL: oci://ghcr.io/antoniolago/rybbit
