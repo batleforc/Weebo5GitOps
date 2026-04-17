@@ -6,28 +6,28 @@ version: 0.5.0
 appVersion: "2.4.0"
 kubeVersion: ">=1.19.0-0"
 maintainers:
-- name: Antônio Lago
-  email: antonio.clago@outlook.com
-  url: https://github.com/antoniolago
+  - name: Antônio Lago
+    email: antonio.clago@outlook.com
+    url: https://github.com/antoniolago
 keywords:
-- analytics
-- self-hosted
-- rybbit
+  - analytics
+  - self-hosted
+  - rybbit
 home: https://github.com/antoniolago/rybbit-helm
 sources:
-- https://github.com/antoniolago/rybbit-helm
+  - https://github.com/antoniolago/rybbit-helm
 
 dependencies:
-- name: cluster
-  alias: postgresql
-  version: "0.5.0"
-  repository: https://cloudnative-pg.github.io/charts
-  condition: postgresql.enabled
-  tags:
-  - postgresql
-- name: clickhouse
-  version: "0.3.9"
-  repository: https://helm.altinity.com/
-  condition: clickhouse.enabled
-  tags:
-  - clickhouse
+  - name: cluster
+    alias: postgresql
+    version: "0.6.0"
+    repository: https://cloudnative-pg.github.io/charts
+    condition: postgresql.enabled
+    tags:
+      - postgresql
+  - name: clickhouse
+    version: "0.3.9"
+    repository: https://helm.altinity.com/
+    condition: clickhouse.enabled
+    tags:
+      - clickhouse
