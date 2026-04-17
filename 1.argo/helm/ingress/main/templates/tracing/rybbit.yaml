@@ -1,0 +1,73 @@
+{{- if .Values.rybbit.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rybbit
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    chart: rybbit
+    repoURL: oci://ghcr.io/antoniolago/rybbit
+    targetRevision: {{ .Values.rybbit.version }}
+    helm:
+      releaseName: rybbit
+      valuesObject:
+        client:
+          image:
+            tag: v2.5.0
+          env:
+            NEXT_PUBLIC_BACKEND_URL: "https://{{ .Values.rybbit.dns }}"
+            NEXT_PUBLIC_DISABLE_SIGNUP: "false"
+        backend:
+          image:
+            tag: v2.5.0
+          env:
+            BASE_URL: "https://{{ .Values.rybbit.dns }}"
+            DISABLE_SIGNUP: "false"
+
+        ingress:
+          # API Ingress (with regex)
+          api:
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: outbound
+              nginx.ingress.kubernetes.io/use-regex: "true"
+              nginx.ingress.kubernetes.io/rewrite-target: /api/$2
+            hosts:
+            - host: {{ .Values.rybbit.dns }}
+              paths:
+              - path: /api(/|$)(.*)
+                pathType: ImplementationSpecific
+            tls:
+            - secretName: rybbit-certificate
+              hosts:
+              - {{ .Values.rybbit.dns }}
+          # Client Ingress (without regex)
+          client:
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: outbound
+            hosts:
+            - host: {{ .Values.rybbit.dns }}
+              paths:
+              - path: /
+                pathType: Prefix
+            tls:
+            - secretName: rybbit-certificate
+              hosts:
+              - {{ .Values.rybbit.dns }}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'rybbit'
+
+{{- end -}}

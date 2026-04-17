@@ -27,6 +27,37 @@ zone:
       auth                3600    AAAA                2001:41d0:2:2751::1
       vpn                 3600    A                   94.23.38.81
       vpn                 3600    AAAA                2001:41d0:2:2751::1
+      track               3600    A                   94.23.38.81
+      track               3600    AAAA                2001:41d0:2:2751::1
+
+  "db.maxleriche.net":
+    zone: "maxleriche.net."
+    file: |
+      $TTL 1h;
+      $origin maxleriche.net.
+      @       IN      SOA     batleforc.fr. maxleriche\.60.gmail.com. (
+                              2023111330; serial
+                              10800; refresh
+                              3600; retry
+                              604800; expire
+                              38400 ); minimum
+              IN      NS                              batleforc.fr.
+              IN      NS                              ns3082912.ip-94-23-38.eu.
+      maxleriche.net.       3600    CAA       0 issue "letsencrypt.org"
+      maxleriche.net.       600     IN TXT "v=spf1 include:_spf.protonmail.ch ~all"
+      @       600     IN TXT "protonmail-verification=eb37b2ad8c95b91c0c993bcdb261f33ae27f9cfd"
+      @       600     MX 10  mail.protonmail.ch.
+      @       600     MX 20  mailsec.protonmail.ch.
+      maxleriche.net.       3600    A                               94.23.38.81
+      maxleriche.net.       3600    AAAA                            2001:41d0:2:2751::1
+      maxleriche.net.       NS                                      batleforc.fr.
+      maxleriche.net.       NS                                      ns3082912.ip-94-23-38.eu.
+      beta                  3600    A                               94.23.38.81
+      beta                  3600    AAAA                            2001:41d0:2:2751::1
+      protonmail._domainkey 3600    CNAME                           protonmail.domainkey.dokpfhrmhsyhdvnrkoythmysqusv3yw6i5wxyt45gziglhzwcfcba.domains.proton.ch.
+      protonmail2._domainkey 3600    CNAME                          protonmail2.domainkey.dokpfhrmhsyhdvnrkoythmysqusv3yw6i5wxyt45gziglhzwcfcba.domains.proton.ch.
+      protonmail3._domainkey 3600    CNAME                          protonmail3.domainkey.dokpfhrmhsyhdvnrkoythmysqusv3yw6i5wxyt45gziglhzwcfcba.domains.proton.ch.
+      _dmarc                 3600    TXT                            "v=DMARC1; p=quarantine"
 
   "38.23.94.in-addr.arpa":
     zone: "38.23.94.in-addr.arpa."
