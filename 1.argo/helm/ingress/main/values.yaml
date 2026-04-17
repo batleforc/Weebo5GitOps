@@ -30,6 +30,7 @@ authentik:
 rybbit:
   enabled: true
   dns: "track.batleforc.fr"
+  disableSignup: true
 
 repo: ""
 
