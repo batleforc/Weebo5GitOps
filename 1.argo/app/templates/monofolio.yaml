@@ -1,0 +1,31 @@
+{{- if .Values.monofolio.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monofolio
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  project: default
+  source:
+    repoURL: '{{ .Values.repo }}'
+    path: '2.app/monofolio'
+    helm:
+      releaseName: monofolio
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'monofolio'
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+{{- end -}}

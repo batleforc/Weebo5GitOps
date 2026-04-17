@@ -1,0 +1,26 @@
+enabled: true
+
+domain:
+  - cert: maxleriche-cert
+    name: maxleriche.net
+  - cert: batleforc-cert
+    name: batleforc.fr
+
+image:
+  repository: ghcr.io/batleforc/monofolio-rs
+  tag: main
+
+env:
+  TRACKING_SCRIPT_SRC: "https://track.batleforc.fr/api/script.js"
+  TRACKING_SITE_ID: "fb803a06ed1f"
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 250m
+    memory: 128Mi
+
+ingress:
+  certIssuer: outbound

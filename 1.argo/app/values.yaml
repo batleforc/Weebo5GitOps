@@ -19,3 +19,6 @@ vpn:
 
 db:
   enabled: true
+
+monofolio:
+  enabled: true
