@@ -23,6 +23,8 @@ spec:
     helm:
       releaseName: rybbit
       valuesObject:
+        postgresql:
+          mode: standalone
         client:
           image:
             tag: v2.5.0
