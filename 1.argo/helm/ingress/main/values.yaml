@@ -29,7 +29,6 @@ authentik:
 
 rybbit:
   enabled: true
-  version: 0.5.6
   dns: "track.batleforc.fr"
 
 repo: ""

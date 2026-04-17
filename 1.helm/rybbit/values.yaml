@@ -1,0 +1,263 @@
+# Default values for rybbit chart
+# This is a YAML-formatted file.
+
+# Global settings
+global:
+  # Storage class for all persistent volumes
+  # Image registry for all images
+  # Image pull secrets for all images
+  imagePullSecrets: []
+  # Pod security context
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+  # Container security context
+  containerSecurityContext:
+    enabled: true
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+  # Pod disruption budget
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+  # Pod anti-affinity
+  podAntiAffinity: "soft"
+
+# Service account configuration
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+# Backend application configuration
+backend:
+  enabled: true
+  image:
+    repository: ghcr.io/rybbit-io/rybbit-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 10m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3001
+  env:
+    NODE_ENV: production
+    # DISABLE_SIGNUP: "true"
+    # BASE_URL: ""
+    ### USE clickhouse CHART VALUES INSTEAD, ITS SAFER
+    # CLICKHOUSE_USER: "rybbit"
+    # CLICKHOUSE_PASSWORD: "rybbit"
+    # CLICKHOUSE_DB: default
+    # CLICKHOUSE_HOST: "default-will-come-from-clickhouse-chart"
+
+    ### USE postgres values instead, ITS SAFER
+    # POSTGRES_HOST: postgresql-postgresql
+    # POSTGRES_DB: analytics
+    # POSTGRES_USER: postgres
+    # POSTGRES_PASSWORD: "use-secret-instead"
+    # POSTGRES_PORT: 5432
+
+  betterSecret:
+    secretName: ""
+    authKey: "better-auth-secret"
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 3001
+    enabled: false
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 3001
+    enabled: false
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    httpGet:
+      path: /health
+      port: 3001
+    enabled: false
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+    successThreshold: 1
+
+# Client application configuration
+client:
+  enabled: true
+  image:
+    repository: ghcr.io/rybbit-io/rybbit-client
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3002
+  env:
+    NODE_ENV: production
+    NEXT_PUBLIC_BACKEND_URL: ""
+  livenessProbe:
+    httpGet:
+      path: /
+      port: 3002
+    enabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    httpGet:
+      path: /
+      port: 3002
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    httpGet:
+      path: /
+      port: 3002
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+    successThreshold: 1
+
+# PostgreSQL configuration (CloudNativePG Cluster)
+# See: https://github.com/cloudnative-pg/charts/blob/main/charts/cluster/values.yaml
+postgresql:
+  enabled: true
+  type: postgresql
+  mode: standalone
+  name: postgresql
+  cluster:
+    # -- Number of instances
+    instances: 1
+  storage:
+    size: 10Gi
+    storageClass: ""
+
+# ClickHouse configuration (Altinity Operator)
+# See: https://github.com/Altinity/helm-charts/blob/main/charts/clickhouse/values.yaml
+clickhouse:
+  enabled: true
+  operator:
+    enabled: true
+    operator:
+      image:
+        # registry: "docker.io"
+        repository: docker.io/altinity/clickhouse-operator
+    metrics:
+      enabled: true
+      image:
+        repository: "docker.io/altinity/metrics-exporter"
+    crdHook:
+      # crdHook.enabled -- enable automatic CRD installation/update via pre-install/pre-upgrade hooks
+      # when disabled, CRDs must be installed manually using kubectl apply
+      enabled: true
+      image:
+        # crdHook.image.repository -- image repository for CRD installation job
+        repository: docker.io/alpine/k8s
+        tag: "1.32.12"
+  clickhouse:
+    replicasCount: 1
+    shardsCount: 1
+    image:
+      repository: docker.io/altinity/clickhouse-server
+    defaultUser:
+      # Default password - should be overridden in production
+      # The chart will store this in rybbit-clickhouse-credentials secret
+      password: "changeme"
+      password_secret_name: ""
+      # Allow access from pod networks (private RFC1918 ranges)
+      # Set to true to allow from any IP, or specify hostIP with a CIDR mask
+      allowExternalAccess: false
+      hostIP: "0.0.0.0/0"
+    persistence:
+      enabled: true
+      size: 20Gi
+      storageClass: ""
+    resources:
+      requests:
+        memory: "600Mi"
+        cpu: "100m"
+      limits:
+        memory: "2Gi"
+        cpu: "1000m"
+  keeper:
+    enabled: true
+    image: docker.io/altinity/clickhouse-keeper
+    replicaCount: 1
+    localStorage:
+      size: 8Gi
+      storageClass: ""
+    resources:
+      memoryRequestsMiB: 128Mi
+      cpuRequestsMs: 100
+      memoryLimitsMiB: 1Gi
+      cpuLimitsMs: 500
+  auth:
+    username: default
+    existingSecret: ""
+    existingSecretKey: "admin-password"
+
+# Ingress configuration
+ingress:
+  # API Ingress (with regex)
+  api:
+    enabled: false
+    className: ""
+    annotations:
+      nginx.ingress.kubernetes.io/use-regex: "true"
+      nginx.ingress.kubernetes.io/rewrite-target: /api/$2
+    hosts:
+    - host: chart-example.local
+      paths:
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
+    tls:
+    - secretName: chart-example-tls
+      hosts:
+      - chart-example.local
+  # Client Ingress (without regex)
+  client:
+    enabled: false
+    className: ""
+    hosts:
+    - host: chart-example.local
+      paths:
+      - path: /
+        pathType: Prefix
+    tls:
+    - secretName: chart-example-tls
+      hosts:
+      - chart-example.local

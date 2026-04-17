@@ -17,9 +17,8 @@ spec:
     - CreateNamespace=true
     - ServerSideApply=true
   source:
-    chart: rybbit
-    repoURL: oci://ghcr.io/antoniolago/rybbit
-    targetRevision: {{ .Values.rybbit.version }}
+    repoURL: '{{ .Values.repo }}'
+    path: '1.helm/rybbit'
     helm:
       releaseName: rybbit
       valuesObject:
