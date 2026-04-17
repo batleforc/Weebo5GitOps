@@ -48,7 +48,7 @@ spec:
             hosts:
             - host: {{ .Values.rybbit.dns }}
               paths:
-              - path: /api(/|$)(.*)
+              - path: /api
                 pathType: ImplementationSpecific
             tls:
             - secretName: rybbit-certificate
