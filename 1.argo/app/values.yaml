@@ -16,3 +16,6 @@ storage:
 
 vpn:
   enabled: true
+
+db:
+  enabled: true

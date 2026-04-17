@@ -1,0 +1,26 @@
+{{- if .Values.cnpg.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cnpg
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    chart: cloudnative-pg
+    repoURL: https://cloudnative-pg.github.io/charts
+    targetRevision: {{ .Values.cnpg.version }}
+    helm:
+      releaseName: cnpg
+  destination:
+    namespace: cnpg
+    server: https://kubernetes.default.svc
+{{- end }}
