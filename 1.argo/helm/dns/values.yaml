@@ -36,18 +36,20 @@ zone:
       $TTL 1h;
       $origin maxleriche.net.
       @       IN      SOA     batleforc.fr. maxleriche\.60.gmail.com. (
-                              2023111330; serial
+                              2023111335; serial
                               10800; refresh
                               3600; retry
                               604800; expire
                               38400 ); minimum
-              IN      NS                              batleforc.fr.
-              IN      NS                              ns3082912.ip-94-23-38.eu.
-      maxleriche.net.       3600    CAA       0 issue "letsencrypt.org"
-      maxleriche.net.       600     IN TXT "v=spf1 include:_spf.protonmail.ch ~all"
-      @       600     IN TXT "protonmail-verification=eb37b2ad8c95b91c0c993bcdb261f33ae27f9cfd"
-      @       600     MX 10  mail.protonmail.ch.
-      @       600     MX 20  mailsec.protonmail.ch.
+                            IN      NS                              batleforc.fr.
+                            IN      NS                              ns3082912.ip-94-23-38.eu.
+      maxleriche.net.       3600    CAA                             0 issue "letsencrypt.org"
+      maxleriche.net.       600     IN TXT                          "v=spf1 include:_spf.protonmail.ch ~all"
+      @                     600     IN TXT                          "protonmail-verification=eb37b2ad8c95b91c0c993bcdb261f33ae27f9cfd"
+      @                     600     MX 10                           mail.protonmail.ch.
+      @                     600     MX 20                           mailsec.protonmail.ch.
+      @                     3600    TXT                             "google-site-verification=i137wbVZIBrHr921ksYBxdfwc32h_iUzHpHgTED0gc4"
+      @                     3600    TXT                             "mlab-domain-1ee34955-2171-460e-8883-8bfe2000e7da"
       maxleriche.net.       3600    A                               94.23.38.81
       maxleriche.net.       3600    AAAA                            2001:41d0:2:2751::1
       maxleriche.net.       NS                                      batleforc.fr.
