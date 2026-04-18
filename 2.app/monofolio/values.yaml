@@ -9,6 +9,7 @@ domain:
 image:
   repository: ghcr.io/batleforc/monofolio-rs
   tag: main
+  pullPolicy: Always
 
 env:
   TRACKING_SCRIPT_SRC: "https://track.batleforc.fr/api/script.js"

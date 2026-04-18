@@ -18,6 +18,7 @@ spec:
       containers:
         - name: monofolio
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          pullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 3000
           env:
