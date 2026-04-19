@@ -16,6 +16,15 @@ spec:
     - ports:
       - port: "53"
         protocol: UDP
+  # TCP/8200 to app.kubernetes.io/name=vault, io.kubernetes.pod.namespace=vault
+  - toEndpoints:
+    - matchLabels:
+        app.kubernetes.io/name: vault
+        io.kubernetes.pod.namespace: vault
+    toPorts:
+    - ports:
+      - port: "8200"
+        protocol: TCP
   endpointSelector:
     matchLabels:
       app: exit-node-vpn-exit-node-base
