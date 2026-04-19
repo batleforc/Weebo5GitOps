@@ -37,24 +37,4 @@ spec:
 {{- with .Values.netbird.resources }}
 {{ toYaml . | indent 12 }}
 {{- end }}
-          livenessProbe:
-            exec:
-              command: ["netbird", "status", "--check", "live"]
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          readinessProbe:
-            exec:
-              command: ["netbird", "status", "--check", "ready"]
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          startupProbe:
-            exec:
-              command: ["netbird", "status", "--check", "startup"]
-            periodSeconds: 2
-            timeoutSeconds: 10
-            failureThreshold: 30
 {{- end -}}
