@@ -46,6 +46,9 @@ blocky:
           - 2620:fe::fe
       strategy: parallel_best
     blocking:
+      clientGroupsBlock:
+        default:
+          - "ads"
       denylists:
         ads:
           - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
