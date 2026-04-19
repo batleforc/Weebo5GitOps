@@ -47,3 +47,4 @@ netpol:
             - port: "53"
     - toFQDNs:
         - matchName: vpn.batleforc.fr
+        - matchName: vault.vault
