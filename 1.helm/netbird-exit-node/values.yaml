@@ -46,4 +46,4 @@ netpol:
         - ports:
             - port: 53
     - toFQDNs:
-        - matchName: vpn.weebo.fr
+        - matchName: vpn.batleforc.fr

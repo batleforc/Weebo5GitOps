@@ -1,0 +1,32 @@
+{{- if .Values.netbird.enabled -}}
+{{- range .Values.exit-node -}}
+{{- if .enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ $.Release.Name}}-{{ .name }}"
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  source:
+    repoURL: '{{ $.Values.repo }}'
+    path: '1.helm/netbird-exit-node'
+    helm:
+      releaseName: "{{ $.Release.Name}}-{{ .name }}"
+      valuesObject:
+        {{ . | toYaml | nindent 8 }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "{{ .namespace }}"
+{{- end -}}
+{{- end -}}

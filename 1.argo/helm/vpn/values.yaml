@@ -10,3 +10,8 @@ netbird:
 
 traefik:
   ips: ""
+
+exit-node:
+  - name: exit-node-base
+    enabled: true
+    namespace: exit-node-base
