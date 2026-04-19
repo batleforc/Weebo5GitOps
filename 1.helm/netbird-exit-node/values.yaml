@@ -44,9 +44,9 @@ netpol:
         - matchName: vpn.batleforc.fr
         - matchName: vault.vault
     - toEndpoints:
-    - matchLabels:
-        io.kubernetes.pod.namespace: kube-system
-        k8s-app: kube-dns
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
       toPorts:
         - ports:
             - port: "53"
