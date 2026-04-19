@@ -1,6 +1,6 @@
-resource "netbird_nameserver_group" "main-test" {
-  name        = "Test Nameserver Group"
-  description = "Test Nameserver Group for Netbird"
+resource "netbird_nameserver_group" "dns-blocky" {
+  name        = "Blocky DNS"
+  description = "Blocky DNS"
   nameservers = [
     {
       ip      = "10.96.0.11"

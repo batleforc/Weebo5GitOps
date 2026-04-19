@@ -7,7 +7,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [x] SSO Provider
   - OLD: [Zitadel](https://zitadel.com/)
   - NEW: [Zitadel](https://zitadel.com/) or [Authentik](https://goauthentik.io/) or [Kanidm](https://github.com/pando85/kaniop)
-- [ ] Secret Storage
+- [x] Secret Storage
   - OLD: [Vault](https://www.vaultproject.io/) x [BankVault](https://www.bank-vaults.io/)
   - NEW: [OpenBao](https://openbao.io/) or [Vault](https://www.vaultproject.io/) x [BankVault](https://www.bank-vaults.io/) x [Kubernetes External Secrets](https://external-secrets.io/)
     - Add support for [numberly/vault-db-injector](https://github.com/numberly/vault-db-injector) and migrate existing connection to it
@@ -19,7 +19,7 @@ This is the base project for the Weebo 5 production upgrade.
   - NEW: [Gitea](https://gitea.io/) or [Forgejo](https://forgejo.org/) ? X [Tekton](https://tekton.dev/) or [ArgoEvents](https://argoproj.github.io/argo-events/) ?
 - [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
 - [ ] Registry - [Harbor](https://goharbor.io/)
-- [ ] VPN
+- [x] VPN
   - OLD : [WireGuard](https://www.wireguard.com/)
   - NEW : [NetBird](https://netbird.io/)
 - [ ] DNS
@@ -37,8 +37,14 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] [Eclipse Che](https://www.eclipse.org/che/)
 - [ ] Tofu Hooks
 - [ ] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
-- [ ] [Umami](https://umami.is/)
+- [x] [Rybbit](https://github.com/rybbit-io/rybbit) - For tracking
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
+- [ ] Basic Monitoring
+  - OLD: [Uptime Kuma](https://kuma.io/)
+  - New: [Gatus](https://github.com/TwiN/gatus)
+- [ ] Matrix
+  - OLD: [Element](https://element.io/)
+  - NEW: [Tuwunel](https://github.com/matrix-construct/tuwunel) when [OIDC support will be ready](https://github.com/matrix-construct/tuwunel/issues/246)
 
 ## Folder WF
 
