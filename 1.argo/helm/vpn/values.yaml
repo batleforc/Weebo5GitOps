@@ -11,7 +11,7 @@ netbird:
 traefik:
   ips: ""
 
-exit-node:
+exitNode:
   - name: exit-node-base
     enabled: true
     namespace: exit-node-base
