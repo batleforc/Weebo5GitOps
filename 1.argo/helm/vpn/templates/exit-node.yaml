@@ -30,3 +30,4 @@ spec:
     namespace: "{{ .namespace }}"
 {{- end -}}
 {{- end -}}
+{{- end -}}
