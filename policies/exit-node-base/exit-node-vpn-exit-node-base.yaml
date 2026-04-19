@@ -25,6 +25,15 @@ spec:
     - ports:
       - port: "8200"
         protocol: TCP
+  # TCP/8443 to app.kubernetes.io/name=traefik, io.kubernetes.pod.namespace=traefik
+  - toEndpoints:
+    - matchLabels:
+        app.kubernetes.io/name: traefik
+        io.kubernetes.pod.namespace: traefik
+    toPorts:
+    - ports:
+      - port: "8443"
+        protocol: TCP
   endpointSelector:
     matchLabels:
       app: exit-node-vpn-exit-node-base
