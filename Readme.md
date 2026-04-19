@@ -22,14 +22,15 @@ This is the base project for the Weebo 5 production upgrade.
 - [x] VPN
   - OLD : [WireGuard](https://www.wireguard.com/)
   - NEW : [NetBird](https://netbird.io/)
-- [ ] DNS
+    - Output Node setup with Strict Routing and DNS filtering through Blocky (Thanks [SoulKyu/cpg](https://github.com/SoulKyu/cpg) that made the debugging of this super easy)
+- [x] DNS
   - OLD: [Bind9](https://www.isc.org/bind/)
   - NEW:
     - [x] Public : [Bind9](https://www.isc.org/bind/) x [ExternalDNS](https://github.com/kubernetes-sigs/external-dns)
-    - [ ] Private :
+    - [x] Private :
       - [ ] [AdGuard](https://adguard.com/en/welcome.html)
-      - [ ] [Blocky](https://0xerr0r.github.io/blocky/latest/configuration/)
-- [ ] Ingress
+      - [x] [Blocky](https://0xerr0r.github.io/blocky/latest/configuration/)
+- [x] Ingress
   - OLD: [HaProxy](https://www.haproxy.com/)
   - NEW: [Traefik](https://traefik.io/)
 - [x] CNI - [Cilium](https://cilium.io/)
