@@ -52,6 +52,13 @@ path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault
 path "${vault_mount.main-vault.path}/metadata/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/monitoring" {
   capabilities = ["read","list"]
 }
+path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/vpn-exit-node" {
+  capabilities = ["read","list"]
+}
+path "${vault_mount.main-vault.path}/metadata/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/vpn-exit-node" {
+  capabilities = ["read","list"]
+}
+
 EOT
 }
 
@@ -66,7 +73,7 @@ resource "vault_kubernetes_auth_backend_role" "auth-write" {
 resource "vault_kubernetes_auth_backend_role" "auth-read" {
   role_name                        = "auth-read"
   bound_service_account_names      = ["authentik", "default"]
-  bound_service_account_namespaces = ["auth", "argocd", "vpn", "che", "grafana", "harbor"]
+  bound_service_account_namespaces = ["auth", "argocd", "vpn", "che", "grafana", "harbor","exit-node-base"]
   token_ttl                        = 3600
   token_policies                   = [vault_policy.mv_reader_policy.name]
 }
