@@ -80,3 +80,18 @@ netpol:
         - ports:
             - port: "53"
               protocol: UDP
+    - toEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: UDP
+            - port: "5351"
+              protocol: UDP
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: ""
+      toPorts:
+        - ports:
+            - port: "1900"
+              protocol: UDP

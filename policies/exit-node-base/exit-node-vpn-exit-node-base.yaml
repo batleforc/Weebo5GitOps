@@ -7,33 +7,6 @@ metadata:
   namespace: exit-node-base
 spec:
   egress:
-  # UDP/53 to io.kubernetes.pod.namespace=kube-system, k8s-app=kube-dns
-  - toEndpoints:
-    - matchLabels:
-        io.kubernetes.pod.namespace: kube-system
-        k8s-app: kube-dns
-    toPorts:
-    - ports:
-      - port: "53"
-        protocol: UDP
-  # TCP/8200 to app.kubernetes.io/name=vault, io.kubernetes.pod.namespace=vault
-  - toEndpoints:
-    - matchLabels:
-        app.kubernetes.io/name: vault
-        io.kubernetes.pod.namespace: vault
-    toPorts:
-    - ports:
-      - port: "8200"
-        protocol: TCP
-  # TCP/8443 to app.kubernetes.io/name=traefik, io.kubernetes.pod.namespace=traefik
-  - toEndpoints:
-    - matchLabels:
-        app.kubernetes.io/name: traefik
-        io.kubernetes.pod.namespace: traefik
-    toPorts:
-    - ports:
-      - port: "8443"
-        protocol: TCP
   # UDP/443, UDP/5351 to entity host
   - toEntities:
     - host
@@ -50,24 +23,6 @@ spec:
     toPorts:
     - ports:
       - port: "1900"
-        protocol: UDP
-  # UDP/3478 to app.kubernetes.io/name=netbird-management, io.kubernetes.pod.namespace=vpn
-  - toEndpoints:
-    - matchLabels:
-        app.kubernetes.io/name: netbird-management
-        io.kubernetes.pod.namespace: vpn
-    toPorts:
-    - ports:
-      - port: "3478"
-        protocol: UDP
-  # UDP/53 to app=blocky, io.kubernetes.pod.namespace=blocky
-  - toEndpoints:
-    - matchLabels:
-        app: blocky
-        io.kubernetes.pod.namespace: blocky
-    toPorts:
-    - ports:
-      - port: "53"
         protocol: UDP
   endpointSelector:
     matchLabels:
