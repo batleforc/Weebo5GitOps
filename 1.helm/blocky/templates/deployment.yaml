@@ -14,6 +14,8 @@ spec:
       app: blocky
   template:
     metadata:
+      annotations:
+        checksum/config: '{{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}'
       labels:
         app: blocky
     spec:
@@ -37,6 +39,16 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config/blocky
+          readinessProbe:
+            tcpSocket:
+              port: 53
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 53
+            initialDelaySeconds: 5
+            periodSeconds: 10
       volumes:
         - name: config
           configMap:
