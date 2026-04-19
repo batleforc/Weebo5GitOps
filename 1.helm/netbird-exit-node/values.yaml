@@ -64,3 +64,19 @@ netpol:
         - ports:
             - port: "8443"
               protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: netbird-management
+            io.kubernetes.pod.namespace: vpn
+      toPorts:
+        - ports:
+            - port: "3478"
+              protocol: UDP
+    - toEndpoints:
+        - matchLabels:
+            app: blocky
+            io.kubernetes.pod.namespace: blocky
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
