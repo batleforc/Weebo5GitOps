@@ -59,7 +59,7 @@ resource "netbird_policy" "exit-node-base" {
 
 resource "vault_kv_secret_v2" "exit-node-base" {
   mount = "mv"
-  name  = "exit-node-base/sub"
+  name  = "exit-node-base/vpn-exit-node"
   data_json = jsonencode(
     {
       KUBERNETES_SETUP_KEY = netbird_setup_key.exit-node-base.key
