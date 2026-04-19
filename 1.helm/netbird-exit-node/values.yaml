@@ -2,7 +2,7 @@ netbird:
   enabled: true
   version: "0.68.3"
   image: 11notes/netbird-exit-node
-  url: "vpn.batleforc.fr"
+  url: "https://vpn.batleforc.fr"
   peer_name: "exit-node"
   tz: "Europe/Paris"
   setup_key: "vault:mv/data/{{ .Release.Namespace }}/vpn-exit-node#KUBERNETES_SETUP_KEY"
