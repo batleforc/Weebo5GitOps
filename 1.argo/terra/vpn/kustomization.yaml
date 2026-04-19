@@ -18,5 +18,5 @@ configMapGenerator:
       - ./terra-map/main.tf
       - ./terra-map/idp.tf
       - ./terra-map/group.tf
-      # - ./terra-map/kubernetes-peer.tf
+      - ./terra-map/exit-node-base.tf
       - ./terra-map/dns.tf

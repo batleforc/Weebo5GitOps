@@ -1,0 +1,60 @@
+{{- if .Values.netbird.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "exit-node-{{ .Release.Name }}"
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "exit-node-{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "exit-node-{{ .Release.Name }}"
+      annotations:
+        {{- with .Values.netbird.annotations }}
+        {{ toYaml . | indent 8 }}
+        {{- end }}
+    spec:
+      containers:
+        - name: exit-node
+          image: "{{ .Values.netbird.image }}:{{ .Values.netbird.version }}"
+          imagePullPolicy: {{ .Values.netbird.pullPolicy }}
+          env:
+            - name: NB_SETUP_KEY
+              value: "{{ tpl .Values.netbird.setup_key . }}" # replace with your setup key
+            - name: NETBIRD_PEER_NAME
+              value: "{{ .Values.netbird.peer_name }}"
+            - name: NB_LOG_LEVEL
+              value: "info"
+            - name: NETBIRD_URL
+              value: "{{ .Values.netbird.url }}"
+            - name: TZ
+              value: "{{ .Values.netbird.tz }}"
+          resources:
+            {{- with .Values.netbird.resources }}
+            {{ toYaml . | indent 12 }}
+            {{- end }}
+          livenessProbe:
+            exec:
+              command: ["netbird", "status", "--check", "live"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command: ["netbird", "status", "--check", "ready"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            exec:
+              command: ["netbird", "status", "--check", "startup"]
+            periodSeconds: 2
+            timeoutSeconds: 10
+            failureThreshold: 30
+{{- end -}}

@@ -1,0 +1,49 @@
+netbird:
+  enabled: true
+  version: "0.68.3"
+  image: 11notes/netbird-exit-node
+  url: "vpn.batleforc.fr"
+  peer_name: "exit-node"
+  tz: "Europe/Paris"
+  setup_key: "vault:mv/data/{{ .Release.Namespace }}/sub#KUBERNETES_SETUP_KEY"
+  pullPolicy: IfNotPresent
+  annotations:
+    vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+    vault.security.banzaicloud.io/vault-role: "auth-read"
+    vault.security.banzaicloud.io/vault-path: "kubernetes"
+    vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+netpol:
+  enabled: true
+  ingress:
+    - {}
+  egress:
+    - toCIDRSet:
+        - cidr: ::/0
+          except:
+            - fd00:10:244::/56
+            - fd00:10:96::/112
+    - toCIDRSet:
+        - cidr: 0.0.0.0/0
+          except:
+            - 10.244.0.0/16
+            - 10.96.0.0/12
+    # - toCIDRSet:
+    #     - cidr: 10.96.0.10/32
+    #   toPorts:
+    #     - ports:
+    #         - port: 53
+    - toCIDRSet:
+        - cidr: 10.96.0.11/32
+      toPorts:
+        - ports:
+            - port: 53
+    - toFQDNs:
+        - matchName: vpn.weebo.fr

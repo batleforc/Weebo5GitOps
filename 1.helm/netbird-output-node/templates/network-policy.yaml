@@ -1,0 +1,20 @@
+{{- if and .Values.netbird.enabled .Values.netpol.enabled -}}
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: "exit-node-{{ .Release.Name }}-netpol"
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpointSelector:
+    matchLabels:
+      app: exit-node-{{ .Release.Name }}
+  ingress:
+    {{- range .Values.netpol.ingress }}
+    - {{ toYaml . | indent 6 }}
+    {{- end }}
+  egress:
+    {{- range .Values.netpol.egress }}
+    - {{ toYaml . | indent 6 }}
+    {{- end }}
+{{- end -}}

@@ -4,8 +4,9 @@ resource "netbird_nameserver_group" "dns-blocky" {
   nameservers = [
     {
       ip      = "10.96.0.11"
-      ns_type = "udp"
-      port    = 53
+    },
+    {
+      ip = "10.96.0.10"
     }
   ]
   groups                 = [data.netbird_group.weebo_admin.id]
