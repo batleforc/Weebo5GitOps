@@ -1,4 +1,4 @@
-data "netbird_group" "home-assistant" {
+resource "netbird_group" "home-assistant" {
   name = "home-assistant"
 }
 
