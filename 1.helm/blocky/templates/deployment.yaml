@@ -42,12 +42,12 @@ spec:
           readinessProbe:
             tcpSocket:
               port: 53
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 10
           livenessProbe:
             tcpSocket:
               port: 53
-            initialDelaySeconds: 5
+            initialDelaySeconds: 15
             periodSeconds: 10
       volumes:
         - name: config
