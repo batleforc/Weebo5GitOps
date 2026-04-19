@@ -10,11 +10,7 @@ spec:
     matchLabels:
       app: exit-node-{{ .Release.Name }}
   ingress:
-    {{- range .Values.netpol.ingress }}
-    - {{ toYaml . | indent 6 }}
-    {{- end }}
+{{ toYaml .Values.netpol.ingress | indent 4 }}
   egress:
-    {{- range .Values.netpol.egress }}
-    - {{ toYaml . | indent 6 }}
-    {{- end }}
+{{ toYaml .Values.netpol.egress | indent 4 }}
 {{- end -}}

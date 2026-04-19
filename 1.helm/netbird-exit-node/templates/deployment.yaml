@@ -14,9 +14,9 @@ spec:
       labels:
         app: "exit-node-{{ .Release.Name }}"
       annotations:
-        {{- with .Values.netbird.annotations }}
-        {{ toYaml . | indent 8 }}
-        {{- end }}
+{{- with .Values.netbird.annotations }}
+{{ toYaml . | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: exit-node
@@ -34,9 +34,9 @@ spec:
             - name: TZ
               value: "{{ .Values.netbird.tz }}"
           resources:
-            {{- with .Values.netbird.resources }}
-            {{ toYaml . | indent 12 }}
-            {{- end }}
+{{- with .Values.netbird.resources }}
+{{ toYaml . | indent 12 }}
+{{- end }}
           livenessProbe:
             exec:
               command: ["netbird", "status", "--check", "live"]
