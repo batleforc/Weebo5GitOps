@@ -17,6 +17,7 @@ tasks:
     cmds:
       - cog install-hook -a -o
       - mkdir -p .tmp
+      - krew install cilium-policy-gen
   recu:
     desc: "Run pre-commit hooks on all files, including submodules"
     cmds:
@@ -49,3 +50,10 @@ tasks:
       KUBECONFIG: 0.config/kubeconfig.yaml
     cmds:
       - cilium {{ .CLI_ARGS }}
+  cpg:
+    desc: "Run cilium-policy-gen commands on the cluster"
+    silent: true
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - kubectl cilium-policy-gen {{ .CLI_ARGS }}

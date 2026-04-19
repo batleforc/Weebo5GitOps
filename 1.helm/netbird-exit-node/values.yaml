@@ -35,11 +35,6 @@ netpol:
           except:
             - 10.244.0.0/16
             - 10.96.0.0/12
-    # - toCIDRSet:
-    #     - cidr: 10.96.0.10/32
-    #   toPorts:
-    #     - ports:
-    #         - port: 53
     - toCIDRSet:
         - cidr: 10.96.0.11/32
       toPorts:
@@ -48,3 +43,11 @@ netpol:
     - toFQDNs:
         - matchName: vpn.batleforc.fr
         - matchName: vault.vault
+    - toEndpoints:
+    - matchLabels:
+        io.kubernetes.pod.namespace: kube-system
+        k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
