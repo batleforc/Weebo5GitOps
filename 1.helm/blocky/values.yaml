@@ -51,7 +51,6 @@ blocky:
           - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
           - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
           - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
-          - https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
           - https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
     prometheus:
       # enabled if true
