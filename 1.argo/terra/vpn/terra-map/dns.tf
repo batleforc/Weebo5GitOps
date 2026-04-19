@@ -5,9 +5,6 @@ resource "netbird_nameserver_group" "dns-blocky" {
     {
       ip      = "10.96.0.11"
     },
-    {
-      ip = "10.96.0.10"
-    }
   ]
   groups                 = [data.netbird_group.weebo_admin.id]
   search_domains_enabled = false
