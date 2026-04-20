@@ -20,8 +20,19 @@ spec:
     spec:
       containers:
         - name: exit-node
+          {{- if .Values.netbird.adminMode.enabled }}
+          image: "{{ .Values.netbird.adminMode.image }}:{{ .Values.netbird.adminMode.version }}"
+          imagePullPolicy: {{ .Values.netbird.adminMode.pullPolicy }}
+          securityContext:
+            capabilities:
+              add:
+                {{- range .Values.netbird.adminMode.capabilities }}
+                - {{ . }}
+                {{- end }}
+          {{- else }}
           image: "{{ .Values.netbird.image }}:{{ .Values.netbird.version }}"
           imagePullPolicy: {{ .Values.netbird.pullPolicy }}
+          {{- end }}
           env:
             - name: NB_SETUP_KEY
               value: "{{ tpl .Values.netbird.setup_key . }}" # replace with your setup key
