@@ -97,28 +97,16 @@ spec:
                 - websecure
               routes:
                 - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && !PathPrefix(`/api`) && !PathPrefix(`/oauth2`) && !PathPrefix(`/ws-proxy/signal`) && !PathPrefix(`/ws-proxy/management`) && !PathPrefix(`/management`) && !PathPrefix(`/signalexchange`) && !PathPrefix(`/relay`)
+                  match: Host(`{{ .Values.netbird.domain }}`)
+                  priority: 1
                   services:
                     - name: netbird-dashboard
                       namespace: vpn
                       passHostHeader: true
                       port: 80
                 - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/api`)
-                  services:
-                    - name: netbird-management
-                      namespace: vpn
-                      passHostHeader: true
-                      port: 80
-                - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/relay`)
-                  services:
-                    - name: netbird-management
-                      namespace: vpn
-                      passHostHeader: true
-                      port: 80
-                - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/management`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && (PathPrefix(`/signalexchange.SignalExchange/`) || PathPrefix(`/management.ManagementService/`))
+                  priority: 100
                   services:
                     - name: netbird-management
                       namespace: vpn
@@ -126,29 +114,8 @@ spec:
                       port: 80
                       scheme: h2c
                 - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/signalexchange`)
-                  services:
-                    - name: netbird-management
-                      namespace: vpn
-                      passHostHeader: true
-                      port: 80
-                      scheme: h2c
-                - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/ws-proxy/signal`)
-                  services:
-                    - name: netbird-management
-                      namespace: vpn
-                      passHostHeader: true
-                      port: 80
-                - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/ws-proxy/management`)
-                  services:
-                    - name: netbird-management
-                      namespace: vpn
-                      passHostHeader: true
-                      port: 80
-                - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && PathPrefix(`/oauth2`)
+                  match: Host(`{{ .Values.netbird.domain }}`) && (PathPrefix(`/relay`) || PathPrefix(`/ws-proxy/`) || PathPrefix(`/api`) || PathPrefix(`/oauth2`))
+                  priority: 100
                   services:
                     - name: netbird-management
                       namespace: vpn
