@@ -19,6 +19,15 @@ netbird:
     requests:
       cpu: 50m
       memory: 128Mi
+  adminMode:
+    enabled: true
+    image: netbirdio/netbird
+    version: "0.68.3"
+    pullPolicy: IfNotPresent
+    capabilities:
+      - NET_ADMIN
+      - SYS_RESOURCE
+      - SYS_ADMIN
 
 netpol:
   enabled: true
