@@ -1,14 +1,13 @@
 coroot:
   enabled: true
-  version: "0.9.4"
+  operator:
+    version: "0.9.4"
 
 grafana:
   enabled: true
   version: "12.1.1"
   datasources:
     clickhouse:
-      - name: che-cluster
-        value: k16ab48c
       - name: default
         value: jsyy2pqy
 
