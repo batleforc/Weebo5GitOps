@@ -15,9 +15,9 @@ resource "authentik_brand" "default" {
   default                          = true
   branding_title                   = "Weebo Authentik"
   flow_device_code                 = authentik_flow.token-authentik-flow.uuid
-  branding_logo                    = "https://batleforc.github.io/weebo-si/logo-wide.png"
-  branding_favicon                 = "https://batleforc.github.io/weebo-si/logo.png"
-  branding_default_flow_background = "https://batleforc.github.io/weebo-si/banner.png"
+  branding_logo                    = "https://maxleriche.net/assets/favicon.svg"
+  branding_favicon                 = "https://maxleriche.net/assets/favicon.svg"
+  branding_default_flow_background = "https://maxleriche.net/assets/home_hero.png"
   default_application              = data.authentik_brand.authentik-default.default_application
   flow_authentication              = data.authentik_brand.authentik-default.flow_authentication
   flow_invalidation                = data.authentik_brand.authentik-default.flow_invalidation
