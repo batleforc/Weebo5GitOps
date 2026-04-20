@@ -164,6 +164,11 @@ management:
     ##
     annotations: {}
 
+    ipFamilyPolicy: PreferDualStack
+    ipFamilies:
+      - IPv4
+      - IPv6
+
   serviceStun:
     ## @param management.serviceStun.enabled Enable or disable the management STUN service.
     ##
@@ -188,6 +193,11 @@ management:
     ## @param management.serviceStun.annotations Annotations for the management STUN service.
     ##
     annotations: {}
+
+    ipFamilyPolicy: PreferDualStack
+    ipFamilies:
+      - IPv4
+      - IPv6
 
   ## @param management.grpcContainerPort [Deprecated] Legacy GRPC container port for the management service for management.useBackwardsGrpcService.
   ##
@@ -360,7 +370,7 @@ management:
   # - name: tmp
   #   emptyDir: {}
 
-## @section Create Netbird management token secret Job
+  ## @section Create Netbird management token secret Job
 
 managementTokenSecretJob:
   ## @param managementTokenSecretJob.enabled Enable or disable creation of the management token secret.
@@ -586,7 +596,7 @@ signal:
   # - name: tmp
   #   emptyDir: {}
 
-## @section NetBird Relay Parameters
+  ## @section NetBird Relay Parameters
 
 relay:
   ## @param relay.enabled Enable or disable the NetBird relay component.
@@ -791,7 +801,7 @@ dashboard:
     args: []
     #  - sed -i 's/listen \[\:\:\]\:80 default_server\;//g' /etc/nginx/http.d/default.conf && /usr/bin/supervisord -c /etc/supervisord.conf
 
-  ## @param replicaCount Number of replicas to deploy
+    ## @param replicaCount Number of replicas to deploy
   replicaCount: 1
 
   image:
@@ -895,7 +905,7 @@ dashboard:
     #    hosts:
     #      - chart-example.local
 
-  ## @param dashboard.resources
+    ## @param dashboard.resources
   resources: {}
   # limits:
   #   cpu: 100m
@@ -954,7 +964,7 @@ dashboard:
   volumes: []
   # - name: tmp
   #   emptyDir: {}
-## @section NetBird Extra Manifests to be included in the chart
+  ## @section NetBird Extra Manifests to be included in the chart
 
 extraManifests: {}
 # - apiVersion: v1

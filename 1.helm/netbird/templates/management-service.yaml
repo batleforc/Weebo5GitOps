@@ -12,6 +12,11 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.management.service.type }}
+  ipFamilyPolicy: {{ .Values.management.service.ipFamilyPolicy }}
+  ipFamilies:
+    {{- range .Values.management.service.ipFamilies }}
+    - {{ . }}
+    {{- end }}
   ports:
     - port: {{ .Values.management.service.port }}
       targetPort: {{ .Values.management.service.name }}

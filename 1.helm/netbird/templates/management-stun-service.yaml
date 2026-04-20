@@ -12,6 +12,11 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.management.serviceStun.type }}
+  ipFamilyPolicy: {{ .Values.management.serviceStun.ipFamilyPolicy }}
+  ipFamilies:
+    {{- range .Values.management.serviceStun.ipFamilies }}
+    - {{ . }}
+    {{- end }}
   ports:
     - port: {{ .Values.management.serviceStun.port }}
       targetPort: {{ .Values.management.stunContainerPort }}
