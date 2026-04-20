@@ -20,7 +20,7 @@ netbird:
       cpu: 50m
       memory: 128Mi
   adminMode:
-    enabled: true
+    enabled: false
     image: netbirdio/netbird
     version: "0.68.3"
     pullPolicy: IfNotPresent
