@@ -13,7 +13,16 @@ This is the base project for the Weebo 5 production upgrade.
     - Add support for [numberly/vault-db-injector](https://github.com/numberly/vault-db-injector) and migrate existing connection to it
 - [ ] Monitoring X Logging
   - OLD: [PromStack](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack) x [Loki](https://grafana.com/oss/loki/)
-  - NEW: [Coroot](https://coroot.com/) X [Grafana](https://grafana.com/)
+  - NEW:
+    - [Coroot](https://coroot.com/) X [Grafana](https://grafana.com/)
+    - [ ] Add New dashboard
+      - [x] Traefik
+      - [ ] Netbird
+      - [ ] Blocky
+      - [ ] Rybbit
+      - [ ] etc
+    - [ ] Mise en place de l'alerting
+    - [ ] Mise en place collecteur Otel
 - [ ] Git Stack
   - OLD: [Gitea](https://gitea.io/) x [Tekton](https://tekton.dev/)
   - NEW: [Gitea](https://gitea.io/) or [Forgejo](https://forgejo.org/) ? X [Tekton](https://tekton.dev/) or [ArgoEvents](https://argoproj.github.io/argo-events/) ?
@@ -28,7 +37,6 @@ This is the base project for the Weebo 5 production upgrade.
   - NEW:
     - [x] Public : [Bind9](https://www.isc.org/bind/) x [ExternalDNS](https://github.com/kubernetes-sigs/external-dns)
     - [x] Private :
-      - [ ] [AdGuard](https://adguard.com/en/welcome.html)
       - [x] [Blocky](https://0xerr0r.github.io/blocky/latest/configuration/)
 - [x] Ingress
   - OLD: [HaProxy](https://www.haproxy.com/)
@@ -37,7 +45,7 @@ This is the base project for the Weebo 5 production upgrade.
   - [ ] !TODO: Message a moi meme pour demain, passer en netpol strict avec zero ouverture by default, et n'ouvrir que ce qui est nécessaire
 - [ ] [Eclipse Che](https://www.eclipse.org/che/)
 - [ ] Tofu Hooks
-- [ ] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
+- [x] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
 - [x] [Rybbit](https://github.com/rybbit-io/rybbit) - For tracking
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
 - [ ] Basic Monitoring
@@ -48,7 +56,11 @@ This is the base project for the Weebo 5 production upgrade.
   - NEW: [Tuwunel](https://github.com/matrix-construct/tuwunel) when [OIDC support will be ready](https://github.com/matrix-construct/tuwunel/issues/246)
 - [ ] Notification
   - OLD: [Gotify](https://gotify.net/)
-  - NEW: Not decided yet
+  - NEW: [Gotify](https://gotify.net/) but with Oidc Support, waiting for [Android Support](https://github.com/gotify/android/pull/444) and [Documentation](https://github.com/gotify/website/pull/100) to be merged
+- [ ] Ssh proxy
+  - Forward ssh connection to selected ressources with [SshPiper](https://github.com/tg123/sshpiper/tree/master/plugin/kubernetes)
+    - If username == git then forward to git server
+    - If username == Another thing then forward to something that answer to GTFO
 
 ## Folder WF
 
