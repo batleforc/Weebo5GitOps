@@ -32,7 +32,8 @@ netbird:
 netpol:
   enabled: true
   ingress:
-    - {}
+    - fromCIDRSet:
+        - cidr: 100.64.0.0/16
   egress:
     - toCIDRSet:
         - cidr: ::/0
@@ -44,6 +45,8 @@ netpol:
           except:
             - 10.244.0.0/16
             - 10.96.0.0/12
+    - toCIDRSet:
+        - cidr: 100.64.0.0/16
     - toCIDRSet:
         - cidr: 10.96.0.11/32
       toPorts:
