@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "exit-node-{{ .Release.Name }}"
+  name: "exit-node-{{ .Release.Name }}-admin"
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
@@ -20,8 +20,14 @@ spec:
     spec:
       containers:
         - name: exit-node
-          image: "{{ .Values.netbird.image }}:{{ .Values.netbird.version }}"
-          imagePullPolicy: {{ .Values.netbird.pullPolicy }}
+          image: "{{ .Values.netbird.adminMode.image }}:{{ .Values.netbird.adminMode.version }}"
+          imagePullPolicy: {{ .Values.netbird.adminMode.pullPolicy }}
+          securityContext:
+            capabilities:
+              add:
+                {{- range .Values.netbird.adminMode.capabilities }}
+                - {{ . }}
+                {{- end }}
           env:
             - name: NB_SETUP_KEY
               value: "{{ tpl .Values.netbird.setup_key . }}" # replace with your setup key
