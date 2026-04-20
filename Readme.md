@@ -25,7 +25,11 @@ This is the base project for the Weebo 5 production upgrade.
     - [ ] Mise en place collecteur Otel
 - [ ] Git Stack
   - OLD: [Gitea](https://gitea.io/) x [Tekton](https://tekton.dev/)
-  - NEW: [Gitea](https://gitea.io/) or [Forgejo](https://forgejo.org/) ? X [Tekton](https://tekton.dev/) or [ArgoEvents](https://argoproj.github.io/argo-events/) ?
+  - NEW:
+    - [x] [Forgejo](https://forgejo.org/) ?
+    - CI/CD
+      - [Tekton](https://tekton.dev/)
+      - [Forgejo Actions](https://code.forgejo.org/forgejo-helm/forgejo-runner)
 - [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
 - [ ] Registry - [Harbor](https://goharbor.io/)
 - [x] VPN
