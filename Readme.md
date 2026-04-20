@@ -46,6 +46,9 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] Matrix
   - OLD: [Element](https://element.io/)
   - NEW: [Tuwunel](https://github.com/matrix-construct/tuwunel) when [OIDC support will be ready](https://github.com/matrix-construct/tuwunel/issues/246)
+- [ ] Notification
+  - OLD: [Gotify](https://gotify.net/)
+  - NEW: Not decided yet
 
 ## Folder WF
 
