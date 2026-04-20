@@ -17,7 +17,7 @@ resource "authentik_provider_oauth2" "git" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://git.batleforc.fr/user/oauth2/authentik/callback",
+      url           = "https://git.batleforc.fr/user/oauth2/batleforc-sso/callback",
     },
   ]
   property_mappings = [

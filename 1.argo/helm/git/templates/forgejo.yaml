@@ -51,7 +51,7 @@ spec:
             service:
               DISABLE_REGISTRATION: true
           oauth:
-            - name: 'Batleforc SSO'
+            - name: 'batleforc-sso'
               provider: 'openidConnect'
               autoDiscoverUrl: 'https://auth.batleforc.fr/application/o/git/.well-known/openid-configuration'
               existingSecret: "git-auth"
