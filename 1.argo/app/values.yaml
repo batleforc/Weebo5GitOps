@@ -22,3 +22,6 @@ db:
 
 monofolio:
   enabled: true
+
+git:
+  enabled: true

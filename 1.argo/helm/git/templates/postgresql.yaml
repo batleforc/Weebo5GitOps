@@ -1,0 +1,28 @@
+{{- if .Values.postgresql.enabled }}
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: forgejo-postgresql
+  namespace: {{ .Release.Namespace }}
+spec:
+  affinity:
+    topologyKey: topology.kubernetes.io/zone
+  bootstrap:
+    initdb: null
+  enablePDB: true
+  enableSuperuserAccess: true
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
+  imagePullPolicy: IfNotPresent
+  instances: 1
+  logLevel: info
+  monitoring:
+    disableDefaultQueries: false
+    enablePodMonitor: false
+  postgresGID: 26
+  postgresUID: 26
+  postgresql: null
+  primaryUpdateMethod: switchover
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 8Gi
+{{- end }}

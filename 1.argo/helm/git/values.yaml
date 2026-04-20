@@ -1,0 +1,11 @@
+forgejo:
+  enabled: true
+  version: "17.0.0"
+  dns: "git.batleforc.fr"
+
+repo: ""
+traefik:
+  ips: ""
+
+postgresql:
+  enabled: false

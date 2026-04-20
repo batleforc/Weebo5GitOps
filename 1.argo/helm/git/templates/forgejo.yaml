@@ -1,0 +1,69 @@
+{{- if .Values.forgejo.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - ServerSideApply=true
+  source:
+    chart: forgejo
+    repoURL: oci://code.forgejo.org/forgejo-helm/forgejo
+    targetRevision: {{ .Values.forgejo.version }}
+    helm:
+      releaseName: forgejo
+      valuesObject:
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: "traefik"
+            cert-manager.io/cluster-issuer: "outbound"
+          hosts:
+          - host: {{ .Values.forgejo.dns }}
+            paths:
+            - path: /
+              pathType: Prefix
+          tls:
+          - hosts:
+            - {{ .Values.forgejo.dns }}
+            secretName: git-tls
+        image:
+          rootless: true
+        persistence:
+          enabled: true
+
+        gitea:
+          admin:
+            username: ""
+            existingSecret: ""
+          config:
+            APP_NAME: "Batleforc Git"
+            indexer:
+              REPO_INDEXER_ENABLED: true
+            service:
+              DISABLE_REGISTRATION: true
+          oauth:
+            - name: 'Batleforc SSO'
+              provider: 'openidConnect'
+              autoDiscoverUrl: 'https://auth.batleforc.fr/application/o/git/.well-known/openid-configuration'
+              existingSecret: "git-auth"
+              scopes: "openid profile email git"
+              groupClaimName: "forgejo"
+              adminGroup: "admin"
+              restrictedGroup: "restricted"
+              requiredClaimName: "forgejo"
+          additionalConfigFromEnvs:
+            - name: "ENABLE_AUTO_REGISTRATION"
+              value: "true"
+  destination:
+    namespace: {{ .Release.Namespace }}
+    server: https://kubernetes.default.svc
+{{- end }}
