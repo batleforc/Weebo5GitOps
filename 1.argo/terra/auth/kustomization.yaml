@@ -26,3 +26,4 @@ configMapGenerator:
       - ./terra-map/grafana.tf
       - ./terra-map/harbor.tf
       - ./terra-map/vault.tf
+      - ./terra-map/git.tf
