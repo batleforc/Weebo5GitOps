@@ -92,8 +92,8 @@ spec:
               name: netbird
             spec:
               forwardingTimeouts:
-                responseheadertimeout: 0s
-                idleconntimeout: 0s
+                responseHeaderTimeout: 0s
+                idleConnTimeout: 0s
           - apiVersion: traefik.io/v1alpha1
             kind: IngressRoute
             metadata:
