@@ -114,7 +114,7 @@ spec:
                       port: 80
                       serversTransport: netbird
                 - kind: Rule
-                  match: Host(`{{ .Values.netbird.domain }}`) && (PathPrefix(`/signalexchange.SignalExchange/`) || PathPrefix(`/management.ManagementService/`))
+                  match: Host(`{{ .Values.netbird.domain }}`) && (PathPrefix(`/signalexchange.SignalExchange/`) || PathPrefix(`/management.ManagementService/`)|| PathPrefix(`/management.ProxyService/`))
                   priority: 100
                   services:
                     - name: netbird-management
