@@ -44,7 +44,7 @@ spec:
               value: "{{ .Values.netbird.url }}"
             - name: NB_MANAGEMENT_URL
               value: "{{ .Values.netbird.url }}"
-            - name!: NB_ADMIN_URL
+            - name: NB_ADMIN_URL
               value: "{{ .Values.netbird.url }}"
             - name: TZ
               value: "{{ .Values.netbird.tz }}"
