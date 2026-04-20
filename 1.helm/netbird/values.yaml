@@ -877,6 +877,10 @@ dashboard:
     ## @param dashboard.service.annotations Annotations for the dashboard service.
     ##
     annotations: {}
+    ipFamilyPolicy: PreferDualStack
+    ipFamilies:
+      - IPv4
+      - IPv6
 
   ingress:
     ## @param dashboard.ingress.enabled

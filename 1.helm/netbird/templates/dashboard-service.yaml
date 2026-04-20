@@ -12,6 +12,11 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.dashboard.service.type }}
+  ipFamilyPolicy: {{ .Values.dashboard.service.ipFamilyPolicy }}
+  ipFamilies:
+    {{- range .Values.dashboard.service.ipFamilies }}
+    - {{ . }}
+    {{- end }}
   ports:
     - port: {{ .Values.dashboard.service.port }}
       targetPort: http
