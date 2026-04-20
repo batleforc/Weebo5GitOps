@@ -87,6 +87,14 @@ spec:
 
         extraManifests:
           - apiVersion: traefik.io/v1alpha1
+            kind: ServersTransport
+            metadata:
+              name: netbird
+            spec:
+              forwardingtimeouts:
+                responseheadertimeout: 0s
+                idleconntimeout: 0s
+          - apiVersion: traefik.io/v1alpha1
             kind: IngressRoute
             metadata:
               name: netbird
@@ -104,6 +112,7 @@ spec:
                       namespace: vpn
                       passHostHeader: true
                       port: 80
+                      serversTransport: netbird
                 - kind: Rule
                   match: Host(`{{ .Values.netbird.domain }}`) && (PathPrefix(`/signalexchange.SignalExchange/`) || PathPrefix(`/management.ManagementService/`))
                   priority: 100
@@ -113,6 +122,7 @@ spec:
                       passHostHeader: true
                       port: 80
                       scheme: h2c
+                      serversTransport: netbird
                 - kind: Rule
                   match: Host(`{{ .Values.netbird.domain }}`) && (PathPrefix(`/relay`) || PathPrefix(`/ws-proxy/`) || PathPrefix(`/api`) || PathPrefix(`/oauth2`))
                   priority: 100
@@ -121,6 +131,7 @@ spec:
                       namespace: vpn
                       passHostHeader: true
                       port: 80
+                      serversTransport: netbird
               tls:
                 secretName: "vpn-certificate"
   destination:
