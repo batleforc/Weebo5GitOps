@@ -25,9 +25,10 @@ spec:
           imagePullPolicy: {{ .Values.netbird.adminMode.pullPolicy }}
           securityContext:
             capabilities:
-              {{- range .Values.netbird.adminMode.capabilities }}
-              - {{ . }}
-              {{- end }}
+              add:
+                {{- range .Values.netbird.adminMode.capabilities }}
+                - {{ . }}
+                {{- end }}
           {{- else }}
           image: "{{ .Values.netbird.image }}:{{ .Values.netbird.version }}"
           imagePullPolicy: {{ .Values.netbird.pullPolicy }}
