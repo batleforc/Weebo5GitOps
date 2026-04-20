@@ -1,0 +1,27 @@
+{{ if .Values.coroot.enabled }}
+apiVersion: coroot.com/v1
+kind: Coroot
+metadata:
+  name: coroot
+  namespace: coroot
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  ingress: # Ingress configuration for Coroot.
+    className: traefik
+    host: coroot.batleforc.fr
+    path: /
+    annotations:
+      cert-manager.io/cluster-issuer: "outbound"
+    tls: # TLS configuration.
+      hosts:
+        - coroot.batleforc.fr
+      secretName: coroot-tls
+  projects:
+    - name: default
+      apiKeys:
+        - description: "Otel collector API Key"
+          keySecret:
+            name: otel-collector-api-key
+            key: api-key
+{{ end }}

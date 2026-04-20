@@ -1,0 +1,35 @@
+{{- if .Values.monitoringApp.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: '{{ .Values.repo }}'
+    path: '1.argo/helm/monitoring/sub'
+    helm:
+      releaseName: monitoring-app
+      valuesObject:
+        {{- with .Values }}
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'argocd'
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+{{- end -}}

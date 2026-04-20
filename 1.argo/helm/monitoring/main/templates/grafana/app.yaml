@@ -1,0 +1,70 @@
+{{ if .Values.grafana.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: monitoring
+  source:
+    repoURL: oci://ghcr.io/grafana-community/helm-charts/grafana
+    chart: "grafana"
+    targetRevision: {{ .Values.grafana.version }}
+    helm:
+      releaseName: grafana
+      valuesObject:
+        sidecar:
+          alerts:
+            enabled: true
+          notifiers:
+            enabled: true
+          dashboards:
+            enabled: true
+          datasources:
+            enabled: true
+        grafana.ini:
+          server:
+            domain: grafana.batleforc.fr
+            root_url: https://grafana.batleforc.fr
+          auth:
+            signout_redirect_url: https://auth.batleforc.fr/application/o/end-session/
+            oauth_auto_login: true
+          auth.generic_oauth:
+            enabled: true
+            name: weebo-si
+            client_id: $__file{/etc/secrets/auth-generic-oauth/client_id}
+            client_secret: $__file{/etc/secrets/auth-generic-oauth/client_secret}
+            scopes: openid profile email
+            auth_url: https://auth.batleforc.fr/application/o/authorize/
+            token_url: https://auth.batleforc.fr/application/o/token/
+            api_url: https://auth.batleforc.fr/application/o/userinfo/
+            role_attribute_path: contains(groups, 'weebo_admin') && 'Admin' || contains(groups, 'weebo_moderator') && 'Editor' || 'Viewer'
+        extraSecretMounts:
+          - name: auth-generic-oauth
+            secretName: grafana-auth
+            mountPath: /etc/secrets/auth-generic-oauth
+            defaultMode: 0440
+            readOnly: true
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: traefik
+            cert-manager.io/cluster-issuer: outbound
+          hosts:
+            - grafana.batleforc.fr
+          tls:
+            - secretName: grafana-tls
+              hosts:
+                - grafana.batleforc.fr
+        plugins:
+          - grafana-clickhouse-datasource
+  destination:
+    name: in-cluster
+    namespace: 'grafana'
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}
