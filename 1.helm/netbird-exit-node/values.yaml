@@ -30,7 +30,7 @@ netbird:
       - SYS_ADMIN
 
 netpol:
-  enabled: true
+  enabled: false
   ingress:
     - fromCIDRSet:
         - cidr: 100.64.0.0/16
