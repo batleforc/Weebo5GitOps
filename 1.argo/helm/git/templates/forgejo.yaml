@@ -50,6 +50,8 @@ spec:
               REPO_INDEXER_ENABLED: true
             service:
               DISABLE_REGISTRATION: true
+            oauth2_client:
+              ENABLE_AUTO_REGISTRATION: true
           oauth:
             - name: 'batleforc-sso'
               provider: 'openidConnect'
@@ -60,9 +62,6 @@ spec:
               adminGroup: "admin"
               restrictedGroup: "restricted"
               requiredClaimName: "forgejo"
-          additionalConfigFromEnvs:
-            - name: "ENABLE_AUTO_REGISTRATION"
-              value: "true"
   destination:
     namespace: {{ .Release.Namespace }}
     server: https://kubernetes.default.svc
