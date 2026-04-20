@@ -91,7 +91,7 @@ spec:
             metadata:
               name: netbird
             spec:
-              forwardingtimeouts:
+              forwardingTimeouts:
                 responseheadertimeout: 0s
                 idleconntimeout: 0s
           - apiVersion: traefik.io/v1alpha1
