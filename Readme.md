@@ -27,7 +27,7 @@ This is the base project for the Weebo 5 production upgrade.
   - OLD: [Gitea](https://gitea.io/) x [Tekton](https://tekton.dev/)
   - NEW:
     - [x] [Forgejo](https://forgejo.org/) ?
-    - CI/CD
+    - [ ]  CI/CD
       - [Tekton](https://tekton.dev/)
       - [Forgejo Actions](https://code.forgejo.org/forgejo-helm/forgejo-runner)
 - [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)

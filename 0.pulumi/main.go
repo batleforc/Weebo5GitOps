@@ -191,6 +191,9 @@ func main() {
 							dnsName,
 							dnsAltName,
 						},
+						"extraArgs": map[string]interface{}{
+							"feature-gates": "UserNamespacesSupport=true",
+						},
 					},
 				},
 				"machine": map[string]interface{}{
@@ -201,6 +204,7 @@ func main() {
 						"net.ipv6.conf.all.autoconf":       0,
 						"net.ipv6.conf.all.accept_ra":      0,
 						"net.ipv4.conf.all.src_valid_mark": 1,
+						"user.max_user_namespaces":         11255,
 					},
 					"kubelet": map[string]interface{}{
 						"extraArgs": map[string]interface{}{
@@ -212,6 +216,11 @@ func main() {
 								"destination": "/var/local-path-provisioner",
 								"type":        "bind",
 								"options":     []string{"bind", "rshared", "rw"},
+							},
+						},
+						"extraConfig": map[string]interface{}{
+							"featureGates": map[string]interface{}{
+								"UserNamespacesSupport": true,
 							},
 						},
 					},
