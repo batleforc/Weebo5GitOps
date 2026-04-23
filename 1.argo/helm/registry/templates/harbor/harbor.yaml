@@ -88,6 +88,7 @@ spec:
             port: 5432
             username: postgres
             existingSecret: harbor-postgresql-superuser
+            coreDatabase: app
   destination:
     server: "https://kubernetes.default.svc"
     namespace: {{ .Release.Namespace }}
