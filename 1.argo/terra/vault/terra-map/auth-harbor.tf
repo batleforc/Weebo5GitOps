@@ -1,17 +1,17 @@
-resource "vault_policy" "harbor_policy" {
-  name = "harbor_policy"
+resource "vault_policy" "registry_policy" {
+  name = "registry_policy"
 
   policy = <<EOT
-path "${vault_mount.main-vault.path}/+/+/harbor" {
+path "${vault_mount.main-vault.path}/+/+/registry" {
   capabilities = ["create", "read", "update", "delete", "list","patch"]
 }
-path "${vault_mount.main-vault.path}/+/+/+/harbor" {
+path "${vault_mount.main-vault.path}/+/+/+/registry" {
   capabilities = ["create", "read", "update", "delete", "list","patch"]
 }
-path "${vault_mount.main-vault.path}/metadata/harbor/harbor" {
+path "${vault_mount.main-vault.path}/metadata/registry/registry" {
   capabilities = ["create", "read", "update", "delete", "list","patch"]
 }
-path "${vault_mount.main-vault.path}/data/harbor/harbor" {
+path "${vault_mount.main-vault.path}/data/registry/registry" {
   capabilities = ["create", "read", "update", "delete", "list","patch"]
 }
 path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/*" {
@@ -29,10 +29,10 @@ path "${vault_mount.main-vault.path}/metadata/{{identity.entity.aliases.${data.v
 EOT
 }
 
-resource "vault_kubernetes_auth_backend_role" "auth-harbor" {
-  role_name                        = "auth-harbor"
-  bound_service_account_names      = ["harbor", "default"]
-  bound_service_account_namespaces = ["harbor"]
+resource "vault_kubernetes_auth_backend_role" "auth-registry" {
+  role_name                        = "auth-registry"
+  bound_service_account_names      = ["registry", "default"]
+  bound_service_account_namespaces = ["registry"]
   token_ttl                        = 3600
-  token_policies                   = [vault_policy.harbor_policy.name]
+  token_policies                   = [vault_policy.registry.name]
 }

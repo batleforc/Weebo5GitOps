@@ -26,7 +26,7 @@ resource "authentik_application" "harbor" {
 
 resource "vault_kv_secret_v2" "harbor" {
   mount = "mv"
-  name  = "harbor/auth"
+  name  = "registry/auth"
   data_json = jsonencode(
     {
       AUTHENTIK_CLIENT_ID     = authentik_provider_oauth2.harbor.client_id,

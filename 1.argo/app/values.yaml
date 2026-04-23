@@ -25,3 +25,6 @@ monofolio:
 
 git:
   enabled: true
+
+registry:
+  enabled: true

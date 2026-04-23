@@ -6,7 +6,7 @@ resource "random_password" "HARBOR_ADMIN_PASSWORD" {
 
 resource "vault_kv_secret_v2" "harbor" {
   mount = vault_mount.main-vault.path
-  name  = "harbor/config"
+  name  = "registry/config"
   data_json = jsonencode(
     {
       HARBOR_ADMIN_PASSWORD     = random_password.HARBOR_ADMIN_PASSWORD.result,
