@@ -84,7 +84,7 @@ spec:
         database:
           type: external
           external:
-            host: harbor-db
+            host: harbor-postgresql-rw
             port: 5432
             username: postgres
             existingSecret: harbor-postgresql-superuser
