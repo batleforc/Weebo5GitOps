@@ -36,12 +36,12 @@ resource "harbor_project" "cache-ghub" {
   storage_quota = 15
 }
 
-resource "harbor_project" "cache-quay" {
-  name          = "cache-quay"
-  registry_id   = resource.harbor_registry.quay.registry_id
-  public        = "false"
-  storage_quota = 15
-}
+# resource "harbor_project" "cache-quay" {
+#   name          = "cache-quay"
+#   registry_id   = resource.harbor_registry.quay.registry_id
+#   public        = "false"
+#   storage_quota = 15
+# }
 
 resource "harbor_project" "cache-talos" {
   name          = "cache-talos"
