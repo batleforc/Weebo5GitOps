@@ -15,7 +15,7 @@ spec:
     helm:
       releaseName: harbor
       valuesObject:
-        harborAdminPassword: "vault:mc-authentik/data/harbor/config#HARBOR_ADMIN_PASSWORD"
+        harborAdminPassword: "vault:mv/data/registry/config#HARBOR_ADMIN_PASSWORD"
         portal:
           automountServiceAccountToken: true
         core:
