@@ -1468,7 +1468,7 @@ data:
                           },
                           "spec": {
                             "exemplar": true,
-                            "expr": "go_gc_duration_seconds{quantile=\"0.5\",service=~\"harbor-.*\"}",
+                            "expr": "go_gc_duration_seconds{quantile=\"0.5\",namespace=~\"registry\"}",
                             "interval": "",
                             "legendFormat": "{{"{{"}}service}}"
                           }
@@ -3131,7 +3131,7 @@ data:
                           },
                           "spec": {
                             "exemplar": true,
-                            "expr": "go_gc_duration_seconds{quantile=\"0.75\",service=~\"harbor-.*\"}",
+                            "expr": "go_gc_duration_seconds{quantile=\"0.75\",namespace=~\"registry\"}",
                             "interval": "",
                             "legendFormat": "{{"{{"}}service}}"
                           }
@@ -3250,7 +3250,7 @@ data:
                           },
                           "spec": {
                             "exemplar": true,
-                            "expr": "go_gc_duration_seconds{quantile=\"0.25\",service=~\"harbor-.*\"}",
+                            "expr": "go_gc_duration_seconds{quantile=\"0.25\",namespace=~\"registry\"}",
                             "interval": "",
                             "legendFormat": "{{"{{"}}service}}"
                           }
