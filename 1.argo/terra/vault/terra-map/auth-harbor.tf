@@ -30,9 +30,9 @@ EOT
 }
 
 resource "vault_kubernetes_auth_backend_role" "auth-registry" {
-  role_name                        = "auth-registry"
+  role_name                        = "registry"
   bound_service_account_names      = ["registry", "default"]
   bound_service_account_namespaces = ["registry"]
   token_ttl                        = 3600
-  token_policies                   = [vault_policy.registry.name]
+  token_policies                   = [vault_policy.registry_policy.name]
 }
