@@ -64,12 +64,12 @@ resource "harbor_project_member_group" "admin_cache_ghub" {
   type          = "oidc"
 }
 
-resource "harbor_project_member_group" "admin_cache_quay" {
-  project_id    = harbor_project.cache-quay.id
-  group_name    = "weebo_admin"
-  role          = "maintainer"
-  type          = "oidc"
-}
+# resource "harbor_project_member_group" "admin_cache_quay" {
+#   project_id    = harbor_project.cache-quay.id
+#   group_name    = "weebo_admin"
+#   role          = "maintainer"
+#   type          = "oidc"
+# }
 
 resource "harbor_project_member_group" "admin_cache_talos" {
   project_id    = harbor_project.cache-talos.id

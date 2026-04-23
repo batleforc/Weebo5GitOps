@@ -18,14 +18,14 @@ resource "harbor_robot_account" "reader" {
       resource = "repository"
     }
   }
-  permissions {
-    namespace = harbor_project.cache-quay.name
-    kind      = "project"
-    access {
-      action   = "pull"
-      resource = "repository"
-    }
-  }
+  # permissions {
+  #   namespace = harbor_project.cache-quay.name
+  #   kind      = "project"
+  #   access {
+  #     action   = "pull"
+  #     resource = "repository"
+  #   }
+  # }
   permissions {
     namespace = harbor_project.cache-talos.name
     kind      = "project"
