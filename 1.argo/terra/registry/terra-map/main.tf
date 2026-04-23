@@ -36,7 +36,7 @@ provider "vault" {
 }
 
 provider "harbor" {
-  url      = "https://harbor.batleforc.fr"
+  url      = "https://registry.batleforc.fr"
   username = var.username
   password = ephemeral.vault_kv_secret_v2.harbor_config.data.HARBOR_ADMIN_PASSWORD
 }

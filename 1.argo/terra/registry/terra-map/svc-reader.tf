@@ -61,7 +61,7 @@ resource "vault_kv_secret_v2" "harbor_reader" {
     {
       username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.reader.name}"
       password = harbor_robot_account.reader.secret
-      url      = "https://harbor.batleforc.fr"
+      url      = "https://registry.batleforc.fr"
     }
   )
 }
