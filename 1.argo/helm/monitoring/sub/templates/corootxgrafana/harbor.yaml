@@ -60,7 +60,7 @@ data:
                           "instant": false,
                           "interval": "",
                           "intervalFactor": 1,
-                          "legendFormat": "{{method}} {{operation}}"
+                          "legendFormat": "{{"{{"}}method}} {{"{{"}}operation}}"
                         },
                         "version": "v0"
                       },
@@ -179,7 +179,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_artifact_pulled",
                           "interval": "",
-                          "legendFormat": "{{project_name}}"
+                          "legendFormat": "{{"{{"}}project_name}}"
                         },
                         "version": "v0"
                       },
@@ -298,7 +298,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_project_member_total",
                           "interval": "",
-                          "legendFormat": "{{project_name}}"
+                          "legendFormat": "{{"{{"}}project_name}}"
                         },
                         "version": "v0"
                       },
@@ -419,7 +419,7 @@ data:
                           "expr": "harbor_project_quota_usage_byte",
                           "format": "time_series",
                           "interval": "",
-                          "legendFormat": "{{project_name}}"
+                          "legendFormat": "{{"{{"}}project_name}}"
                         },
                         "version": "v0"
                       },
@@ -502,7 +502,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_project_repo_total",
                           "interval": "",
-                          "legendFormat": "{{project_name}}"
+                          "legendFormat": "{{"{{"}}project_name}}"
                         },
                         "version": "v0"
                       },
@@ -623,7 +623,7 @@ data:
                           "instant": false,
                           "interval": "",
                           "intervalFactor": 1,
-                          "legendFormat": "{{method}} {{operation}}"
+                          "legendFormat": "{{"{{"}}method}} {{"{{"}}operation}}"
                         },
                         "version": "v0"
                       },
@@ -742,7 +742,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_core_http_inflight_requests",
                           "interval": "",
-                          "legendFormat": "{{pod}}"
+                          "legendFormat": "{{"{{"}}pod}}"
                         },
                         "version": "v0"
                       },
@@ -861,7 +861,7 @@ data:
                           "exemplar": true,
                           "expr": "registry_http_in_flight_requests",
                           "interval": "",
-                          "legendFormat": "{{handler}}"
+                          "legendFormat": "{{"{{"}}handler}}"
                         },
                         "version": "v0"
                       },
@@ -981,7 +981,7 @@ data:
                           "exemplar": true,
                           "expr": "rate(registry_http_requests_total[5m])",
                           "interval": "",
-                          "legendFormat": "{{method}} {{handler}}",
+                          "legendFormat": "{{"{{"}}method}} {{"{{"}}handler}}",
                           "range": true
                         },
                         "version": "v0"
@@ -1101,7 +1101,7 @@ data:
                           "exemplar": true,
                           "expr": "histogram_quantile(0.9, rate(registry_http_request_duration_seconds_bucket[10m]))",
                           "interval": "",
-                          "legendFormat": "{{method}} {{handler}}"
+                          "legendFormat": "{{"{{"}}method}} {{"{{"}}handler}}"
                         },
                         "version": "v0"
                       },
@@ -1220,7 +1220,7 @@ data:
                           "exemplar": true,
                           "expr": "histogram_quantile(0.9, rate(registry_http_request_size_bytes_bucket[10m]))",
                           "interval": "",
-                          "legendFormat": "{{handler}}"
+                          "legendFormat": "{{"{{"}}handler}}"
                         },
                         "version": "v0"
                       },
@@ -1339,7 +1339,7 @@ data:
                           "exemplar": true,
                           "expr": "histogram_quantile(0.9, rate(registry_http_response_size_bytes_bucket[10m]))",
                           "interval": "",
-                          "legendFormat": "{{handler}}"
+                          "legendFormat": "{{"{{"}}handler}}"
                         },
                         "version": "v0"
                       },
@@ -1458,7 +1458,7 @@ data:
                           "exemplar": true,
                           "expr": "go_gc_duration_seconds{quantile=\"0.5\",namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}"
+                          "legendFormat": "{{"{{"}}pod}}"
                         },
                         "version": "v0"
                       },
@@ -1578,7 +1578,7 @@ data:
                           "exemplar": true,
                           "expr": "go_goroutines{namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -1700,7 +1700,7 @@ data:
                           "format": "time_series",
                           "instant": false,
                           "interval": "",
-                          "legendFormat": "{{component}}"
+                          "legendFormat": "{{"{{"}}component}}"
                         },
                         "version": "v0"
                       },
@@ -1799,7 +1799,7 @@ data:
                           "exemplar": true,
                           "expr": "go_memstats_alloc_bytes{namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -1920,7 +1920,7 @@ data:
                           "exemplar": true,
                           "expr": "go_memstats_heap_objects{namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -2041,7 +2041,7 @@ data:
                           "exemplar": true,
                           "expr": "go_threads{namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -2162,7 +2162,7 @@ data:
                           "exemplar": true,
                           "expr": "go_memstats_next_gc_bytes{namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -2283,7 +2283,7 @@ data:
                           "exemplar": true,
                           "expr": "process_open_fds{namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -2403,7 +2403,7 @@ data:
                           "exemplar": true,
                           "expr": "rate(harbor_task_scheduled_total[1m])",
                           "interval": "",
-                          "legendFormat": "{{pod}}"
+                          "legendFormat": "{{"{{"}}pod}}"
                         },
                         "version": "v0"
                       },
@@ -2522,7 +2522,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_task_scheduled_total",
                           "interval": "",
-                          "legendFormat": "{{pod}}"
+                          "legendFormat": "{{"{{"}}pod}}"
                         },
                         "version": "v0"
                       },
@@ -2641,7 +2641,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_task_queue_size",
                           "interval": "",
-                          "legendFormat": "{{type}}"
+                          "legendFormat": "{{"{{"}}type}}"
                         },
                         "version": "v0"
                       },
@@ -2760,7 +2760,7 @@ data:
                           "exemplar": true,
                           "expr": "harbor_task_queue_latency",
                           "interval": "",
-                          "legendFormat": "{{type}}"
+                          "legendFormat": "{{"{{"}}type}}"
                         },
                         "version": "v0"
                       },
@@ -2880,7 +2880,7 @@ data:
                           "exemplar": true,
                           "expr": "rate(process_cpu_seconds_total{namespace=~\"registry\"}[5m])",
                           "interval": "",
-                          "legendFormat": "{{pod}}",
+                          "legendFormat": "{{"{{"}}pod}}",
                           "range": true
                         },
                         "version": "v0"
@@ -3000,7 +3000,7 @@ data:
                           "exemplar": true,
                           "expr": "go_gc_duration_seconds{quantile=\"0.75\",namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}"
+                          "legendFormat": "{{"{{"}}pod}}"
                         },
                         "version": "v0"
                       },
@@ -3119,7 +3119,7 @@ data:
                           "exemplar": true,
                           "expr": "go_gc_duration_seconds{quantile=\"0.25\",namespace=~\"registry\"}",
                           "interval": "",
-                          "legendFormat": "{{pod}}"
+                          "legendFormat": "{{"{{"}}pod}}"
                         },
                         "version": "v0"
                       },
