@@ -35,7 +35,7 @@ data:
         }
       ],
       "cursorSync": "Off",
-      "editable": true,
+      "editable": false,
       "elements": {
         "panel-14": {
           "kind": "Panel",
@@ -3671,6 +3671,8 @@ data:
         "to": "now"
       },
       "title": "Harbor",
+      "uid": "n5bu_gZk",
+      "version": 1,
       "variables": [
         {
           "kind": "DatasourceVariable",
