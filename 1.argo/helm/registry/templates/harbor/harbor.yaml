@@ -18,6 +18,10 @@ spec:
         harborAdminPassword: "vault:mv/data/registry/config#HARBOR_ADMIN_PASSWORD"
         portal:
           automountServiceAccountToken: true
+          podAnnotations:
+            inject-certs: "enabled"
+            coroot.com/scrape-metrics: 'true'
+            coroot.com/metrics-port: '8001'
         core:
           automountServiceAccountToken: true
           podAnnotations:
@@ -42,12 +46,12 @@ spec:
           automountServiceAccountToken: true
           podAnnotations:
             inject-certs: "enabled"
+            coroot.com/scrape-metrics: 'true'
+            coroot.com/metrics-port: '8001'
             vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
             vault.security.banzaicloud.io/vault-role: "auth-read"
             vault.security.banzaicloud.io/vault-path: "kubernetes"
             vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
-            coroot.com/scrape-metrics: 'true'
-            coroot.com/metrics-port: '8001'
         metrics:
           enabled: true
           serviceMonitor:

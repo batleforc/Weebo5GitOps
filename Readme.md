@@ -31,7 +31,7 @@ This is the base project for the Weebo 5 production upgrade.
       - [Tekton](https://tekton.dev/)
       - [Forgejo Actions](https://code.forgejo.org/forgejo-helm/forgejo-runner)
 - [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
-- [ ] Registry - [Harbor](https://goharbor.io/)
+- [x] Registry - [Harbor](https://goharbor.io/)
 - [x] VPN
   - OLD : [WireGuard](https://www.wireguard.com/)
   - NEW : [NetBird](https://netbird.io/)
