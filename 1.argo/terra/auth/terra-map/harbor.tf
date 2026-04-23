@@ -7,7 +7,7 @@ resource "authentik_provider_oauth2" "harbor" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://harbor.batleforc.fr/c/oidc/callback",
+      url           = "https://registry.batleforc.fr/c/oidc/callback",
     },
   ]
   property_mappings = [

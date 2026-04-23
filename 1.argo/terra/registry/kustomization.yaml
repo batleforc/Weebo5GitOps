@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: terra-registry
+namespace: registry
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - job.yaml
+  - volume.yaml
+
+configMapGenerator:
+  - name: terra-registry-config
+    namespace: registry
+    files:
+      - ./terra-map/main.tf
+      - ./terra-map/data.tf
+      - ./terra-map/config.tf
+      - ./terra-map/projects-cache.tf
+      - ./terra-map/svc-reader.tf
+      - ./terra-map/projects-talos.tf
