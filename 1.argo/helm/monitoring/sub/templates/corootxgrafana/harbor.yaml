@@ -3672,7 +3672,7 @@ data:
       },
       "title": "Harbor",
       "uid": "n5bu_gZk",
-      "version": 1,
+      "version": 2,
       "variables": [
         {
           "kind": "DatasourceVariable",
