@@ -17,6 +17,7 @@ This is the base project for the Weebo 5 production upgrade.
     - [Coroot](https://coroot.com/) X [Grafana](https://grafana.com/)
     - [ ] Add New dashboard
       - [x] Traefik
+      - [x] Harbor
       - [ ] Netbird
       - [ ] Blocky
       - [ ] Rybbit
