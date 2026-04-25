@@ -18,8 +18,9 @@ configMapGenerator:
       - ./terra-map/main.tf
       - ./terra-map/auth-base.tf
       - ./terra-map/auth-bootstrap.tf
-      - ./terra-map/auth-vpn.tf
-      - ./terra-map/auth-monitoring.tf
+      - ./terra-map/vpn.tf
+      - ./terra-map/monitoring.tf
       - ./terra-map/harbor.tf
-      - ./terra-map/auth-harbor.tf
+      - ./terra-map/registry.tf
       - ./terra-map/auth-policy.tf
+      - ./terra-map/auth-vault.tf
