@@ -2,5 +2,6 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
-  "go.goroot": "~/.local/share/mise/installs/go/latest"
+  "go.goroot": "~/.local/share/mise/installs/go/latest",
+  "opentofu.languageServer.tofu.path": "~/.local/share/mise/installs/opentofu/latest/tofu"
 }

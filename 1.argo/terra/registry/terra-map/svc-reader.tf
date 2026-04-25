@@ -42,14 +42,22 @@ resource "harbor_robot_account" "reader" {
       resource = "repository"
     }
   }
+  permissions {
+    namespace = harbor_project.forgejo-action.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
 }
 
 
 variable "namespace_who_read" {
   type = map(string)
   default = {
-    "registry"          = "registry"
-    "vpn"         = "vpn"
+    "registry" = "registry"
+    "vpn"      = "vpn"
   }
 }
 

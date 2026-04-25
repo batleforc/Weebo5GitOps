@@ -1,0 +1,12 @@
+version: "3"
+
+vars:
+  registry: "registry.batleforc.fr"
+
+tasks:
+  build-buildah:
+    desc: "Build the Buildah container image for the Git action"
+    cmds:
+      - podman build -t ${registry}/forgejo-action/forgejo-buildah:v1.43.1
+        1.argo/helm/git/action
+      - podman push ${registry}/forgejo-action/forgejo-buildah:v1.43.1

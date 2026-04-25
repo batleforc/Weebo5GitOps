@@ -1,0 +1,8 @@
+FROM quay.io/buildah/stable:v1.43.1
+RUN dnf install -y nodejs && dnf clean all && \
+  # Remove fuse-overlayfs mount_program — native kernel overlay works in user namespaces
+  # on kernel 5.11+ (hostUsers: false + runAsUser: 0). Faster and more reliable than FUSE.
+  sed -i '/mount_program/d' /etc/containers/storage.conf && \
+  # Remove fsync=0 from mountopt — this is a fuse-overlayfs-only option, not valid for
+  # native kernel overlayfs and causes EINVAL on mount.
+  sed -i 's/mountopt = "nodev,fsync=0"/mountopt = "nodev"/' /etc/containers/storage.conf

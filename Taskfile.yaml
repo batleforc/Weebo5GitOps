@@ -9,6 +9,7 @@ includes:
   pulumi-conf: 0.pulumi-conf/Taskfile.yaml
   argo: .task/argo.yaml
   vault: .task/vault.yaml
+  for-action: .task/fogejo-action.yaml
 
 tasks:
   init:
