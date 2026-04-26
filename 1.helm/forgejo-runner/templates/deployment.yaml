@@ -33,9 +33,9 @@ spec:
             - |
               rsubst < /source-config/config.yaml > /config/config.yaml
               {{ range .Values.runner.podSpecToInclude }}
-              - cp /source-config/podspec-{{ . }} /config/podspec-{{ . }}
+              cp /source-config/podspec-{{ . }} /config/podspec-{{ . }}
               {{ end }}
-              - forgejo-runner --config /config/config.yaml daemon
+              forgejo-runner --config /config/config.yaml daemon
           volumeMounts:
             - name: target-config
               mountPath: /config
