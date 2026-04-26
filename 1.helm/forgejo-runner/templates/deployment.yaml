@@ -30,7 +30,7 @@ spec:
           #args: ["forgejo-runner", "--config", "/config/config.yaml", "daemon"]
           command: ["/bin/sh", "-c"]
           args:
-            - envsubst < /source-config/config.yaml > /config/config.yaml
+            - rsubst < /source-config/config.yaml > /config/config.yaml
             {{ range .Values.runner.podSpecToInclude }}
             - cp /source-config/podspec-{{ . }} /config/podspec-{{ . }}
             {{ end }}
