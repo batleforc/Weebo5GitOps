@@ -1,5 +1,5 @@
 runner:
-  enabled: false
+  enabled: true
   image:
     repository: registry.batleforc.fr/forgejo-action/forgejo-runner
     tag: latest
