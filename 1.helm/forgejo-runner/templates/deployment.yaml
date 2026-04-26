@@ -17,14 +17,38 @@ spec:
         app: forgejo-runner
     spec:
       serviceAccountName: forgejo-runner
+      initContainers:
+        - name: envsubst
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args:
+            - envsubst < /config/config.yaml > /target-config/config.yaml
+            {{ range .Values.runner.podSpecToInclude }}
+            - cp /config/podspec-{{ . }} /target-config/podspec-{{ . }}
+            {{ end }}
+          env:
+            - name: RUNNER_TOKEN
+              value: vault:mv/data/{{ $.Release.Namespace }}/sub#token
+            - name: RUNNER_UUID
+              value: vault:mv/data/{{ $.Release.Namespace }}/sub#uuid
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: target-config
+              mountPath: /target-config
       containers:
         - name: runner
           image: {{ .Values.runner.image.repository }}:{{ .Values.runner.image.tag }}
           args: ["forgejo-runner", "--config", "/config/config.yaml", "daemon"]
           volumeMounts:
-            - name: config
+            - name: target-config
               mountPath: /config
-              readOnly: true
+          env:
+            - name: RUNNER_TOKEN
+              value: vault:mv/data/{{ $.Release.Namespace }}/sub#token
+            - name: RUNNER_UUID
+              value: vault:mv/data/{{ $.Release.Namespace }}/sub#uuid
           resources:
             requests:
               cpu: 100m
@@ -33,6 +57,8 @@ spec:
               cpu: "1"
               memory: 512Mi
       volumes:
+        - name: target-config
+          emptyDir: {}
         - name: config
           configMap:
             name: runner-config

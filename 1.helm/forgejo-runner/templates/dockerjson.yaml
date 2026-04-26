@@ -7,7 +7,7 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: docker-store
+    name: store
     kind: SecretStore
   target:
     template:

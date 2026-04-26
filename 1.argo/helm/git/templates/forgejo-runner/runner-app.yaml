@@ -1,0 +1,31 @@
+{{- if and .Values.forgejo.enabled .Values.forgejo.runner.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo-runner-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: '{{ .Values.repo }}'
+    path: '1.helm/forgejo-runner'
+    helm:
+      releaseName: forgejo-runner-app
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'forgejo-action'
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+{{- end -}}
