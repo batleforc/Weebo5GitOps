@@ -24,7 +24,7 @@ path "${vault_mount.main-vault.path}/metadata/forgejo-action/sub" {
 EOT
 }
 
-resource "vault_kubernetes_auth_backend_role" "auth-read" {
+resource "vault_kubernetes_auth_backend_role" "forgejo_policy" {
   role_name                        = "forgejo-readwrite"
   bound_service_account_names      = ["default", "forgejo-runner"]
   bound_service_account_namespaces = ["git", "forgejo-action"]
