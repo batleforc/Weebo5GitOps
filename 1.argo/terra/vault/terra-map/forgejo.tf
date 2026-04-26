@@ -19,7 +19,7 @@ path "${vault_mount.main-vault.path}/data/forgejo-action/sub" {
   capabilities = ["create", "read", "update", "delete", "list"]
 }
 path "${vault_mount.main-vault.path}/metadata/forgejo-action/sub" {
-  capabilities = ["read","list"]
+  capabilities = ["read","list","update"]
 }
 EOT
 }
