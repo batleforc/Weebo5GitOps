@@ -17,10 +17,10 @@ spec:
   data:
     - secretKey: harbor_username
       remoteRef:
-        key: mv/{{ $.Release.Namespace }}/harbor
+        key: mv/{{ $.Release.Namespace }}/registry
         property: username
     - secretKey: harbor_password
       remoteRef:
-        key: mv/{{ $.Release.Namespace }}/harbor
+        key: mv/{{ $.Release.Namespace }}/registry
         property: password
 {{- end -}}
