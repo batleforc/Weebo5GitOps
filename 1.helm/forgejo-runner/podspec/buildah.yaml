@@ -45,6 +45,9 @@ containers:
         mountPath: /var/tmp
       - name: run
         mountPath: /run
+      - name: vault-tls
+        mountPath: /vault-tls
+        readOnly: true
     resources:
       requests:
         cpu: "500m"
@@ -66,4 +69,7 @@ volumes:
   - name: run
     emptyDir:
       sizeLimit: 256Mi
+  - name: vault-tls
+    secret:
+      secretName: vault-tls
 restartPolicy: Never

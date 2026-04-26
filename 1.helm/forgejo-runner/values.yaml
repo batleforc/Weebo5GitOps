@@ -16,6 +16,10 @@ runner:
       labels:
         - "kubernetes:k8spod:///config/podspec-default.yaml"
         - "buildah:k8spod:///config/podspec-buildah.yaml"
+      envs:
+        VAULT_ADDR: "https://vault.vault:8200"
+        VAULT_CA_CERT: /vault-tls/ca.crt
+        VAULT_FORGEJO_ROLE: forgejo_default_policy
 
     kubernetes:
       namespace: forgejo-actions

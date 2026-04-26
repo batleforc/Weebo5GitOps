@@ -9,4 +9,13 @@ containers:
         cpu: "2"
         memory: 2Gi
         ephemeral-storage: 10Gi
+    volumeMounts:
+      - name: vault-tls
+        mountPath: /vault-tls
+        readOnly: true
+
+volumes:
+  - name: vault-tls
+    secret:
+      secretName: vault-tls
 restartPolicy: Never
