@@ -19,6 +19,8 @@ spec:
       serviceAccountName: forgejo-runner
       containers:
         - name: runner
+          imagePullSecrets:
+            - name: docker-config
           image: {{ .Values.runner.image.repository }}:{{ .Values.runner.image.tag }}
           #args: ["forgejo-runner", "--config", "/config/config.yaml", "daemon"]
           command: ["/bin/sh", "-c"]
