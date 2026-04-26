@@ -32,8 +32,8 @@ runner:
       connections:
         forgejo:
           url: https://git.batleforc.fr
-          uuid: "$RUNNER_UUID" # filled in at deploy time
-          token: "$RUNNER_TOKEN" # filled in at deploy time
+          uuid: "{{RUNNER_UUID}}" # filled in at deploy time
+          token: "{{RUNNER_TOKEN}}" # filled in at deploy time
           labels:
             - "kubernetes:k8spod:///config/podspec-default.yaml"
             - "buildah:k8spod:///config/podspec-buildah.yaml"
