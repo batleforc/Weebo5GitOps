@@ -99,7 +99,7 @@ resource "harbor_robot_account" "rw-monofolio-rs" {
   }
 }
 
-resource "vault_kv_secret_v2" "harbor_reader" {
+resource "vault_kv_secret_v2" "rw-monofolio-rs" {
   mount = "git-vault"
   name  = "batleforc/monofolio-rs/registry"
   data_json = jsonencode(
