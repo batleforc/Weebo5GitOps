@@ -8,6 +8,14 @@ path "${vault_mount.main-vault.path}/+/+/registry" {
 path "${vault_mount.main-vault.path}/+/+/+/registry" {
   capabilities = ["create", "read", "update", "delete", "list","patch"]
 }
+
+path "${vault_mount.git_vault.path}/+/+/registry" {
+  capabilities = ["create", "read", "update", "delete", "list","patch"]
+}
+path "${vault_mount.git_vault.path}/+/+/+/registry" {
+  capabilities = ["create", "read", "update", "delete", "list","patch"]
+}
+
 path "${vault_mount.main-vault.path}/metadata/registry/registry" {
   capabilities = ["create", "read", "update", "delete", "list","patch"]
 }

@@ -22,3 +22,4 @@ configMapGenerator:
       - ./terra-map/svc-reader.tf
       - ./terra-map/projects-talos.tf
       - ./terra-map/projects-forgejo.tf
+      - ./terra-map/monofolio-rs.tf
