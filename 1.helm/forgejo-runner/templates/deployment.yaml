@@ -1,0 +1,39 @@
+{{- if .Values.runner.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: forgejo-runner
+  template:
+    metadata:
+      labels:
+        app: forgejo-runner
+    spec:
+      serviceAccountName: forgejo-runner
+      containers:
+        - name: runner
+          image: {{ .Values.runner.image.repository }}:{{ .Values.runner.image.tag }}
+          args: ["forgejo-runner", "--config", "/config/config.yaml", "daemon"]
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+      volumes:
+        - name: config
+          configMap:
+            name: runner-config
+{{- end -}}

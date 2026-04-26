@@ -1,0 +1,26 @@
+{{- if .Values.runner.secretStore.enabled -}}
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: docker-config
+  namespace: {{ $.Release.Namespace }}
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: docker-store
+    kind: SecretStore
+  target:
+    template:
+      type: kubernetes.io/dockerconfigjson
+      data:
+        .dockerconfigjson: '{"auths":{"registry.batleforc.fr":{"username":"{{ printf "{{"}} .harbor_username }}","password":"{{ printf "{{"}} .harbor_password }}","auth":"{{ printf "{{"}} printf "%s:%s" .harbor_username .harbor_password | b64enc }}"}}}'
+  data:
+    - secretKey: harbor_username
+      remoteRef:
+        key: mv/{{ $.Release.Namespace }}/harbor
+        property: username
+    - secretKey: harbor_password
+      remoteRef:
+        key: mv/{{ $.Release.Namespace }}/harbor
+        property: password
+{{- end -}}

@@ -1,0 +1,17 @@
+{{- if .Values.runner.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: runner-config
+  namespace: {{ .Release.Namespace }}
+data:
+  {{ $files := .Files }}
+  config.yaml: |-
+{{ with .Values.runner.runnerConfig }}
+{{ toYaml . | indent 4 }}
+{{ end }}
+  {{- range .Values.runner.podSpecToInclude }}
+  podspec-{{ . }}: |-
+{{ $files.Get (printf "podspec/%s" .) | indent 4 }}
+  {{- end }}
+{{- end -}}

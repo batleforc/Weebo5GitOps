@@ -1,0 +1,69 @@
+hostUsers: false
+containers:
+  - name: main
+    image: harbor.batleforc.fr/forgejo-action/forgejo-buildah:v1.43.1
+    env:
+      - name: BUILDAH_ISOLATION
+        value: chroot
+      - name: STORAGE_DRIVER
+        value: overlay
+      # Fix tar fchmodat EPERM: emptyDir superblocks are in the init user namespace,
+      # making CAP_FOWNER ineffective across the boundary. Skip mode/owner restoration.
+      - name: TAR_OPTIONS
+        value: "--no-same-permissions --no-same-owner"
+    imagePullSecrets:
+      - name: docker-config
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      # capabilities: drop: ALL empties the OCI bounding set before the process starts,
+      # overriding the K8s userns capability grant. We add back only what buildah needs:
+      # SETUID/SETGID: writing uid_map/gid_map for buildah's internal user namespace (login, build)
+      # SYS_CHROOT: chroot(2) for BUILDAH_ISOLATION=chroot
+      # SETFCAP: setting file capabilities inside built images
+      # CHOWN: chown(2) during image layer extraction
+      capabilities:
+        add:
+          - SETUID
+          - SETGID
+          - SYS_CHROOT
+          - SETFCAP
+          - CHOWN
+        drop:
+          - ALL
+      seccompProfile:
+        type: Localhost
+        localhostProfile: profiles/ci-build.json
+    volumeMounts:
+      - name: buildah-storage
+        mountPath: /var/lib/containers/storage
+      - name: tmp
+        mountPath: /tmp
+      - name: var-tmp
+        mountPath: /var/tmp
+      - name: run
+        mountPath: /run
+    resources:
+      requests:
+        cpu: "500m"
+        memory: 1Gi
+      limits:
+        cpu: "4"
+        memory: 4Gi
+        ephemeral-storage: 20Gi
+volumes:
+  - name: buildah-storage
+    emptyDir:
+      sizeLimit: 20Gi
+  - name: tmp
+    emptyDir:
+      sizeLimit: 1Gi
+  - name: var-tmp
+    emptyDir:
+      sizeLimit: 1Gi
+  - name: run
+    emptyDir:
+      sizeLimit: 256Mi
+restartPolicy: Never

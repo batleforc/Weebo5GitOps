@@ -1,0 +1,12 @@
+containers:
+  - name: main
+    image: node:22-bookworm
+    resources:
+      requests:
+        cpu: "500m"
+        memory: 512Mi
+      limits:
+        cpu: "2"
+        memory: 2Gi
+        ephemeral-storage: 10Gi
+restartPolicy: Never

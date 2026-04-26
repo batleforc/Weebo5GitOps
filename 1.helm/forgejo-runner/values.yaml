@@ -1,0 +1,41 @@
+runner:
+  enabled: true
+  image:
+    repository: registry.batleforc.fr/forgejo-action/forgejo-runner
+    tag: latest
+  podSpecToInclude:
+    - buildah.yaml
+    - default.yaml
+  runnerConfig:
+    log:
+      level: info
+
+    runner:
+      capacity: 4
+      timeout: 3h
+      labels:
+        - "kubernetes:k8spod:///config/podspec-default.yaml"
+        - "buildah:k8spod:///config/podspec-buildah.yaml"
+
+    kubernetes:
+      namespace: forgejo-actions
+      poll_timeout: 30s
+
+    container:
+      # Disables Docker socket check — not needed with K8s backend
+      docker_host: "-"
+
+    cache:
+      enabled: false
+
+    server:
+      connections:
+        forgejo:
+          url: https://git.batleforc.fr
+          uuid: "" # filled in at deploy time
+          token_url: "file:///secrets/token"
+          labels:
+            - "kubernetes:k8spod:///config/podspec-default.yaml"
+            - "buildah:k8spod:///config/podspec-buildah.yaml"
+  secretStore:
+    enabled: true

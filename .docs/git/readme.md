@@ -16,6 +16,7 @@ Pour l'usage que je souhaite en faire, je pense uttilisé la solution en cours d
 
 - [Forgejo runner but with kube](https://github.com/eleboucher/runner)
 - [Hardened Kubernetes runner](https://codeberg.org/ppaslan/forgejo-kubernetes-runners)
+- [Register runner](https://forgejo.org/docs/next/admin/actions/registration/#offline-registration)
 
 ### Build docker
 
