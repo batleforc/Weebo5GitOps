@@ -5,7 +5,7 @@ forgejo:
   runner:
     enabled: true
     job:
-      image: alpine/k8s:1.35
+      image: alpine/k8s:1.35.4
 
 repo: ""
 traefik:
