@@ -56,8 +56,9 @@ resource "harbor_robot_account" "reader" {
 variable "namespace_who_read" {
   type = map(string)
   default = {
-    "registry" = "registry"
-    "vpn"      = "vpn"
+    "registry"       = "registry"
+    "vpn"            = "vpn"
+    "forgejo-action" = "forgejo-action"
   }
 }
 
