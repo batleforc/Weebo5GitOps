@@ -1,7 +1,7 @@
 hostUsers: false
 containers:
   - name: main
-    image: harbor.batleforc.fr/forgejo-action/forgejo-buildah:v1.43.1
+    image: registry.batleforc.fr/forgejo-action/forgejo-buildah:v1.43.1
     env:
       - name: BUILDAH_ISOLATION
         value: chroot
