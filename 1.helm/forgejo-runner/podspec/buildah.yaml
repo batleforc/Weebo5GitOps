@@ -11,8 +11,6 @@ containers:
       # making CAP_FOWNER ineffective across the boundary. Skip mode/owner restoration.
       - name: TAR_OPTIONS
         value: "--no-same-permissions --no-same-owner"
-    imagePullSecrets:
-      - name: docker-config
     securityContext:
       runAsUser: 0
       runAsGroup: 0
@@ -56,6 +54,8 @@ containers:
         cpu: "4"
         memory: 4Gi
         ephemeral-storage: 20Gi
+imagePullSecrets:
+  - name: docker-config
 volumes:
   - name: buildah-storage
     emptyDir:
