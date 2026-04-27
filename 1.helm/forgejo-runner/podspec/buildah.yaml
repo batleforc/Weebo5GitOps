@@ -1,4 +1,7 @@
 hostUsers: false
+securityContext:
+  fsGroup: 1000
+  fsGroupChangePolicy: OnRootMismatch
 containers:
   - name: main
     image: registry.batleforc.fr/forgejo-action/forgejo-buildah:v1.43.1
@@ -15,7 +18,7 @@ containers:
       runAsUser: 0
       runAsGroup: 0
       allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: false
+      readOnlyRootFilesystem: true
       # capabilities: drop: ALL empties the OCI bounding set before the process starts,
       # overriding the K8s userns capability grant. We add back only what buildah needs:
       # SETUID/SETGID: writing uid_map/gid_map for buildah's internal user namespace (login, build)
@@ -45,7 +48,6 @@ containers:
         mountPath: /run
       - name: data
         mountPath: /data
-        subPath: data
       - name: vault-tls
         mountPath: /vault-tls
         readOnly: true
