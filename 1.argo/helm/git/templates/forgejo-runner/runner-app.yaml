@@ -18,6 +18,9 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: 'forgejo-action'
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        pod-security.kubernetes.io/enforce: privileged
     automated:
       selfHeal: true
     syncOptions:
