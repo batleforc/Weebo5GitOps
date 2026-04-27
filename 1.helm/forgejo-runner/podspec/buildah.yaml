@@ -45,6 +45,7 @@ containers:
         mountPath: /run
       - name: data
         mountPath: /data
+        subPath: data
       - name: vault-tls
         mountPath: /vault-tls
         readOnly: true
