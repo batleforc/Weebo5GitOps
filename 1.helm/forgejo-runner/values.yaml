@@ -22,7 +22,7 @@ runner:
         VAULT_FORGEJO_ROLE: forgejo_default_policy
 
     kubernetes:
-      namespace: forgejo-actions
+      namespace: forgejo-action
       poll_timeout: 30s
 
     container:
