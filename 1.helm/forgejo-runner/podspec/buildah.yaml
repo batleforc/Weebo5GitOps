@@ -44,8 +44,6 @@ containers:
         mountPath: /var/tmp
       - name: run
         mountPath: /run
-      - name: data
-        mountPath: /data
       - name: vault-tls
         mountPath: /vault-tls
         readOnly: true
@@ -72,9 +70,6 @@ volumes:
   - name: run
     emptyDir:
       sizeLimit: 256Mi
-  - name: data
-    emptyDir:
-      sizeLimit: 1Gi
   - name: vault-tls
     secret:
       secretName: vault-tls
