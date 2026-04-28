@@ -27,3 +27,4 @@ configMapGenerator:
       - ./terra-map/harbor.tf
       - ./terra-map/vault.tf
       - ./terra-map/git.tf
+      - ./terra-map/che-cluster.tf
