@@ -1,0 +1,28 @@
+piVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "devworkspace-operator"
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: "default"
+  source:
+    repoURL: "https://github.com/devfile/devworkspace-operator"
+    targetRevision: "{{ .Values.che.operator.devworkspaceVersion }}"
+    path: "deploy/deployment/kubernetes"
+
+  destination:
+    name: "in-cluster"
+    namespace: "devworkspace-controller"
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m

@@ -19,6 +19,9 @@ spec:
     targetRevision: {{ .Values.externalSecrets.version }}
     helm:
       releaseName: external-secrets
+      valuesObject:
+        genericTargets:
+          enabled: true
   destination:
     name: "in-cluster"
     namespace: external-secrets
