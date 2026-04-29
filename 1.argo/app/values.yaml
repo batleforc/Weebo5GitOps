@@ -28,3 +28,6 @@ git:
 
 registry:
   enabled: true
+
+che:
+  enabled: true
