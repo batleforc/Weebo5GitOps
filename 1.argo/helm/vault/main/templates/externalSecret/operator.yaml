@@ -24,7 +24,7 @@ spec:
           enabled: true
           resources:
             - apiGroup: org.eclipse.che
-              resource:
+              resources:
                 - checlusters
               verbs:
                 - get
