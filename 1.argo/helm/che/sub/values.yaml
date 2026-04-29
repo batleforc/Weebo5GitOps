@@ -1,5 +1,7 @@
 che:
   enabled: true
+  cluster:
+    enabled: false
   cheApp:
     enabled: true
   ingress:

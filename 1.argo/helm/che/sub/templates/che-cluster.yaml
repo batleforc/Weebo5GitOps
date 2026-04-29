@@ -1,3 +1,4 @@
+{{- if .Values.che.cluster.enabled -}}
 # https://doc.crds.dev/github.com/eclipse-che/che-operator
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
@@ -78,3 +79,5 @@ spec:
       remoteRef:
         key: mv/eclipse-che/auth
         property: AUTHENTIK_CLIENT_SECRET
+
+{{- end -}}
