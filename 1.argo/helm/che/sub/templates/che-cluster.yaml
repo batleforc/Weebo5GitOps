@@ -18,7 +18,7 @@ spec:
       metadata:
         annotations:
           che.eclipse.org/self-signed-certificate: "false"
-          argocd.argoproj.io/tracking-id: che-cluster-main-in:org.eclipse.che/CheCluster:eclipse-che/che-cluster
+          argocd.argoproj.io/tracking-id: che-app:org.eclipse.che/CheCluster:eclipse-che/che-cluster
       data:
         spec: |
           devEnvironments:
