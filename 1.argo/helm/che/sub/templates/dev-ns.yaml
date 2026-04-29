@@ -1,24 +1,24 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: che-batleforc
+  name: dev-ws-max
   labels:
     app.kubernetes.io/part-of: che.eclipse.org
     app.kubernetes.io/component: workspaces-namespace
   annotations:
-    che.eclipse.org/username: Batleforc
+    che.eclipse.org/username: batleforc
     scheduler.alpha.kubernetes.io/node-selector: worker
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: che-batleforc-rolebinding
-  namespace: che-batleforc
+  name: dev-ws-max-rolebinding
+  namespace: dev-ws-max
   labels:
     app.kubernetes.io/part-of: che.eclipse.org
 subjects:
   - kind: User
-    name: weebsso:batleforc@weebo.poc
+    name: weebsso:max@batleforc.fr
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
@@ -28,13 +28,13 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: che-batleforc-rolebinding-devworkspace
-  namespace: che-batleforc
+  name: dev-ws-max-rolebinding-devworkspace
+  namespace: dev-ws-max
   labels:
     app.kubernetes.io/part-of: che.eclipse.org
 subjects:
   - kind: User
-    name: weebsso:batleforc@weebo.poc
+    name: weebsso:max@batleforc.fr
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole

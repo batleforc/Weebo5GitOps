@@ -4,4 +4,5 @@ config:
   0.pulumi:kubeVersion: v1.35.3
   0.pulumi:ciliumVersion: v1.18.6
   0.pulumi:argoAppsVersion: 9.4.17
+  0.pulumi:authEnabled: true
   cilium:configPath: ../0.config/kubeconfig.yaml
