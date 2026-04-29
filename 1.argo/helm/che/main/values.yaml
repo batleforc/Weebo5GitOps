@@ -7,6 +7,6 @@ che:
     host: cde.batleforc.fr
   operator:
     cheVersion: 7.116.0
-    devworkspaceVersion: 0.40.1
+    devworkspaceVersion: v0.40.1
 
 repo: ""
