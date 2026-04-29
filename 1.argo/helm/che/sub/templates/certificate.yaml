@@ -4,12 +4,12 @@ metadata:
   name: che-cluster-tls
   namespace: eclipse-che
 spec:
+  commonName: "{{ .Values.che.ingress.host }}"
   dnsNames:
     - "{{ .Values.che.ingress.host }}"
   issuerRef:
-    group: cert-manager.io
     kind: ClusterIssuer
-    name: outbound
+    name: "outbound"
   secretName: che-cluster-tls
   secretTemplate:
     labels:
