@@ -41,7 +41,7 @@ resource "vault_kv_secret_v2" "che-app" {
     {
       AUTHENTIK_CLIENT_ID     = authentik_provider_oauth2.che.client_id,
       AUTHENTIK_CLIENT_SECRET = authentik_provider_oauth2.che.client_secret,
-      AUTHENTIK_URL           = "https://login.4.weebo.fr/application/o/${authentik_application.che.slug}/",
+      AUTHENTIK_URL           = "https://auth.batleforc.fr/application/o/${authentik_application.che.slug}/",
     }
   )
 }
