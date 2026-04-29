@@ -22,6 +22,17 @@ spec:
       valuesObject:
         genericTargets:
           enabled: true
+          resources:
+            - apiGroup: org.eclipse.che
+              resource:
+                - checlusters
+              verbs:
+                - get
+                - list
+                - watch
+                - create
+                - update
+                - delete
   destination:
     name: "in-cluster"
     namespace: external-secrets
