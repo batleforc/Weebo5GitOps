@@ -15,13 +15,11 @@ spec:
       kind: CheCluster
       apiVersion: org.eclipse.che/v2
     template:
-      type: Opaque
-      name: eclipse-che
+      metadata:
+        annotations:
+          che.eclipse.org/self-signed-certificate: "false"
+          argocd.argoproj.io/tracking-id: che-cluster-main-in:org.eclipse.che/CheCluster:eclipse-che/che-cluster
       data:
-        metadata:
-          annotations:
-            che.eclipse.org/self-signed-certificate: "false"
-            argocd.argoproj.io/tracking-id: che-cluster-main-in:org.eclipse.che/CheCluster:eclipse-che/che-cluster
         spec:
           devEnvironments:
             disableContainerBuildCapabilities: false
