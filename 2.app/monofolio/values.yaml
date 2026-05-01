@@ -7,9 +7,12 @@ domain:
     name: batleforc.fr
 
 image:
-  repository: ghcr.io/batleforc/monofolio-rs
+  repository: registry.batleforc.fr/batleforc/monofolio-rs
   tag: main
   pullPolicy: Always
+
+secretStore:
+  enabled: true
 
 env:
   TRACKING_SCRIPT_SRC: "https://track.batleforc.fr/api/script.js"

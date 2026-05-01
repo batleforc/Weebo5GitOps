@@ -15,6 +15,10 @@ spec:
       labels:
         app: monofolio
     spec:
+      {{- if .Values.secretStore.enabled }}
+      imagePullSecrets:
+        - name: docker-config
+      {{- end }}
       containers:
         - name: monofolio
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
