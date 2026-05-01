@@ -43,6 +43,8 @@ spec:
             - name: config
               mountPath: /source-config
               readOnly: true
+            - name: data
+              mountPath: /data
           env:
             - name: RUNNER_TOKEN
               value: vault:mv/data/{{ $.Release.Namespace }}/sub#token
@@ -61,4 +63,6 @@ spec:
         - name: config
           configMap:
             name: runner-config
+        - name: data
+          emptyDir: {}
 {{- end -}}
