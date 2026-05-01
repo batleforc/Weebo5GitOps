@@ -105,6 +105,31 @@ zone:
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
       1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN PTR        batleforc.fr.
+  "db.weebo.fr":
+    zone: "weebo.fr."
+    file: |
+      $TTL 1h ;
+      $ORIGIN weebo.fr.
+      @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
+                              2024011942; serial
+                              7200; refresh
+                              3600; retry
+                              1209600; expire
+                              38400 ) ; minimum
+      @                   IN      NS                  batleforc.fr.
+      @                   IN      NS                  ns3082912.ip-94-23-38.eu.
+      @                   3600    CAA       0  issue "letsencrypt.org"
+      weebo.fr.       600     IN TXT "v=spf1 mx a:mail.weebo.fr ~all"
+      weebo.fr.       600     IN TXT "google-site-verification=0N1vTehQGI2Bc_p08SeijHssABbML4WF6OUAtKDCeMU"
+      @               600     IN TXT "mlab-domain-e02d707d-376b-4715-9363-9075ec5e7315"
+      weebo.fr.       3600    A                               94.23.38.81
+      weebo.fr.       3600    AAAA                            2001:41d0:2:2751::1
+      *.didi          3600    A                               192.99.4.173
+      *.wiwi          3600    A                               192.99.4.173
+      4               3600    A                               37.187.255.5
+      4               3600    AAAA                            2001:41d0:c:705::1
+      *.4             3600    A                               37.187.255.5
+      *.4             3600    AAAA                            2001:41d0:c:705::1
 
 forwarders:
   - 10.96.0.10
