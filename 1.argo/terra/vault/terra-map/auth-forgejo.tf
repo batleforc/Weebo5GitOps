@@ -16,16 +16,16 @@ resource "vault_policy" "forgejo_default_policy" {
   name = "forgejo_default_policy"
 
   policy = <<EOT
-path "${vault_mount.git_vault.path}/data/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.metadata.repository}}/default" {
+path "${vault_mount.git_vault.path}/data/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.name}}/default" {
   capabilities = ["read","list"]
 }
-path "${vault_mount.git_vault.path}/metadata/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.metadata.repository}}/default" {
+path "${vault_mount.git_vault.path}/metadata/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.name}}/default" {
   capabilities = ["read","list"]
 }
-path "${vault_mount.git_vault.path}/data/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.metadata.repository}}/registry" {
+path "${vault_mount.git_vault.path}/data/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.name}}/registry" {
   capabilities = ["read","list"]
 }
-path "${vault_mount.git_vault.path}/metadata/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.metadata.repository}}/registry" {
+path "${vault_mount.git_vault.path}/metadata/{{identity.entity.aliases.${vault_jwt_auth_backend.forgejo_auth.accessor}.name}}/registry" {
   capabilities = ["read","list"]
 }
 
