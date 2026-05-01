@@ -28,9 +28,9 @@ This is the base project for the Weebo 5 production upgrade.
   - OLD: [Gitea](https://gitea.io/) x [Tekton](https://tekton.dev/)
   - NEW:
     - [x] [Forgejo](https://forgejo.org/) ?
-    - [ ]  CI/CD
-      - [Tekton](https://tekton.dev/)
-      - [Forgejo Actions](https://code.forgejo.org/forgejo-helm/forgejo-runner)
+    - [x]  CI/CD
+      - [x] [Tekton](https://tekton.dev/)
+      - [Forgejo Actions](https://code.forgejo.org/forgejo-helm/forgejo-runner) - For the future, if Forgejo doesn't have the features needed.
 - [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
 - [x] Registry - [Harbor](https://goharbor.io/)
 - [x] VPN
@@ -48,10 +48,11 @@ This is the base project for the Weebo 5 production upgrade.
   - NEW: [Traefik](https://traefik.io/)
 - [x] CNI - [Cilium](https://cilium.io/)
   - [ ] !TODO: Message a moi meme pour demain, passer en netpol strict avec zero ouverture by default, et n'ouvrir que ce qui est nécessaire
-- [ ] [Eclipse Che](https://www.eclipse.org/che/)
+- [x] [Eclipse Che](https://www.eclipse.org/che/)
 - [ ] Tofu Hooks
 - [x] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
 - [x] [Rybbit](https://github.com/rybbit-io/rybbit) - For tracking
+- [ ] [VaultWarden](https://github.com/dani-garcia/vaultwarden) - For password management
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
 - [ ] Basic Monitoring
   - OLD: [Uptime Kuma](https://kuma.io/)

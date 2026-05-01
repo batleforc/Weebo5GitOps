@@ -5,6 +5,8 @@ domain:
     name: maxleriche.net
   - cert: batleforc-cert
     name: batleforc.fr
+  - cert: weebo-cert
+    name: weebo.fr
 
 image:
   repository: registry.batleforc.fr/batleforc/monofolio-rs
