@@ -99,6 +99,60 @@ resource "harbor_robot_account" "rw-batleforc" {
   }
 }
 
+resource "harbor_robot_account" "r-batleforc" {
+  name        = "r-batleforc"
+  description = "Service account dedicated to read only access to batleforc project in Harbor"
+  level       = "system"
+  permissions {
+    namespace = harbor_project.cache-dck.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
+  permissions {
+    namespace = harbor_project.cache-ghub.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
+  permissions {
+    namespace = harbor_project.cache-talos.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
+  permissions {
+    namespace = harbor_project.talos.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
+  permissions {
+    namespace = harbor_project.forgejo-action.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
+  permissions {
+    namespace = harbor_project.batleforc.name
+    kind      = "project"
+    access {
+      action   = "pull"
+      resource = "repository"
+    }
+  }
+}
+
 resource "vault_kv_secret_v2" "rw-monofolio-rs" {
   mount = "git-vault"
   name  = "batleforc/monofolio-rs/registry"
@@ -107,6 +161,18 @@ resource "vault_kv_secret_v2" "rw-monofolio-rs" {
       username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.rw-batleforc.name}"
       password = harbor_robot_account.rw-batleforc.secret
       url      = "registry.batleforc.fr"
+    }
+  )
+}
+
+resource "vault_kv_secret_v2" "r-monofolio-rs" {
+  mount = "mv"
+  name  = "monofolio/registry"
+  data_json = jsonencode(
+    {
+      username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.r-batleforc.name}"
+      password = harbor_robot_account.r-batleforc.secret
+      url      = "https://registry.batleforc.fr"
     }
   )
 }
