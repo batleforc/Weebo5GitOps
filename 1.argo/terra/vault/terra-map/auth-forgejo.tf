@@ -9,7 +9,7 @@ resource "vault_jwt_auth_backend" "forgejo_auth" {
   description        = "Forgejo JWT Auth Backend"
   path               = "forgejo_jwt"
   oidc_discovery_url = "https://git.batleforc.fr/api/actions"
-  bound_issuer       = "https://git.batleforc.fr/"
+  bound_issuer       = "https://git.batleforc.fr"
 }
 
 resource "vault_policy" "forgejo_default_policy" {
