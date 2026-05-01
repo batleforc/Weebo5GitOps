@@ -50,7 +50,7 @@ zone:
       $TTL 1h;
       $origin maxleriche.net.
       @       IN      SOA     batleforc.fr. maxleriche\.60.gmail.com. (
-                              2023111336; serial
+                              2026042048; serial
                               10800; refresh
                               3600; retry
                               604800; expire
@@ -111,7 +111,7 @@ zone:
       $TTL 1h ;
       $ORIGIN weebo.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2024011942; serial
+                              2026042048; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
