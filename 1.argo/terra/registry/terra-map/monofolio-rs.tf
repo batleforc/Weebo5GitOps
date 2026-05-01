@@ -1,13 +1,13 @@
-resource "harbor_project" "monofolio-rs" {
-  name                 = "monofolio-rs"
+resource "harbor_project" "batleforc" {
+  name                 = "batleforc"
   public               = "false"
   storage_quota        = 10
   auto_sbom_generation = true
 }
 
-resource "harbor_robot_account" "rw-monofolio-rs" {
-  name        = "rw-monofolio-rs"
-  description = "Service account dedicated to r/w access to monofolio-rs project in Harbor"
+resource "harbor_robot_account" "rw-batleforc" {
+  name        = "rw-batleforc"
+  description = "Service account dedicated to r/w access to batleforc project in Harbor"
   level       = "system"
   permissions {
     namespace = harbor_project.cache-dck.name
@@ -50,7 +50,7 @@ resource "harbor_robot_account" "rw-monofolio-rs" {
     }
   }
   permissions {
-    namespace = harbor_project.monofolio-rs.name
+    namespace = harbor_project.batleforc.name
     kind      = "project"
     access {
       action   = "pull"
@@ -104,8 +104,8 @@ resource "vault_kv_secret_v2" "rw-monofolio-rs" {
   name  = "batleforc/monofolio-rs/registry"
   data_json = jsonencode(
     {
-      username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.rw-monofolio-rs.name}"
-      password = harbor_robot_account.rw-monofolio-rs.secret
+      username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.rw-batleforc.name}"
+      password = harbor_robot_account.rw-batleforc.secret
       url      = "registry.batleforc.fr"
     }
   )
