@@ -30,6 +30,7 @@ spec:
           enabled: true
           tlsSecret: vaultwarden-tls
           hostname: {{ .Values.vaultwarden.domain }}
+          class: traefik
         image:
           extraVars:
             - key: SSO_ENABLED
