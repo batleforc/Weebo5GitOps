@@ -32,15 +32,24 @@ spec:
           hostname: {{ .Values.vaultwarden.domain }}
         image:
           extraVars:
-            SSO_ENABLED: true
-            SSO_AUTHORITY: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_URL"
-            SSO_CLIENT_ID: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_CLIENT_ID"
-            SSO_CLIENT_SECRET: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_CLIENT_SECRET"
-            SSO_SCOPES: email openid profile offline_access
-            SSO_ALLOW_UNKNOWN_EMAIL_VERIFICATION: false
-            SSO_CLIENT_CACHE_EXPIRATION: 0
-            SSO_ONLY: false # Set to true to disable email+master password login and require SSO
-            SSO_SIGNUPS_MATCH_EMAIL: true
+            - name: SSO_ENABLED
+              value: true
+            - name: SSO_AUTHORITY
+              value: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_URL"
+            - name: SSO_CLIENT_ID
+              value: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_CLIENT_ID"
+            - name: SSO_CLIENT_SECRET
+              value: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_CLIENT_SECRET"
+            - name: SSO_SCOPES
+              value: email openid profile offline_access
+            - name: SSO_ALLOW_UNKNOWN_EMAIL_VERIFICATION
+              value: false
+            - name: SSO_CLIENT_CACHE_EXPIRATION
+              value: 0
+            - name: SSO_ONLY
+              value: false # Set to true to disable email+master password login and require SSO
+            - name: SSO_SIGNUPS_MATCH_EMAIL
+              value: true
         podAnnotations:
           vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
           vault.security.banzaicloud.io/vault-role: "auth-read"
