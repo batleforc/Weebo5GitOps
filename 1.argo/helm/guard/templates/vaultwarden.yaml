@@ -24,7 +24,7 @@ spec:
         domain: "https://{{ .Values.vaultwarden.domain }}"
         database:
           type: postgresql
-          existingSecret: vaultwarden-postgresql-superuser
+          existingSecret: vaultwarden-postgresql-app
           existingSecretKey: uri
         ingress:
           enabled: true
