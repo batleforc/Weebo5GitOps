@@ -48,7 +48,7 @@ spec:
             - key: SSO_CLIENT_CACHE_EXPIRATION
               value: 0
             - key: SSO_ONLY
-              value: false # Set to true to disable email+master password login and require SSO
+              value: true # Set to true to disable email+master password login and require SSO
             - key: SSO_SIGNUPS_MATCH_EMAIL
               value: true
         podAnnotations:
