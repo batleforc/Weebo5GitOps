@@ -7,7 +7,7 @@ resource "authentik_provider_oauth2" "guard" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://guard.batleforc.fr/c/oidc/callback",
+      url           = "https://guard.batleforc.fr/identity/connect/oidc-signin",
     },
   ]
   property_mappings = [
