@@ -49,7 +49,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [x] CNI - [Cilium](https://cilium.io/)
   - [ ] !TODO: Message a moi meme pour demain, passer en netpol strict avec zero ouverture by default, et n'ouvrir que ce qui est nécessaire
 - [x] [Eclipse Che](https://www.eclipse.org/che/)
-- [ ] Tofu Hooks
+- [ ] Tofu Hooks - Translate Terraform Hooks to Tofu one
 - [x] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
 - [x] [Rybbit](https://github.com/rybbit-io/rybbit) - For tracking
 - [ ] [VaultWarden](https://github.com/dani-garcia/vaultwarden) - For password management

@@ -1,7 +1,7 @@
 [tools]
 task = "latest"
 helm = "latest"
-krew = "latest"
+"aqua:kubernetes-sigs/krew" = "latest"
 talosctl = "latest"
 yq = "latest"
 opentofu = "latest"
@@ -21,3 +21,6 @@ helm-ls = "latest"
 
 [shell_alias]
 terraform = "tofu"
+
+[plugins]
+kkrew = "https://github.com/soupglasses/mise-krew"
