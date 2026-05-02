@@ -42,10 +42,8 @@ spec:
               storage:
                 pvcStrategy: per-workspace
                 perUserStrategyPvcConfig:
-                  storageClass: kubevirt
                   claimSize: "10Gi"
                 perWorkspaceStrategyPvcConfig:
-                  storageClass: kubevirt
                   claimSize: "10Gi"
             networking:
               hostname: {{ .Values.che.ingress.host }}

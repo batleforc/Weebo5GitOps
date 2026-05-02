@@ -52,7 +52,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] Tofu Hooks - Translate Terraform Hooks to Tofu one
 - [x] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
 - [x] [Rybbit](https://github.com/rybbit-io/rybbit) - For tracking
-- [ ] [VaultWarden](https://github.com/dani-garcia/vaultwarden) - For password management
+- [x] [VaultWarden](https://github.com/dani-garcia/vaultwarden) - For password management
 - [ ] [LinkWarden](https://github.com/linkwarden/linkwarden) - For link management
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
 - [ ] Basic Monitoring
