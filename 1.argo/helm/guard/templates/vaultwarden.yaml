@@ -1,0 +1,52 @@
+{{- if .Values.vaultwarden.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - ServerSideApply=true
+  source:
+    chart: vaultwarden
+    repoURL: https://guerzon.github.io/vaultwarden
+    targetRevision: {{ .Values.vaultwarden.version }}
+    helm:
+      releaseName: vaultwarden
+      valuesObject:
+        domain: "https://{{ .Values.vaultwarden.domain }}"
+        database:
+          type: postgresql
+          existingSecret: vaultwarden-postgresql-superuser
+          existingSecretKey: uri
+        ingress:
+          enabled: true
+          tlsSecret: vaultwarden-tls
+          hostname: {{ .Values.vaultwarden.domain }}
+        image:
+          extraVars:
+            SSO_ENABLED: true
+            SSO_AUTHORITY: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_URL"
+            SSO_CLIENT_ID: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_CLIENT_ID"
+            SSO_CLIENT_SECRET: "vault:mv/data/{{.Release.Namespace}}/auth#AUTHENTIK_CLIENT_SECRET"
+            SSO_SCOPES: email openid profile offline_access
+            SSO_ALLOW_UNKNOWN_EMAIL_VERIFICATION: false
+            SSO_CLIENT_CACHE_EXPIRATION: 0
+            SSO_ONLY: false # Set to true to disable email+master password login and require SSO
+            SSO_SIGNUPS_MATCH_EMAIL: true
+        podAnnotations:
+          vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+          vault.security.banzaicloud.io/vault-role: "auth-read"
+          vault.security.banzaicloud.io/vault-path: "kubernetes"
+          vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+  destination:
+    namespace: {{ .Release.Namespace }}
+    server: https://kubernetes.default.svc
+{{- end -}}

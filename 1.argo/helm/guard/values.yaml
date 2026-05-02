@@ -1,0 +1,4 @@
+vaultwarden:
+  enabled: true
+  domain: guard.batleforc.fr
+  version: 0.36.3
