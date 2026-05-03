@@ -75,4 +75,4 @@ Comme vault, Kubernetes fournis un moyen de validé l'authentification OIDC, [Un
 
 #### ArgoCD
 
-Tien tien tien... notre troisiéme service permettrait lui aussi de valider le jeton OIDC de l'action Forgejo ? Et oui, c'est possible vue qu'ArgoCD inclus un serveur DEX, pour plus d'info [cette page de documentation](https://argo-cd.readthedocs.io/en/latest/operator-manual/user-management/github-actions/) explique comment faire. (Ne partez pas, je vais rentrer dans les détails de ce setup l'article dédié a ArgoCD).
+Tien tien tien... notre troisiéme service permettrait lui aussi de valider le jeton OIDC de l'action Forgejo ? Et oui, c'est possible vue qu'ArgoCD inclus un serveur DEX, pour plus d'info [cette page de documentation](https://argo-cd.readthedocs.io/en/latest/operator-manual/user-management/github-actions/) ou [cette autre page coté Dex](https://dexidp.io/docs/guides/token-exchange/) explique comment faire. (Ne partez pas, je vais rentrer dans les détails de ce setup l'article dédié a ArgoCD). or with [CI/CD](https://github.com/clowdhaus/argo-cd-action).
