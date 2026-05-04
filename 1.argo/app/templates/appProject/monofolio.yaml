@@ -11,6 +11,7 @@ spec:
       policies:
         # Allow pipelines to sync applications in the project
         - p, repo:batleforc/monofolio-rs:ref:refs/heads/main, applications, sync, monofolio, allow
+        - p, repo:batleforc/monofolio-rs:ref:refs/heads/main, applications, get, monofolio, allow
   sourceRepos:
     - '{{ .Values.repo }}'
   destinations:
