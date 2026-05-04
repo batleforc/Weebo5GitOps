@@ -2,6 +2,7 @@ hostUsers: false
 containers:
   - name: main
     image: registry.batleforc.fr/forgejo-action/buildah:main
+    imagePullPolicy: Always
     env:
       - name: BUILDAH_ISOLATION
         value: chroot
