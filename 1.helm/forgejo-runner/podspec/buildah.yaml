@@ -70,10 +70,10 @@ volumes:
       sizeLimit: 20Gi
   - name: tmp
     emptyDir:
-      sizeLimit: 1Gi
+      sizeLimit: 2Gi
   - name: var-tmp
     emptyDir:
-      sizeLimit: 5Gi
+      sizeLimit: 10Gi
   - name: run
     emptyDir:
       sizeLimit: 256Mi
