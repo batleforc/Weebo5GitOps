@@ -73,7 +73,7 @@ volumes:
       sizeLimit: 1Gi
   - name: var-tmp
     emptyDir:
-      sizeLimit: 2Gi
+      sizeLimit: 5Gi
   - name: run
     emptyDir:
       sizeLimit: 256Mi
