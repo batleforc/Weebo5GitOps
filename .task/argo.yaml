@@ -1,6 +1,12 @@
 version: "3"
 
 tasks:
+  default:
+    desc: "Default task to access argoCD CLI"
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - argocd {{ .CLI_ARGS }}
   forward:
     desc: "Forward the port to access ArgoCD UI"
     env:
@@ -17,3 +23,9 @@ tasks:
     desc: "Login to ArgoCD CLI"
     cmds:
       - argocd login localhost:8080 --username admin --password $(task argo:password) --insecure
+  login-remote:
+    desc: "Login to ArgoCD CLI for remote cluster"
+    env:
+      KUBECONFIG: 0.config/kubeconfig.yaml
+    cmds:
+      - argocd login argo.batleforc.fr --sso
