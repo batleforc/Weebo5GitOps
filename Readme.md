@@ -55,6 +55,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [x] [VaultWarden](https://github.com/dani-garcia/vaultwarden) - For password management
 - [ ] [LinkWarden](https://github.com/linkwarden/linkwarden) - For link management
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
+- [ ] [KubeArmor](https://github.com/kubearmor/kubearmor)
 - [ ] Basic Monitoring
   - OLD: [Uptime Kuma](https://kuma.io/)
   - New: [Gatus](https://github.com/TwiN/gatus)
