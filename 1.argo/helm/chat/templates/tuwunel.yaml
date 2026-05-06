@@ -14,7 +14,6 @@ spec:
     - CreateNamespace=true
     - ServerSideApply=true
   source:
-    chart: conduwuit
     repoURL: {{ .Values.repo }}
     path: '1.helm/tuwunel'
     helm:
