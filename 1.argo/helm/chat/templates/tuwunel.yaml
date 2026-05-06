@@ -26,6 +26,7 @@ spec:
           vault.security.banzaicloud.io/vault-path: "kubernetes"
           vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
         ingress:
+          enabled: true
           annotations:
             cert-manager.io/cluster-issuer: outbound
         image:
