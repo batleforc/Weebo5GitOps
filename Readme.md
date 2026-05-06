@@ -59,7 +59,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] Basic Monitoring
   - OLD: [Uptime Kuma](https://kuma.io/)
   - New: [Gatus](https://github.com/TwiN/gatus)
-- [ ] Matrix
+- [x] Matrix
   - OLD: [Element](https://element.io/)
   - NEW: [Tuwunel](https://github.com/matrix-construct/tuwunel) when [OIDC support will be ready](https://github.com/matrix-construct/tuwunel/issues/246)
 - [ ] Notification
