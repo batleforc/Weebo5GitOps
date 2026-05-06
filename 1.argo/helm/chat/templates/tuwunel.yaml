@@ -21,6 +21,11 @@ spec:
       releaseName: tuwunel
       valuesObject:
         server_name: {{ .Values.tuwunel.baseDomain}}
+        podAnnotations:
+          vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+          vault.security.banzaicloud.io/vault-role: "auth"
+          vault.security.banzaicloud.io/vault-path: "kubernetes"
+          vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
         ingress:
           annotations:
             cert-manager.io/cluster-issuer: outbound
@@ -31,9 +36,22 @@ spec:
         config:
           global:
             new_user_displayname_suffix: "🆕"
+            allow_registration: "false"
+            login_with_password: "false"
             well_known:
               client: "https://{{ .Values.tuwunel.realDomain }}"
               server: "{{ .Values.tuwunel.realDomain }}:443"
+        extraEnv:
+        - name: TUWUNEL_IDENTITY_PROVIDER__0__BRAND
+          value: "Batleforc SSO"
+        - name: TUWUNEL_IDENTITY_PROVIDER__0__CLIENT_ID
+          value: "vault:mv/data/chat/auth#AUTHENTIK_CLIENT_ID"
+        - name: TUWUNEL_IDENTITY_PROVIDER__0__CLIENT_SECRET
+          value: "vault:mv/data/chat/auth#AUTHENTIK_CLIENT_SECRET"
+        - name: TUWUNEL_IDENTITY_PROVIDER__0__CALLBACK_URL
+          value: "https://{{ .Values.tuwunel.realDomain }}/_matrix/client/unstable/login/sso/callback/chat"
+        - name: TUWUNEL_IDENTITY_PROVIDER__0__ISSUER_URL
+          value: "vault:mv/data/chat/auth#AUTHENTIK_URL"
 
   destination:
     name: in-cluster

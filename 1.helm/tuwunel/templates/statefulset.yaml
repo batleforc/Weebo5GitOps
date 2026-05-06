@@ -30,6 +30,10 @@ spec:
     metadata:
       labels:
         {{- include "tuwunel.labels" . | nindent 8 }}
+      annotations:
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
     spec:
       containers:
         - name: tuwunel

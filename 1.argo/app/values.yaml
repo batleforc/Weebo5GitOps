@@ -34,3 +34,6 @@ che:
 
 guard:
   enabled: true
+
+chat:
+  enabled: true
