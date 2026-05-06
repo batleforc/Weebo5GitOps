@@ -36,6 +36,7 @@ spec:
           global:
             new_user_displayname_suffix: "🆕"
             allow_registration: "false"
+            allow_federation: "true"
             login_with_password: "false"
             well_known:
               client: "https://{{ .Values.tuwunel.realDomain }}"
