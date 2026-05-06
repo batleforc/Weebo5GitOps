@@ -21,7 +21,6 @@ config:
   global:
     port: 8080
     allow_registration: "true"
-    registration_token: ""
     allow_federation: "false"
     trusted_servers: []
     tls: {}
