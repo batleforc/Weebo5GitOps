@@ -1,7 +1,8 @@
 tuwunel:
   enabled: true
-  version: "2.1.0"
   baseDomain: "batleforc.fr"
   realDomain: "chat.batleforc.fr"
   image:
     version: "v1.6.1"
+
+repo: ""

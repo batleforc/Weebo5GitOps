@@ -15,18 +15,22 @@ spec:
     - ServerSideApply=true
   source:
     chart: conduwuit
-    repoURL: oci://ghcr.io/magikid/modern-conduwuit-helm/conduwuit
-    targetRevision: {{ .Values.tuwunel.version }}
+    repoURL: {{ .Values.repo }}
+    path: '1.helm/tuwunel'
     helm:
       releaseName: tuwunel
       valuesObject:
         server_name: {{ .Values.tuwunel.baseDomain}}
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: outbound
         image:
           repository: ghcr.io/matrix-construct/tuwunel
-          tag: {{ .Values.tuwunel.version }}
+          tag: {{ .Values.tuwunel.image.version }}
           pullPolicy: Always
         config:
           global:
+            new_user_displayname_suffix: "🆕"
             well_known:
               client: "https://{{ .Values.tuwunel.realDomain }}"
               server: "{{ .Values.tuwunel.realDomain }}:443"
