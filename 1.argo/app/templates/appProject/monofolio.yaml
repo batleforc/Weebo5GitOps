@@ -10,8 +10,8 @@ spec:
       description: forgejo pipelines role
       policies:
         # Allow pipelines to sync applications in the project
-        - p, repo:batleforc/monofolio-rs:ref:refs/heads/main, applications, sync, argocd/monofolio, allow
-        - p, repo:batleforc/monofolio-rs:ref:refs/heads/main, applications, get, argocd/monofolio, allow
+        - p, repo:batleforc/monofolio-rs:ref:refs/heads/main, applications, sync, monofolio-project/monofolio, allow
+        - p, repo:batleforc/monofolio-rs:ref:refs/heads/main, applications, get, monofolio-project/monofolio, allow
   sourceRepos:
     - '{{ .Values.repo }}'
   destinations:

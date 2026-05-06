@@ -1,0 +1,37 @@
+{{- if .Values.tuwunel.enabled -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tuwunel
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  source:
+    chart: conduwuit
+    repoURL: oci://ghcr.io/magikid/modern-conduwuit-helm/conduwuit
+    targetRevision: {{ .Values.tuwunel.version }}
+    helm:
+      releaseName: tuwunel
+      valuesObject:
+        server_name: {{ .Values.tuwunel.baseDomain}}
+        image:
+          repository: ghcr.io/matrix-construct/tuwunel
+          tag: {{ .Values.tuwunel.version }}
+          pullPolicy: Always
+        config:
+          global:
+            well_known:
+              client: "https://{{ .Values.tuwunel.realDomain }}"
+              server: "{{ .Values.tuwunel.realDomain }}:443"
+
+  destination:
+    name: in-cluster
+    namespace: {{ .Release.Namespace }}
+{{- end -}}
