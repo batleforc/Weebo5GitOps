@@ -20,7 +20,7 @@ spec:
           ips: "{{ .Values.traefik.ips }}"
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: 'argocd'
+    namespace: 'chat'
   syncPolicy:
     automated:
       selfHeal: true
