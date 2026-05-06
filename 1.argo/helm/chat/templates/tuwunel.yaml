@@ -27,6 +27,7 @@ spec:
           vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
         ingress:
           enabled: true
+          class: traefik
           annotations:
             cert-manager.io/cluster-issuer: outbound
         image:
