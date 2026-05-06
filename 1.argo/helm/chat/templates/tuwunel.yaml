@@ -28,6 +28,7 @@ spec:
         ingress:
           enabled: true
           class: traefik
+          tls: true
           annotations:
             cert-manager.io/cluster-issuer: outbound
         image:
