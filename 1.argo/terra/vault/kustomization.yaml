@@ -24,4 +24,4 @@ configMapGenerator:
       - ./terra-map/registry.tf
       - ./terra-map/auth-policy.tf
       #- ./terra-map/auth-forgejo.tf
-      #- ./terra-map/forgejo.tf
+      - ./terra-map/forgejo.tf

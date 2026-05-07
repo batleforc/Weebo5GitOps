@@ -1,10 +1,3 @@
-resource "vault_mount" "git_vault" {
-  path        = "git-vault"
-  type        = "kv"
-  options     = { version = "2" }
-  description = "Vault for Git repositories secrets"
-}
-
 resource "vault_jwt_auth_backend" "forgejo_auth" {
   description        = "Forgejo JWT Auth Backend"
   path               = "forgejo_jwt"
