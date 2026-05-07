@@ -1543,7 +1543,7 @@ data:
                 "format": "time_series",
                 "instant": false,
                 "interval": "1m",
-                "legendFormat": " {{client}}",
+                "legendFormat": " {{"{{"}}client}}",
                 "refId": "A"
               }
             ],
@@ -1628,7 +1628,7 @@ data:
                 "format": "heatmap",
                 "instant": false,
                 "interval": "",
-                "legendFormat": "{{le}}",
+                "legendFormat": "{{"{{"}}le}}",
                 "refId": "A"
               }
             ],
@@ -1703,7 +1703,7 @@ data:
                 "format": "time_series",
                 "instant": true,
                 "interval": "",
-                "legendFormat": "{{ type }}",
+                "legendFormat": "{{"{{"}} type }}",
                 "refId": "A"
               }
             ],
@@ -1778,7 +1778,7 @@ data:
                 "format": "time_series",
                 "instant": true,
                 "interval": "",
-                "legendFormat": "{{ client }}",
+                "legendFormat": "{{"{{"}} client }}",
                 "refId": "A"
               }
             ],
@@ -1853,7 +1853,7 @@ data:
                 "format": "time_series",
                 "instant": true,
                 "interval": "",
-                "legendFormat": "{{ group }}",
+                "legendFormat": "{{"{{"}} group }}",
                 "refId": "A"
               }
             ],
@@ -1928,7 +1928,7 @@ data:
                 "format": "time_series",
                 "instant": true,
                 "interval": "",
-                "legendFormat": "{{reason}}",
+                "legendFormat": "{{"{{"}}reason}}",
                 "refId": "A"
               }
             ],
@@ -2003,7 +2003,7 @@ data:
                 "format": "time_series",
                 "instant": true,
                 "interval": "",
-                "legendFormat": "{{response_type}}",
+                "legendFormat": "{{"{{"}}response_type}}",
                 "refId": "A"
               }
             ],
@@ -2078,7 +2078,7 @@ data:
                 "format": "time_series",
                 "instant": true,
                 "interval": "",
-                "legendFormat": "{{response_code}}",
+                "legendFormat": "{{"{{"}}response_code}}",
                 "refId": "A"
               }
             ],
