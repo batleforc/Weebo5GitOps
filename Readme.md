@@ -19,7 +19,7 @@ This is the base project for the Weebo 5 production upgrade.
       - [x] Traefik
       - [x] Harbor
       - [ ] Netbird
-      - [ ] Blocky
+      - [x] Blocky
       - [ ] Rybbit
       - [ ] etc
     - [ ] Mise en place de l'alerting
