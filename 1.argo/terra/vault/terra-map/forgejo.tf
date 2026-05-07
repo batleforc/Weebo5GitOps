@@ -9,7 +9,18 @@ resource "vault_policy" "forgejo_policy" {
   name = "forgejo_policy"
 
   policy = <<EOT
-
+path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/*" {
+  capabilities = ["read","list"]
+}
+path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/config" {
+  capabilities = ["create", "read", "update", "delete", "list"]
+}
+path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/sub" {
+  capabilities = ["create", "read", "update", "delete", "list"]
+}
+path "${vault_mount.main-vault.path}/metadata/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/sub" {
+  capabilities = ["read","list"]
+}
 
 path "${vault_mount.main-vault.path}/data/forgejo-action/sub" {
   capabilities = ["create", "read", "update", "delete", "list"]
