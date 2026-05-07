@@ -7,6 +7,11 @@ metadata:
   annotations:
     coroot.io/monitor: "true"
     coroot.io/port: "4000"
+    coroot.com/scrape-metrics: 'true'
+    coroot.com/metrics-port: '4000'
+    coroot.com/metrics-path: '/metrics' # optional
+    coroot.com/metrics-scheme: 'http' # optional
+
 spec:
   replicas: 1
   selector:
