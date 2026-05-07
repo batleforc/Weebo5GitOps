@@ -28,7 +28,7 @@ tasks:
     desc: "Run talosctl commands on the cluster"
     silent: true
     env:
-      TALOSCONFIG: 0.config/talosconfig.yaml
+      TALOSCONFIG: 0.config/talosconfig2.yaml
     cmds:
       - talosctl {{ .CLI_ARGS }}
   k:
