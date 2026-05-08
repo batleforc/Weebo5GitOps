@@ -3,6 +3,7 @@ resource "forgejo_organization" "action" {
 }
 
 resource "forgejo_repository" "checkout" {
+  owner           = forgejo_organization.action.name
   name            = "checkout"
   clone_addr      = "https://github.com/actions/checkout"
   mirror          = true
@@ -10,6 +11,7 @@ resource "forgejo_repository" "checkout" {
 }
 
 resource "forgejo_repository" "hashicorp_vault-action" {
+  owner           = forgejo_organization.action.name
   name            = "hashicorp_vault-action"
   clone_addr      = "https://github.com/hashicorp/vault-action"
   mirror          = true
@@ -17,6 +19,7 @@ resource "forgejo_repository" "hashicorp_vault-action" {
 }
 
 resource "forgejo_repository" "updatecli" {
+  owner           = forgejo_organization.action.name
   name            = "updatecli"
   clone_addr      = "https://github.com/updatecli/updatecli-action"
   mirror          = true
@@ -24,6 +27,7 @@ resource "forgejo_repository" "updatecli" {
 }
 
 resource "forgejo_repository" "rust-toolchain" {
+  owner           = forgejo_organization.action.name
   name            = "rust-toolchain"
   clone_addr      = "https://github.com/dtolnay/rust-toolchain"
   mirror          = true
