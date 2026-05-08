@@ -35,3 +35,9 @@ tasks:
       TOKEN: "{{ .TOKEN }}"
     cmds:
       - task vault -- kv put -tls-skip-verify -mount=mv vpn/config TERRAFORM_TOKEN={{ .TOKEN }}
+  git:
+    desc: "Create entry in vault for git credentials"
+    vars:
+      API_TOKEN: "{{ .API_TOKEN }}"
+    cmds:
+      - task vault -- kv put -tls-skip-verify -mount=mv git/config API_TOKEN={{ .API_TOKEN }}

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: terra-git
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: 1.argo/terra/git
+    repoURL: "{{ .Values.repo }}"
+    targetRevision: HEAD
+  destination:
+    namespace: git
+    server: "https://kubernetes.default.svc"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
