@@ -21,7 +21,6 @@ variable "forgejo_management_url" {
 }
 
 provider "forgejo" {
-  alias     = "apiToken"
   host      = var.forgejo_management_url
   api_token = var.forgejo_token
   # ...or use the FORGEJO_API_TOKEN environment variable
