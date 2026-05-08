@@ -18,3 +18,4 @@ configMapGenerator:
       - ./terra-map/main.tf
       - ./terra-map/action.tf
       - ./terra-map/forgejo.tf
+      - ./terra-map/batleforc.tf
