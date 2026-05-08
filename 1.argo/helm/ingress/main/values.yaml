@@ -30,7 +30,7 @@ authentik:
 rybbit:
   enabled: true
   dns: "track.batleforc.fr"
-  disableSignup: false
+  disableSignup: true
   additionalDomain:
     - name: "maxleriche.net"
       certName: "maxleriche-net-certificate"
