@@ -18,7 +18,7 @@ secretStore:
 
 env:
   TRACKING_SCRIPT_SRC: "https://track.batleforc.fr/api/script.js"
-  TRACKING_SITE_ID: "fb803a06ed1f"
+  TRACKING_SITE_ID: "2080a0eb6b62"
 
 resources:
   limits:
