@@ -11,4 +11,4 @@ tasks:
   up:
     desc: "Update the infrastructure by running pulumi up"
     cmds:
-      - task pulumi-conf:base -- up --yes
+      - task pulumi-conf:base -- up

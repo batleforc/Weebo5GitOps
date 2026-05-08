@@ -16,10 +16,11 @@ tasks:
   up:
     desc: "Update the infrastructure by running pulumi up"
     cmds:
-      - task pulumi:base -- up --yes
+      - task pulumi:base -- up
   # Get AUTHENTIK_URL from vault and export it as an environment variable for the pulumi stack
   vault:OIDC_URL:
-    desc: "Get the OIDC URL from vault and export it as an environment variable for
+    desc:
+      "Get the OIDC URL from vault and export it as an environment variable for
       the pulumi stack"
     env:
       VAULT_ADDR: "https://localhost:8200"
