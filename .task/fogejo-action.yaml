@@ -8,5 +8,5 @@ tasks:
     desc: "Build the Buildah container image for the Git action"
     cmds:
       - podman build -t {{ .registry }}/forgejo-action/forgejo-runner:latest
-        1.argo/helm/git/action
+        .tmp/runner
       - podman push {{ .registry }}/forgejo-action/forgejo-runner:latest
