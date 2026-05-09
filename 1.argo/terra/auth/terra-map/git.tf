@@ -72,3 +72,15 @@ resource "authentik_policy_binding" "git-access" {
   group  = authentik_group.weebo_user.id
   order  = 0
 }
+
+resource "authentik_policy_binding" "git-access2" {
+  target = authentik_application.git.uuid
+  group  = authentik_group.git_user.id
+  order  = 0
+}
+
+resource "authentik_policy_binding" "git-access3" {
+  target = authentik_application.git.uuid
+  group  = authentik_group.git_restricted.id
+  order  = 0
+}
