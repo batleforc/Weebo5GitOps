@@ -38,6 +38,7 @@ resource "authentik_application" "vault" {
   name              = "vault"
   slug              = "vault"
   protocol_provider = authentik_provider_oauth2.vault.id
+  meta_icon         = "https://maxleriche.net/public/media/techno/vault.png"
 }
 
 resource "vault_jwt_auth_backend" "vault_authentik" {

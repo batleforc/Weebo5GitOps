@@ -21,6 +21,7 @@ resource "authentik_application" "grafana" {
   name              = "grafana"
   slug              = "grafana"
   protocol_provider = authentik_provider_oauth2.grafana.id
+  meta_icon         = "https://maxleriche.net/public/media/application/grafana.png"
 }
 
 resource "vault_kv_secret_v2" "grafana" {

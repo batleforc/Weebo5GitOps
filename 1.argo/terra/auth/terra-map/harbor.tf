@@ -22,6 +22,7 @@ resource "authentik_application" "harbor" {
   name              = "harbor"
   slug              = "harbor"
   protocol_provider = authentik_provider_oauth2.harbor.id
+  meta_icon         = "https://maxleriche.net/public/media/application/harbor.png"
 }
 
 resource "vault_kv_secret_v2" "harbor" {

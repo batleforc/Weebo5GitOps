@@ -59,6 +59,7 @@ resource "authentik_application" "vpn" {
   name              = "vpn"
   slug              = "vpn"
   protocol_provider = authentik_provider_oauth2.vpn.id
+  meta_icon         = "https://maxleriche.net/public/media/application/netbird.png"
 }
 
 resource "random_string" "encryption_key" {

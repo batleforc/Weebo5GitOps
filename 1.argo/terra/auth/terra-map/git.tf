@@ -51,6 +51,7 @@ resource "authentik_application" "git" {
   name              = "git"
   slug              = "git"
   protocol_provider = authentik_provider_oauth2.git.id
+  meta_icon         = "https://maxleriche.net/public/media/application/forgejo.png"
 }
 
 resource "vault_kv_secret_v2" "git" {

@@ -22,6 +22,7 @@ resource "authentik_application" "chat" {
   name              = "chat"
   slug              = "chat"
   protocol_provider = authentik_provider_oauth2.chat.id
+  meta_icon         = "https://maxleriche.net/public/media/application/tuwunel.png"
 }
 
 resource "vault_kv_secret_v2" "chat" {

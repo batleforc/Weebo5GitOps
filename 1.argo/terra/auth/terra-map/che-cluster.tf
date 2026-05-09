@@ -32,6 +32,7 @@ resource "authentik_application" "che" {
   name              = "che-cluster"
   slug              = "che-cluster"
   protocol_provider = authentik_provider_oauth2.che.id
+  meta_icon         = "https://maxleriche.net/public/media/application/eclipse-che.png"
 }
 
 resource "vault_kv_secret_v2" "che-app" {
