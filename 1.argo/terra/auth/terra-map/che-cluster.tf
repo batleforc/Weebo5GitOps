@@ -33,6 +33,7 @@ resource "authentik_application" "che" {
   slug              = "che-cluster"
   protocol_provider = authentik_provider_oauth2.che.id
   meta_icon         = "https://maxleriche.net/public/media/application/eclipse-che.png"
+  meta_launch_url   = "https://cde.batleforc.fr"
 }
 
 resource "vault_kv_secret_v2" "che-app" {

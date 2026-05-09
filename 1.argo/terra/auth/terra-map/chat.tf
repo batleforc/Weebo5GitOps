@@ -23,6 +23,7 @@ resource "authentik_application" "chat" {
   slug              = "chat"
   protocol_provider = authentik_provider_oauth2.chat.id
   meta_icon         = "https://maxleriche.net/public/media/application/tuwunel.png"
+  meta_launch_url   = "https://chat-web.batleforc.fr"
 }
 
 resource "vault_kv_secret_v2" "chat" {
