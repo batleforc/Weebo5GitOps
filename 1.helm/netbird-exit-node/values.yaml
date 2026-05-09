@@ -6,7 +6,7 @@ netbird:
   peer_name: "exit-node"
   tz: "Europe/Paris"
   setup_key: "vault:mv/data/{{ .Release.Namespace }}/vpn-exit-node#KUBERNETES_SETUP_KEY"
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   annotations:
     vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
     vault.security.banzaicloud.io/vault-role: "auth-read"
