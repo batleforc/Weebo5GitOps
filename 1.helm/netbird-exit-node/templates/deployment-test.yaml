@@ -24,11 +24,11 @@ spec:
           env:
             - name: NB_SETUP_KEY
               value: "{{ tpl .Values.netbird.setup_key . }}" # replace with your setup key
-            - name: NETBIRD_PEER_NAME
+            - name: NB_HOSTNAME
               value: "{{ .Values.netbird.peer_name }}"
             - name: NB_LOG_LEVEL
               value: "info"
-            - name: NETBIRD_URL
+            - name: NB_URL
               value: "{{ .Values.netbird.url }}"
             - name: NB_MANAGEMENT_URL
               value: "{{ .Values.netbird.url }}"
