@@ -1,0 +1,48 @@
+{{- if .Values.elementWeb.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: element-config
+  namespace: {{ .Release.Namespace }}
+data:
+  config.json: |
+    {
+        "default_server_config": {
+            "m.homeserver": {
+                "base_url": "https://{{ .Values.tuwunel.realDomain }}/",
+                "server_name": "{{ .Values.tuwunel.realDomain }}"
+            },
+        },
+        "disable_custom_urls": true,
+        "disable_guests": true,
+        "disable_login_language_selector": false,
+        "disable_3pid_login": true,
+        "brand": "Batleforc Chat",
+        "integrations_ui_url": "https://scalar.vector.im/",
+        "integrations_rest_url": "https://scalar.vector.im/api",
+        "integrations_widgets_urls": [
+                "https://scalar.vector.im/_matrix/integrations/v1",
+                "https://scalar.vector.im/api",
+                "https://scalar-staging.vector.im/_matrix/integrations/v1",
+                "https://scalar-staging.vector.im/api"
+        ],
+        "bug_report_endpoint_url": "https://rageshakes.element.io/api/submit",
+        "defaultCountryCode": "FR",
+        "show_labs_settings": false,
+        "features": { },
+        "default_federate": true,
+        "default_theme": "light",
+        "room_directory": {
+            "servers": [
+                    "{{ .Values.tuwunel.baseDomain }}",
+            ]
+        },
+        "enable_presence_by_hs_url": {
+            "https://matrix.org": false,
+            "https://matrix-client.matrix.org": false,
+        },
+        "setting_defaults": {
+            "breadcrumbs": true
+        }
+    }
+{{- end -}}

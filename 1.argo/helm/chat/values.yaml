@@ -6,3 +6,10 @@ tuwunel:
     version: "v1.6.1"
 
 repo: ""
+
+elementWeb:
+  enabled: true
+  domain: "chat-web.batleforc.fr"
+  image:
+    url: "vectorim/element-web"
+    version: "latest"

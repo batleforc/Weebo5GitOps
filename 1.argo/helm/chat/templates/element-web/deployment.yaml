@@ -1,0 +1,47 @@
+{{- if .Values.elementWeb.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: element
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: element
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: element
+    spec:
+      containers:
+      - name: element
+        image: "{{ .Values.elementWeb.image.url }}:{{ .Values.elementWeb.image.version }}"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config.json
+          subPath: config.json
+        env:
+        - name: ELEMENT_WEB_PORT
+          value: "8080"
+        ports:
+        - containerPort: 8080
+          name: element
+          protocol: TCP
+        readinessProbe:
+            httpGet:
+                path: /
+                port: element
+            initialDelaySeconds: 2
+            periodSeconds: 3
+        livenessProbe:
+            httpGet:
+                path: /
+                port: element
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+      - name: config-volume
+        configMap:
+          name: element-config
+{{- end -}}
