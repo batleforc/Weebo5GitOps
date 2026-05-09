@@ -41,6 +41,7 @@ blocky:
         strategy: fast
       groups:
         default:
+          - 10.96.0.10
           - 1.1.1.1
           - 9.9.9.9
           - 2620:fe::fe

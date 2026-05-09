@@ -10,6 +10,7 @@ includes:
   argo: .task/argo.yaml
   vault: .task/vault.yaml
   for-action: .task/fogejo-action.yaml
+  vpn: .task/vpn.yaml
 
 tasks:
   init:
