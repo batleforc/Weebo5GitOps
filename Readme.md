@@ -63,7 +63,8 @@ This is the base project for the Weebo 5 production upgrade.
   - OLD: [Element](https://element.io/)
   - NEW: [Tuwunel](https://github.com/matrix-construct/tuwunel) when [OIDC support will be ready](https://github.com/matrix-construct/tuwunel/issues/246)
 - [ ] [Matrix Voice](https://matrix-construct.github.io/tuwunel/calls/matrix_rtc.html)
-- [ ] Deploy [element-web](https://github.com/element-hq/element-web)
+- [ ] [Matrix Webhook](https://matrix-org.github.io/matrix-hookshot/latest/setup/webhooks.html)
+- [x] Deploy [element-web](https://github.com/element-hq/element-web)
 - [ ] Notification
   - OLD: [Gotify](https://gotify.net/)
   - NEW: [Gotify](https://gotify.net/) but with Oidc Support, waiting for [Android Support](https://github.com/gotify/android/pull/444) and [Documentation](https://github.com/gotify/website/pull/100) to be merged
