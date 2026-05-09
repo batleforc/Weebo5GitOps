@@ -11,7 +11,7 @@ data:
             "m.homeserver": {
                 "base_url": "https://{{ .Values.tuwunel.realDomain }}/",
                 "server_name": "{{ .Values.tuwunel.realDomain }}"
-            },
+            }
         },
         "disable_custom_urls": true,
         "disable_guests": true,
