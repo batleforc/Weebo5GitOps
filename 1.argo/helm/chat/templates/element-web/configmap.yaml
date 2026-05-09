@@ -31,7 +31,7 @@ data:
         "show_labs_settings": false,
         "features": { },
         "default_federate": true,
-        "default_theme": "light",
+        "default_theme": "dark",
         "room_directory": {
             "servers": [
                     "{{ .Values.tuwunel.baseDomain }}"
@@ -43,6 +43,14 @@ data:
         },
         "setting_defaults": {
             "breadcrumbs": true
+        },
+        "branding": {
+          "welcome_background_url": "https://maxleriche.net/assets/home_hero.png",
+          "auth_header_logo_url": "https://maxleriche.net/assets/web-app-manifest-192x192.png",
+          "auth_footer_links": [
+              { "text": "Auth", "url": "https://auth.batleforc.fr" },
+              { "text": "Home", "url": "https://maxleriche.net" }
+          ]
         }
     }
 {{- end -}}

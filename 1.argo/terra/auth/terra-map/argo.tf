@@ -25,7 +25,7 @@ resource "authentik_application" "argo" {
   name              = "argo"
   slug              = "argo"
   protocol_provider = authentik_provider_oauth2.argo.id
-  meta_icon         = "https://maxleriche.net/public/media/argo.png"
+  meta_icon         = "https://maxleriche.net/public/media/techno/argo.png"
 }
 
 resource "vault_kv_secret_v2" "argo" {
