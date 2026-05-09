@@ -1,4 +1,4 @@
-{{- if .Values.netbird.enabled }}
+{{- if and .Values.netbird.enabled (not .Values.netbird.test) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
