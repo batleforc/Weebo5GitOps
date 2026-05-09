@@ -13,7 +13,7 @@ resource "netbird_setup_key" "exit-node-user" {
   usage_limit            = 0
 }
 
-resource "netbird_route" "kubernetes-exit-node-v4" {
+resource "netbird_route" "kubernetes-exit-node-v4-user" {
   network_id = "exit-node-user"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
@@ -22,7 +22,7 @@ resource "netbird_route" "kubernetes-exit-node-v4" {
   network     = "0.0.0.0/0"
 }
 
-resource "netbird_route" "kubernetes-exit-node-v6" {
+resource "netbird_route" "kubernetes-exit-node-v6-user" {
   network_id = "exit-node-user"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
