@@ -96,3 +96,9 @@ resource "vault_kv_secret_v2" "vpn" {
     }
   )
 }
+
+resource "authentik_policy_binding" "vpn-access" {
+  target = authentik_application.vpn.uuid
+  group  = authentik_group.weebo_user.id
+  order  = 0
+}

@@ -35,3 +35,9 @@ resource "vault_kv_secret_v2" "grafana" {
     }
   )
 }
+
+resource "authentik_policy_binding" "grafana-access" {
+  target = authentik_application.grafana.uuid
+  group  = authentik_group.weebo_moderator.id
+  order  = 0
+}

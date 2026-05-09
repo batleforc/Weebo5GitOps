@@ -66,3 +66,9 @@ resource "vault_kv_secret_v2" "git" {
     }
   )
 }
+
+resource "authentik_policy_binding" "git-access" {
+  target = authentik_application.git.uuid
+  group  = authentik_group.weebo_user.id
+  order  = 0
+}

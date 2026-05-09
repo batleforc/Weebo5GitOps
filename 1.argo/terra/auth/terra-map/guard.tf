@@ -36,3 +36,9 @@ resource "vault_kv_secret_v2" "guard" {
     }
   )
 }
+
+resource "authentik_policy_binding" "guard-access" {
+  target = authentik_application.guard.uuid
+  group  = authentik_group.weebo_user.id
+  order  = 0
+}

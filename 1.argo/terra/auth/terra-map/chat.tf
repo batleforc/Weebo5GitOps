@@ -37,3 +37,9 @@ resource "vault_kv_secret_v2" "chat" {
     }
   )
 }
+
+resource "authentik_policy_binding" "chat-access" {
+  target = authentik_application.chat.uuid
+  group  = authentik_group.weebo_user.id
+  order  = 0
+}

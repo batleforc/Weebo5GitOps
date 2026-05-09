@@ -36,3 +36,9 @@ resource "vault_kv_secret_v2" "harbor" {
     }
   )
 }
+
+resource "authentik_policy_binding" "harbor-access" {
+  target = authentik_application.harbor.uuid
+  group  = authentik_group.weebo_moderator.id
+  order  = 0
+}
