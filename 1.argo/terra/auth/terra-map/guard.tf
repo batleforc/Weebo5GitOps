@@ -22,6 +22,7 @@ resource "authentik_application" "guard" {
   name              = "guard"
   slug              = "guard"
   protocol_provider = authentik_provider_oauth2.guard.id
+  meta_icon         = "https://maxleriche.net/public/media/application/vaultwarden.png"
 }
 
 resource "vault_kv_secret_v2" "guard" {
