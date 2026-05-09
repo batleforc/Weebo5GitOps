@@ -1,5 +1,5 @@
 netbird:
-  test: true
+  test: false
   enabled: true
   version: "0.70"
   image: 11notes/netbird-exit-node
