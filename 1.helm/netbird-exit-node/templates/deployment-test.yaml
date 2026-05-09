@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: "exit-node-{{ .Release.Name }}-test"
+      annotations:
+{{- with .Values.netbird.annotations }}
+{{ toYaml . | indent 8 }}
+{{- end }}
     spec:
       containers:
         - name: netbird
