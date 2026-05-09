@@ -14,7 +14,7 @@ spec:
       labels:
         app: element
       annotations:
-        checksum/config: '{{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}'
+        checksum/config: '{{ include (print $.Template.BasePath "/element-web/configmap.yaml") . | sha256sum }}'
     spec:
       containers:
       - name: element
