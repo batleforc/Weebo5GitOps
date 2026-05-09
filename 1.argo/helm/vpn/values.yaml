@@ -1,6 +1,7 @@
 repo: ""
 
 netbird:
+  test: true
   enabled: true
   domain: vpn.batleforc.fr
   dashboard:
