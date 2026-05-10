@@ -56,6 +56,7 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] [LinkWarden](https://github.com/linkwarden/linkwarden) - For link management
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
 - [ ] [KubeArmor](https://github.com/kubearmor/kubearmor)
+- [ ] Mise en place alternative Sonarqube
 - [ ] Basic Monitoring
   - OLD: [Uptime Kuma](https://kuma.io/)
   - New: [Gatus](https://github.com/TwiN/gatus)
@@ -65,6 +66,8 @@ This is the base project for the Weebo 5 production upgrade.
 - [ ] [Matrix Voice](https://matrix-construct.github.io/tuwunel/calls/matrix_rtc.html)
 - [ ] [Matrix Webhook](https://matrix-org.github.io/matrix-hookshot/latest/setup/webhooks.html)
 - [x] Deploy [element-web](https://github.com/element-hq/element-web)
+- [ ] Mise en place d'une alternative a Sonarqube pour l'analyse de code statique, a voir si on peut faire quelque chose avec [CodeQL](https://codeql.github.com/) ou [OpenGrep](https://opengrep.dev/)
+  - [ ] Comment stocker les résultats des analyse (Sarif ?) Forgejo ? Dashboard tierce ?
 - [ ] Notification
   - OLD: [Gotify](https://gotify.net/)
   - NEW: [Gotify](https://gotify.net/) but with Oidc Support, waiting for [Android Support](https://github.com/gotify/android/pull/444) and [Documentation](https://github.com/gotify/website/pull/100) to be merged
@@ -72,6 +75,23 @@ This is the base project for the Weebo 5 production upgrade.
   - Forward ssh connection to selected ressources with [SshPiper](https://github.com/tg123/sshpiper/tree/master/plugin/kubernetes)
     - If username == git then forward to git server
     - If username == Another thing then forward to something that answer to GTFO
+- [ ] Mise en place de Backup
+  - [ ] VaultWarden
+  - [ ] Tuwunel
+  - [ ] Git
+  - [ ] Vault : Si clef venant de l'extérieur, sinon pas besoin de backup étant donné que 90% des secrets sont générés via Terraform et que les autres sont des secrets de service qui peuvent être régénérés facilement
+  - A ne pas backup
+    - Rybbit (c'est juste pour le tracking, pas besoin de backup)
+    - CertManager (c'est juste pour la gestion des certificats, pas besoin de backup)
+    - Traefik
+    - Blocky (Stateless)
+    - Bind9 (Stateless)
+    - NetBird (Facile a reconstruire, pas besoin de backup)
+    - Coroot (Facile a reconstruire, pas besoin de backup)
+    - Grafana (Stateless, pas besoin de backup)
+    - Authentik (Facile a reconstruire, pas besoin de backup)
+    - Vault (Facile a reconstruire, pas besoin de backup sauf pour d'éventuelle clef externe)
+    - Harbor (Image facilement reconstruite ou provenant d'un cache, pas besoin de backup)
 
 ## Folder WF
 
