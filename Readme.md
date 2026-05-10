@@ -53,7 +53,10 @@ This is the base project for the Weebo 5 production upgrade.
 - [x] [CertManager](https://cert-manager.io/) x DNS01-rfc2136
 - [x] [Rybbit](https://github.com/rybbit-io/rybbit) - For tracking
 - [x] [VaultWarden](https://github.com/dani-garcia/vaultwarden) - For password management
-- [ ] [LinkWarden](https://github.com/linkwarden/linkwarden) - For link management
+- [ ] Gestionaire de Favoris
+  - [LinkWarden](https://github.com/linkwarden/linkwarden)
+  - [Shiori](https://github.com/go-shiori/shiori)
+  - [Grimoire](https://github.com/goniszewski/grimoire?ref=belginux.com)
 - [ ] [Stalward MAIL](https://stalw.art/) <https://stalw.art/docs/cluster/orchestration/kubernetes/> <https://github.com/bilbilak/terraform-provider-stalwart-mail>
 - [ ] [KubeArmor](https://github.com/kubearmor/kubearmor)
 - [ ] Mise en place alternative Sonarqube
