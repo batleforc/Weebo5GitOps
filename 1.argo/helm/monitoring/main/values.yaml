@@ -9,7 +9,7 @@ grafana:
   datasources:
     clickhouse:
       - name: default
-        value: 93siuzzj
+        value: f6uz5n4g
 
 repo: ""
 
