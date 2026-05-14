@@ -66,7 +66,7 @@ data:
               "includeAll": false,
               "refresh": "onDashboardLoad"
             }
-          },
+          }
         ],
         "elements": {
           "panel-1": {
