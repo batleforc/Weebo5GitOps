@@ -67,22 +67,6 @@ data:
               "refresh": "onDashboardLoad"
             }
           },
-          {
-            "kind": "CustomVariable",
-            "spec": {
-              "name": "log_level",
-              "label": "Log Level",
-              "query": "info,warn,error,debug,trace,fatal",
-              "current": {
-                "value": "$__all",
-                "text": "All"
-              },
-              "hide": "dontHide",
-              "multi": true,
-              "includeAll": true,
-              "allValue": ""
-            }
-          }
         ],
         "elements": {
           "panel-1": {
