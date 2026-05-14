@@ -8,7 +8,7 @@ che:
     enabled: true
     host: cde.batleforc.fr
   operator:
-    cheVersion: 7.116.0
+    cheVersion: 7.117.0
     devworkspaceVersion: 0.40.1
 
 repo: ""

@@ -41,6 +41,7 @@ This is the base project for the Weebo 5 production upgrade.
   - OLD: [Bind9](https://www.isc.org/bind/)
   - NEW:
     - [x] Public : [Bind9](https://www.isc.org/bind/) x [ExternalDNS](https://github.com/kubernetes-sigs/external-dns)
+    - [ ] Look at [Bindy](https://github.com/firestoned/bindy) to see if i can replace the combo external-dns + bind9 with it (for now the combo match all my need)
     - [x] Private :
       - [x] [Blocky](https://0xerr0r.github.io/blocky/latest/configuration/)
 - [x] Ingress
