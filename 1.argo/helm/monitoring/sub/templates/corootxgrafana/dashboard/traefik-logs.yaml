@@ -58,7 +58,7 @@ data:
                 "value": "coroot-clickhouse-default",
                 "text": "coroot-clickhouse-default"
               },
-              "hide": 0,
+              "hide": "dontHide",
               "multi": false,
               "includeAll": false,
               "refresh": "onDashboardLoad"
@@ -74,7 +74,7 @@ data:
                 "value": "$__all",
                 "text": "All"
               },
-              "hide": 0,
+              "hide": "dontHide",
               "multi": true,
               "includeAll": true,
               "allValue": ""
