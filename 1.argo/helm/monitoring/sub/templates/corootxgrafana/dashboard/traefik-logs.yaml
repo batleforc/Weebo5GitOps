@@ -37,6 +37,9 @@ data:
                   "matchAny": false,
                   "tags": [],
                   "type": "dashboard"
+                },
+                "labels": {
+                  "grafana.app/export-label": "grafana-1"
                 }
               },
               "enable": true,
