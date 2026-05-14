@@ -1,0 +1,281 @@
+{{ if .Values.grafana.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-logs-grafana-dashboard
+  namespace: grafana
+  labels:
+    grafana_dashboard: "1"
+data:
+  traefik-logs.json: |-
+    {
+      "apiVersion": "dashboard.grafana.app/v2",
+      "kind": "Dashboard",
+      "metadata": {
+        "name": "traefik-logs-clickhouse",
+        "generation": 1,
+        "creationTimestamp": "2026-05-14T00:00:00Z",
+        "labels": {},
+        "annotations": {}
+      },
+      "spec": {
+        "title": "Traefik Logs (ClickHouse)",
+        "description": "Traefik application logs from ClickHouse Coroot",
+        "schemaVersion": 41,
+        "editable": true,
+        "cursorSync": "Off",
+        "annotations": [
+          {
+            "kind": "AnnotationQuery",
+            "spec": {
+              "query": {
+                "kind": "DataQuery",
+                "group": "grafana",
+                "version": "v0",
+                "spec": {
+                  "limit": 100,
+                  "matchAny": false,
+                  "tags": [],
+                  "type": "dashboard"
+                }
+              },
+              "enable": true,
+              "hide": true,
+              "iconColor": "rgba(0, 211, 255, 1)",
+              "name": "Annotations & Alerts",
+              "builtIn": true
+            }
+          }
+        ],
+        "variables": [
+          {
+            "kind": "DatasourceVariable",
+            "spec": {
+              "name": "clickhouse_datasource",
+              "label": "ClickHouse Datasource",
+              "pluginId": "grafana-clickhouse-datasource",
+              "current": {
+                "value": "coroot-clickhouse-default",
+                "text": "coroot-clickhouse-default"
+              },
+              "hide": 0,
+              "multi": false,
+              "includeAll": false,
+              "refresh": "onDashboardLoad"
+            }
+          },
+          {
+            "kind": "CustomVariable",
+            "spec": {
+              "name": "log_level",
+              "label": "Log Level",
+              "query": "info,warn,error,debug,trace,fatal",
+              "current": {
+                "value": "$__all",
+                "text": "All"
+              },
+              "hide": 0,
+              "multi": true,
+              "includeAll": true,
+              "allValue": ""
+            }
+          }
+        ],
+        "elements": {
+          "panel-1": {
+            "kind": "Panel",
+            "spec": {
+              "id": 1,
+              "title": "Log Level Distribution",
+              "description": "Count of log entries per level",
+              "links": [],
+              "data": {
+                "kind": "QueryGroup",
+                "spec": {
+                  "queries": [
+                    {
+                      "kind": "PanelQuery",
+                      "spec": {
+                        "query": {
+                          "kind": "DataQuery",
+                          "group": "grafana-clickhouse-datasource",
+                          "version": "v0",
+                          "datasource": {
+                            "name": "${clickhouse_datasource}"
+                          },
+                          "spec": {
+                            "rawSql": "SELECT JSONExtractString(Body,'level') as level, count() as count FROM \"coroot_f6uz5n4g\".\"otel_logs\" WHERE ( Timestamp >= $__fromTime AND Timestamp <= $__toTime ) AND ( ServiceName = '/k8s/traefik/traefik' ) GROUP BY level ORDER BY count DESC",
+                            "queryType": "sql",
+                            "meta": {
+                              "builderOptions": {
+                                "queryType": "sql",
+                                "mode": "list"
+                              }
+                            }
+                          }
+                        },
+                        "refId": "A",
+                        "hidden": false
+                      }
+                    }
+                  ],
+                  "transformations": [],
+                  "queryOptions": {}
+                }
+              },
+              "vizConfig": {
+                "kind": "VizConfig",
+                "group": "piechart",
+                "version": "11.0.0",
+                "spec": {
+                  "options": {
+                    "legend": {
+                      "displayMode": "table",
+                      "placement": "right",
+                      "showLegend": true,
+                      "values": ["value", "percent"]
+                    },
+                    "pieType": "pie",
+                    "tooltip": {
+                      "mode": "single",
+                      "sort": "none"
+                    }
+                  },
+                  "fieldConfig": {
+                    "defaults": {
+                      "color": {
+                        "mode": "palette-classic"
+                      }
+                    },
+                    "overrides": [
+                      {
+                        "matcher": { "id": "byName", "options": "error" },
+                        "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }]
+                      },
+                      {
+                        "matcher": { "id": "byName", "options": "warn" },
+                        "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }]
+                      },
+                      {
+                        "matcher": { "id": "byName", "options": "info" },
+                        "properties": [{ "id": "color", "value": { "fixedColor": "blue", "mode": "fixed" } }]
+                      },
+                      {
+                        "matcher": { "id": "byName", "options": "debug" },
+                        "properties": [{ "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } }]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "panel-2": {
+            "kind": "Panel",
+            "spec": {
+              "id": 2,
+              "title": "Traefik Logs",
+              "description": "Traefik application logs from ClickHouse — level extracted from Body JSON",
+              "links": [],
+              "data": {
+                "kind": "QueryGroup",
+                "spec": {
+                  "queries": [
+                    {
+                      "kind": "PanelQuery",
+                      "spec": {
+                        "query": {
+                          "kind": "DataQuery",
+                          "group": "grafana-clickhouse-datasource",
+                          "version": "v0",
+                          "datasource": {
+                            "name": "${clickhouse_datasource}"
+                          },
+                          "spec": {
+                            "rawSql": "SELECT Timestamp as \"timestamp\", Body as \"body\", JSONExtractString(Body,'level') as \"level\" FROM \"coroot_f6uz5n4g\".\"otel_logs\" WHERE ( Timestamp >= $__fromTime AND Timestamp <= $__toTime ) AND ( ServiceName = '/k8s/traefik/traefik' ) ORDER BY Timestamp DESC LIMIT 1000",
+                            "queryType": "sql",
+                            "meta": {
+                              "builderOptions": {
+                                "queryType": "sql",
+                                "mode": "list"
+                              }
+                            }
+                          }
+                        },
+                        "refId": "A",
+                        "hidden": false
+                      }
+                    }
+                  ],
+                  "transformations": [],
+                  "queryOptions": {}
+                }
+              },
+              "vizConfig": {
+                "kind": "VizConfig",
+                "group": "logs",
+                "version": "11.0.0",
+                "spec": {
+                  "options": {
+                    "dedupStrategy": "none",
+                    "enableLogDetails": true,
+                    "prettifyLogMessage": true,
+                    "showCommonLabels": false,
+                    "showLabels": true,
+                    "showTime": true,
+                    "sortOrder": "Descending",
+                    "wrapLogMessage": false
+                  },
+                  "fieldConfig": {
+                    "defaults": {},
+                    "overrides": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "layout": {
+          "kind": "GridLayout",
+          "spec": {
+            "items": [
+              {
+                "kind": "GridLayoutItem",
+                "spec": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 8,
+                  "height": 8,
+                  "element": {
+                    "kind": "ElementReference",
+                    "name": "panel-1"
+                  }
+                }
+              },
+              {
+                "kind": "GridLayoutItem",
+                "spec": {
+                  "x": 0,
+                  "y": 8,
+                  "width": 24,
+                  "height": 20,
+                  "element": {
+                    "kind": "ElementReference",
+                    "name": "panel-2"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "timeSettings": {
+          "timezone": "browser",
+          "from": "now-1h",
+          "to": "now",
+          "autoRefresh": "30s",
+          "autoRefreshIntervals": ["5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"],
+          "hideTimepicker": false
+        }
+      }
+    }
+{{ end }}
