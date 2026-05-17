@@ -52,6 +52,8 @@ spec:
               DISABLE_REGISTRATION: true
             oauth2_client:
               ENABLE_AUTO_REGISTRATION: true
+            repository:
+              ACCESS_CONTROL_ALLOW_ORIGIN: "*"
           oauth:
             - name: 'batleforc-sso'
               provider: 'openidConnect'
