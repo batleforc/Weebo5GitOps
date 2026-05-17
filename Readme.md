@@ -31,6 +31,7 @@ This is the base project for the Weebo 5 production upgrade.
     - [x]  CI/CD
       - [x] [Tekton](https://tekton.dev/)
       - [Forgejo Actions](https://code.forgejo.org/forgejo-helm/forgejo-runner) - For the future, if Forgejo doesn't have the features needed.
+    - [ ] [Git Pages](https://git-pages.org/)
 - [x] GitOps - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
 - [x] Registry - [Harbor](https://goharbor.io/)
 - [x] VPN
@@ -79,6 +80,7 @@ This is the base project for the Weebo 5 production upgrade.
   - Forward ssh connection to selected ressources with [SshPiper](https://github.com/tg123/sshpiper/tree/master/plugin/kubernetes)
     - If username == git then forward to git server
     - If username == Another thing then forward to something that answer to GTFO
+- [ ] [RustFS](https://rustfs.com/) - For S3 compatible storage
 - [ ] Mise en place de Backup
   - [ ] VaultWarden
   - [ ] Tuwunel
