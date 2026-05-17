@@ -6,7 +6,7 @@ netbird:
   dashboard:
     version: "v2.38.0"
   server:
-    version: "0.71.0"
+    version: "0.71.2"
 
 traefik:
   ips: ""
