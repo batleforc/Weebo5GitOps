@@ -45,6 +45,10 @@ spec:
                   claimSize: "10Gi"
                 perWorkspaceStrategyPvcConfig:
                   claimSize: "10Gi"
+              defaultComponents:
+                - name: tool
+                  container:
+                    image: ghcr.io/batleforc/weebodevimage/che-base:main
             networking:
               hostname: {{ .Values.che.ingress.host }}
               domain: {{ .Values.che.ingress.host }}
