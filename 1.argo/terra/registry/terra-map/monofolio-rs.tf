@@ -165,6 +165,18 @@ resource "vault_kv_secret_v2" "rw-monofolio-rs" {
   )
 }
 
+resource "vault_kv_secret_v2" "rw-batleforc" {
+  mount = "mv"
+  name  = "dev-ws-max/registry"
+  data_json = jsonencode(
+    {
+      username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.rw-batleforc.name}"
+      password = harbor_robot_account.rw-batleforc.secret
+      url      = "registry.batleforc.fr"
+    }
+  )
+}
+
 resource "vault_kv_secret_v2" "r-monofolio-rs" {
   mount = "mv"
   name  = "monofolio/registry"
