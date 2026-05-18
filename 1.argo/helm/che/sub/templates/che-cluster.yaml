@@ -48,7 +48,7 @@ spec:
               defaultComponents:
                 - name: tool
                   container:
-                    image: ghcr.io/batleforc/weebodevimage/che-base:main
+                    image: ghcr.io/batleforc/weebodevimage/che-mise:main
             networking:
               hostname: {{ .Values.che.ingress.host }}
               domain: {{ .Values.che.ingress.host }}
