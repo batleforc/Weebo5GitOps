@@ -30,3 +30,4 @@ configMapGenerator:
       - ./terra-map/che-cluster.tf
       - ./terra-map/guard.tf
       - ./terra-map/chat.tf
+      - ./terra-map/s3.tf
