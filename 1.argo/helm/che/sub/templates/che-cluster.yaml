@@ -29,6 +29,7 @@ spec:
               disableContainerBuildCapabilities: false
               maxNumberOfWorkspacesPerUser: 20
               maxNumberOfRunningWorkspacesPerUser: 5
+              secondsOfInactivityBeforeIdling: 10800
               defaultNamespace:
                 template: dev-ws-<username>
                 autoProvision: false
