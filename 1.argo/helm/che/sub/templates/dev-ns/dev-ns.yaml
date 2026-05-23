@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: che.eclipse.org
     app.kubernetes.io/component: workspaces-namespace
   annotations:
-    che.eclipse.org/username: batleforc
+    che.eclipse.org/username: max
     scheduler.alpha.kubernetes.io/node-selector: worker
 ---
 kind: RoleBinding
