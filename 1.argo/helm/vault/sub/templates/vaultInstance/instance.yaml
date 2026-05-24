@@ -10,6 +10,8 @@ metadata:
 spec:
   size: 1
   image: {{ .Values.vaultInstance.image }}:{{ .Values.vaultInstance.version }}
+  vaultAnnotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
 
   # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
   serviceAccount: vault
