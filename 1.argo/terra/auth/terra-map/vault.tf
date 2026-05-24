@@ -39,6 +39,7 @@ resource "authentik_application" "vault" {
   slug              = "vault"
   protocol_provider = authentik_provider_oauth2.vault.id
   meta_icon         = "https://maxleriche.net/public/media/techno/vault.png"
+  meta_launch_url   = "https://vault.batleforc.fr/ui/vault/auth?with=authentik%2F&role=weebo_admin"
 }
 
 resource "vault_jwt_auth_backend" "vault_authentik" {
@@ -49,6 +50,10 @@ resource "vault_jwt_auth_backend" "vault_authentik" {
   oidc_client_id     = authentik_provider_oauth2.vault.client_id
   oidc_client_secret = authentik_provider_oauth2.vault.client_secret
   default_role       = "reader"
+
+  tune {
+    listing_visibility = "unauth"
+  }
 }
 
 resource "vault_jwt_auth_backend_role" "vault_authentik_reader" {
