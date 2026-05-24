@@ -17,3 +17,4 @@ configMapGenerator:
     files:
       - ./terra-map/main.tf
       - ./terra-map/user.tf
+      - ./terra-map/git-pages.tf
