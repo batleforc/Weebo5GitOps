@@ -31,7 +31,7 @@ variable "s3_id" {
 
 variable "s3_addr" {
   description = "S3 Address"
-  default     = "https://bucket.batleforc.fr"
+  default     = "bucket.batleforc.fr"
 }
 
 variable "vault_addr" {
