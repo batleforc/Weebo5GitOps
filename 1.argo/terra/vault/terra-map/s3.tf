@@ -59,7 +59,7 @@ path "${vault_mount.main-vault.path}/metadata/{{identity.entity.aliases.${data.v
 EOT
 }
 
-resource "vault_kubernetes_auth_backend_role" "auth-write" {
+resource "vault_kubernetes_auth_backend_role" "s3_admin" {
   role_name                        = "s3-admin"
   bound_service_account_names      = ["default"]
   bound_service_account_namespaces = ["s3"]
