@@ -2,14 +2,12 @@ resource "rustfs_bucket" "git_pages" {
   name = "git-pages"
 }
 resource "random_password" "git_pages_sa_password" {
-  length           = 42
-  special          = true
-  override_special = "_-"
+  length  = 40
+  special = false
 }
 resource "random_password" "git_pages_admin_id" {
-  length           = 16
-  special          = true
-  override_special = "_-"
+  length  = 20
+  special = false
 }
 
 resource "rustfs_serviceaccount" "git_pages" {
