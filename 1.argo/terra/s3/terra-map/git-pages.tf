@@ -7,7 +7,7 @@ resource "random_password" "git_pages_sa_password" {
   override_special = "_-"
 }
 resource "random_password" "git_pages_admin_id" {
-  length           = 42
+  length           = 20
   special          = true
   override_special = "_-"
 }
