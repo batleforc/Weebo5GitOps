@@ -8,10 +8,10 @@ terraform {
       source  = "aminueza/minio"
       version = ">= 3.0.0"
     }
-    # rustfs = {
-    #   source  = "weinmann-emt/rustfs"
-    #   version = "0.0.6"
-    # }
+    rustfs = {
+      source  = "weinmann-emt/rustfs"
+      version = "0.0.6"
+    }
   }
 }
 
@@ -54,4 +54,11 @@ provider "minio" {
   minio_server   = var.s3_addr
   minio_user     = var.s3_id
   minio_password = var.s3_token
+}
+
+provider "rustfs" {
+  access_key = var.s3_id
+  secret_key = var.s3_token
+  endpoint   = var.s3_addr
+  ssl        = true
 }
