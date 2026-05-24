@@ -12,6 +12,7 @@ spec:
   image: {{ .Values.vaultInstance.image }}:{{ .Values.vaultInstance.version }}
   vaultAnnotations:
     traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: traefik-skip-tls@kubernetescrd
 
   # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
   serviceAccount: vault
