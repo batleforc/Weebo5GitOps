@@ -1,0 +1,58 @@
+{{- if .Values.gitPages.enabled -}}
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: git-pages
+  labels:
+    argocd.argoproj.io/instance: git-pages
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`*.{{ .Values.gitPages.dnsWildcardDomain.domain }}`)
+      priority: 1
+      services:
+        - name: git-pages
+          namespace: "{{ .Release.Namespace }}"
+          passHostHeader: true
+          port: 3000
+      {{- if .Values.gitPages.middleware.strictSource.enabled -}}
+      middlewares:
+      - name: vpn-only
+        namespace: traefik
+      {{- end -}}
+  tls:
+    secretName: "{{ .Values.gitPages.dnsWildcardDomain.certificateName }}"
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: git-pages
+  labels:
+    argocd.argoproj.io/instance: git-pages
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`*.{{ .Values.gitPages.dnsWildcardDomain.domain }}`)
+      priority: 1
+      services:
+        - name: git-pages
+          namespace: "{{ .Release.Namespace }}"
+          passHostHeader: true
+          port: 3000
+      {{- if .Values.gitPages.middleware.enabled -}}
+      middlewares:
+      {{- if .Values.gitPages.middleware.redirectToHttps.enabled -}}
+      - name: redirect-to-https
+        namespace: traefik
+      {{- end -}}
+      {{- if .Values.gitPages.middleware.strictSource.enabled -}}
+      - name: vpn-only
+        namespace: traefik
+      {{- end -}}
+      {{- end -}}
+{{- end -}}

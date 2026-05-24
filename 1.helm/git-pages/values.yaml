@@ -1,2 +1,17 @@
 gitPages:
   enabled: true
+  env:
+    PAGES_WILDCARD_0_DOMAIN: "git.batleforc.fr"
+    PAGES_WILDCARD_0_CLONE_URL: "https://git.batleforc.fr/<user>/<project>.git"
+    PAGES_WILDCARD_0_INDEX_REPO: "<user>.git.batleforc.fr"
+    PAGES_WILDCARD_0_INDEX_AUTHORIZATION: "forgejo"
+  dnsWildcardDomain:
+    enabled: true
+    domain: "git.batleforc.fr"
+    certificateName: "cert-dns01-git-wildcard"
+  middleware:
+    enabled: true
+    redirectToHttps:
+      enabled: true
+    strictSource:
+      enabled: true

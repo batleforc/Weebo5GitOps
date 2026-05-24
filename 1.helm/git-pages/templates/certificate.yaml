@@ -1,0 +1,14 @@
+{{- if and .Values.gitPages.enabled .Values.gitPages.dnsWildcardDomain.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-dns01-git-wildcard
+spec:
+  commonName: "*.{{ .Values.gitPages.dnsWildcardDomain.domain }}"
+  secretName: "{{ .Values.gitPages.dnsWildcardDomain.certificateName }}"
+  dnsNames:
+  - "*.{{ .Values.gitPages.dnsWildcardDomain.domain }}"
+  issuerRef:
+    kind: ClusterIssuer
+    name: dns-01
+{{- end -}}

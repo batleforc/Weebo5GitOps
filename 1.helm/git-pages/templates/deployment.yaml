@@ -21,7 +21,7 @@ spec:
         - name: git-pages
           image: ghcr.io/weebo5/git-pages:latest
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           env:
             - name: PAGES_STORAGE_TYPE
               value: s3
@@ -33,6 +33,10 @@ spec:
               value: "vault:mv/data/{{ .Release.Namespace }}/s3#secret_key"
             - name: PAGES_STORAGE_S3_BUCKET
               value: git-pages
+            {{- range $key, $value := .Values.gitPages.env }}
+            - name: {{ $key }}
+              value: {{ $value }}
+            {{- end }}
           resources:
             limits:
               cpu: 100m
@@ -40,5 +44,4 @@ spec:
             requests:
               cpu: 50m
               memory: 64Mi
-
 {{- end -}}

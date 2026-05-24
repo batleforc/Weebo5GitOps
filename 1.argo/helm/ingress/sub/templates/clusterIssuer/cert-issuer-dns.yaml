@@ -16,7 +16,7 @@ spec:
     solvers:
     - dns01:
         rfc2136:
-          nameserver: dns-server.outdns.svc.cluster.local
+          nameserver: {{ .Values.certManager.certIssuerDNS01.nameservers }}
           tsigAlgorithm: HMACSHA512
           tsigKeyName: tsig-key
           tsigSecretSecretRef:

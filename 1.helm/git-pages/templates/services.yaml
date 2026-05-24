@@ -1,0 +1,17 @@
+{{- if .Values.gitPages.enabled -}}
+# https://git-pages.org/running-a-server/#wildcard-domains
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: git-pages
+  labels:
+    app: git-pages
+spec:
+  selector:
+    app: git-pages
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+{{- end -}}
