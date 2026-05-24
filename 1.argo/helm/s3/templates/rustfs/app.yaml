@@ -1,10 +1,8 @@
 {{- if .Values.rustfs.enabled -}}
-# TODO: add storage size and persistence
-# TODO: add middleware to filter inbound traffic to rustfs
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rustfsç
+  name: rustfs
   namespace: argocd
 spec:
   project: default
