@@ -9,6 +9,10 @@ resource "authentik_provider_oauth2" "s3" {
       matching_mode = "strict",
       url           = "https://bucket.batleforc.fr/rustfs/admin/v3/oidc/callback",
     },
+    {
+      matching_mode = "strict",
+      url           = "https://bucket.batleforc.fr/rustfs/admin/v3/oidc/callback/authentik",
+    }
   ]
   property_mappings = [
     data.authentik_property_mapping_provider_scope.scope-email.id,
