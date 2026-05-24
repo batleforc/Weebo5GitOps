@@ -21,7 +21,7 @@ spec:
               service:
                 name: rustfs-svc
                 port:
-                  number: 3000
+                  number: 9001
     {{- range .Values.rustfs.domain.additional }}
     - host: {{ .name }}
       http:
@@ -32,7 +32,7 @@ spec:
               service:
                 name: rustfs-svc
                 port:
-                  number: 3000
+                  number: 9001
     {{- end }}
   tls:
     - hosts:
