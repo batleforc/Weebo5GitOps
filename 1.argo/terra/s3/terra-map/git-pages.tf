@@ -29,3 +29,15 @@ resource "rustfs_policy" "git_pages_policy" {
     }
   }]
 }
+
+resource "vault_kv_secret_v2" "git_pages" {
+  mount = "mv"
+  name  = "git_pages/s3"
+  data_json = jsonencode(
+    {
+      access_key = random_password.git_pages_admin_id.result,
+      secret_key = random_password.git_pages_sa_password.result,
+      url        = "https://bucket.batleforc.fr"
+    }
+  )
+}
