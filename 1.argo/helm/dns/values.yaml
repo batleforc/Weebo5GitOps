@@ -13,6 +13,7 @@ zone:
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
       @                   3600    CAA       0  issue "letsencrypt.org"
+      @                   600     IN TXT              "google-site-verification=6V23ppVxZ_rzTlJ8QO01KYH1J0bTGRN5JPc6eKavqeU"
       ns1                 IN      A                   94.23.38.81
       ns1                 IN      AAAA                2001:41d0:2:2751::1
       ns2                 IN      A                   94.23.38.81
