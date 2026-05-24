@@ -11,9 +11,10 @@ resource "random_password" "git_pages_admin_id" {
 }
 
 resource "rustfs_serviceaccount" "git_pages" {
-  name       = "git-pages"
-  access_key = random_password.git_pages_admin_id.result
-  secret_key = random_password.git_pages_sa_password.result
+  name        = "git-pages"
+  description = "Service account for Git Pages"
+  access_key  = random_password.git_pages_admin_id.result
+  secret_key  = random_password.git_pages_sa_password.result
 }
 
 resource "rustfs_policy" "git_pages_policy" {

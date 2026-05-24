@@ -44,7 +44,7 @@ provider "vault" {
   ca_cert_file     = "/etc/ssl/vault/ca.crt"
   skip_child_token = "true"
   auth_login_jwt {
-    role  = "vpn"
+    role  = "s3-admin"
     jwt   = local.token_vault
     mount = "kubernetes"
   }
