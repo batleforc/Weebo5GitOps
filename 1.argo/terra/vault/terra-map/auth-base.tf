@@ -25,6 +25,7 @@ path "auth/token/lookup-self" { capabilities = ["read", "list", "create"] }
 path "auth/token/renew-self" { capabilities = ["update", "read"] }
 path "sys/mounts" { capabilities = ["read","list"] }
 path "sys/mounts/*" { capabilities = ["read","list"] }
+path "sys/mounts/auth/*" { capabilities = ["read", "list", "update"] }
 path "auth/*" { capabilities = ["read","list", "update", "create", "delete", "sudo"] }
 path "identity/*" { capabilities = ["read","list", "update", "create", "delete", "sudo"] }
 EOT
