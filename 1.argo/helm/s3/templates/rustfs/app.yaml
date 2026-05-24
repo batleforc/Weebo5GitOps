@@ -27,7 +27,7 @@ spec:
             secret_key: "vault:mv/data/s3/config#S3_ADMIN_PASSWORD"
         extraEnv:
           - name: RUSTFS_IDENTITY_OPENID_ENABLE
-            value: "on"
+            value: "true"
           - name: RUSTFS_IDENTITY_OPENID_CONFIG_URL
             value: "vault:mv/data/s3/auth#AUTHENTIK_URL"
           - name: RUSTFS_IDENTITY_OPENID_CLIENT_ID
@@ -39,11 +39,13 @@ spec:
           - name: RUSTFS_IDENTITY_OPENID_ROLES_CLAIM
             value: "roles"
           - name: RUSTFS_IDENTITY_OPENID_REDIRECT_URI
-            value: "https://{{ .Values.rustfs.domain.core }}/rustfs/admin/v3/oidc/callback"
+            value: "https://{{ .Values.rustfs.domain.core }}/rustfs/admin/v3/oidc/callback/authentik"
           - name: RUSTFS_IDENTITY_OPENID_SCOPES
             value: "openid,profile,email,groups"
           - name: RUSTFS_IDENTITY_OPENID_DISPLAY_NAME
             value: "Batleforc SSO"
+          - name: RUSTFS_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC
+            value: "false"
         mode:
           standalone:
             enabled: true
