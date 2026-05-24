@@ -18,3 +18,7 @@ resource "minio_iam_policy" "test_policy" {
 }
 EOF
 }
+
+resource "minio_iam_group" "weebo_admin" {
+  name = "weebo_admin"
+}
