@@ -19,7 +19,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rustfs
+                name: rustfs-svc
                 port:
                   number: 3000
     {{- range .Values.rustfs.domain.additional }}
@@ -30,7 +30,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rustfs
+                name: rustfs-svc
                 port:
                   number: 3000
     {{- end }}

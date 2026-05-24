@@ -18,7 +18,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rustfs
+                name: rustfs-svc
                 port:
                   number: 9001
     {{- range .Values.rustfs.domain.additional }}
@@ -29,7 +29,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rustfs
+                name: rustfs-svc
                 port:
                   number: 9001
     {{- end }}
