@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: terra-s3
+namespace: s3
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - job.yaml
+  - volume.yaml
+
+configMapGenerator:
+  - name: terra-s3-config
+    namespace: s3
+    files:
+      - ./terra-map/main.tf
+      - ./terra-map/user.tf
