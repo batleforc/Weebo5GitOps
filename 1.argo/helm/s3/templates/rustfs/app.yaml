@@ -27,15 +27,24 @@ spec:
             access_key: "vault:mv/data/s3/config#S3_ADMIN_ID"
             secret_key: "vault:mv/data/s3/config#S3_ADMIN_PASSWORD"
         extraEnv:
-          RUSTFS_IDENTITY_OPENID_ENABLE: on
-          RUSTFS_IDENTITY_OPENID_CONFIG_URL: "vault:mv/data/s3/auth#AUTHENTIK_URL"
-          RUSTFS_IDENTITY_OPENID_CLIENT_ID: "vault:mv/data/s3/auth#AUTHENTIK_CLIENT_ID"
-          RUSTFS_IDENTITY_OPENID_CLIENT_SECRET: "vault:mv/data/s3/auth#AUTHENTIK_CLIENT_SECRET"
-          RUSTFS_IDENTITY_OPENID_GROUPS_CLAIM: "groups"
-          RUSTFS_IDENTITY_OPENID_ROLES_CLAIM: "roles"
-          RUSTFS_IDENTITY_OPENID_REDIRECT_URI: "http://localhost:9901/oauth_callback"
-          RUSTFS_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
-          RUSTFS_IDENTITY_OPENID_DISPLAY_NAME: "Batleforc SSO"
+          - name: RUSTFS_IDENTITY_OPENID_ENABLE
+            value: "on"
+          - name: RUSTFS_IDENTITY_OPENID_CONFIG_URL
+            value: "vault:mv/data/s3/auth#AUTHENTIK_URL"
+          - name: RUSTFS_IDENTITY_OPENID_CLIENT_ID
+            value: "vault:mv/data/s3/auth#AUTHENTIK_CLIENT_ID"
+          - name: RUSTFS_IDENTITY_OPENID_CLIENT_SECRET
+            value: "vault:mv/data/s3/auth#AUTHENTIK_CLIENT_SECRET"
+          - name: RUSTFS_IDENTITY_OPENID_GROUPS_CLAIM
+            value: "groups"
+          - name: RUSTFS_IDENTITY_OPENID_ROLES_CLAIM
+            value: "roles"
+          - name: RUSTFS_IDENTITY_OPENID_REDIRECT_URI
+            value: "https://{{ .Values.rustfs.domain.core }}/oauth_callback"
+          - name: RUSTFS_IDENTITY_OPENID_SCOPES
+            value: "openid,profile,email,groups"
+          - name: RUSTFS_IDENTITY_OPENID_DISPLAY_NAME
+            value: "Batleforc SSO"
         mode:
           standalone:
             enabled: true
