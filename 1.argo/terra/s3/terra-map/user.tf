@@ -10,7 +10,7 @@ resource "minio_iam_policy" "test_policy" {
       "Resource": ["arn:aws:s3:::*"],
       "Condition": {
         "ForAnyValue:StringEquals": {
-          "jwt:roles": ["weebo_admin"]
+          "jwt:groups": ["weebo_admin"]
         }
       }
     }
