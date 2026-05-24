@@ -18,6 +18,7 @@ go = "latest"
 cilium-cli = "latest"
 cilium-hubble = "latest"
 helm-ls = "latest"
+mc = "latest"
 
 [shell_alias]
 terraform = "tofu"

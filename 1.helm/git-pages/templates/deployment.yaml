@@ -1,0 +1,44 @@
+{{- if .Values.gitPages.enabled -}}
+# https://git-pages.org/running-a-server/#wildcard-domains
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-pages
+  labels:
+    app: git-pages
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-pages
+  template:
+    metadata:
+      labels:
+        app: git-pages
+    spec:
+      containers:
+        - name: git-pages
+          image: ghcr.io/weebo5/git-pages:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: PAGES_STORAGE_TYPE
+              value: s3
+            - name: PAGES_STORAGE_S3_ENDPOINT
+              value: "vault:mv/data/{{ .Release.Namespace }}/s3#url"
+            - name: PAGES_STORAGE_S3_ACCESS_KEY_ID
+              value: "vault:mv/data/{{ .Release.Namespace }}/s3#access_key"
+            - name: PAGES_STORAGE_S3_SECRET_ACCESS_KEY
+              value: "vault:mv/data/{{ .Release.Namespace }}/s3#secret_key"
+            - name: PAGES_STORAGE_S3_BUCKET
+              value: git-pages
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+
+{{- end -}}
