@@ -57,8 +57,8 @@ provider "minio" {
 }
 
 provider "rustfs" {
-  access_key = var.s3_id
-  secret_key = var.s3_token
-  endpoint   = var.s3_addr
-  ssl        = true
+  access_key    = var.s3_id
+  access_secret = var.s3_token
+  endpoint      = var.s3_addr
+  ssl           = true
 }
