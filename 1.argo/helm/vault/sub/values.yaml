@@ -17,5 +17,6 @@ vaultInstance:
   hook:
     enabled: true
     version: 1.22.2
+  dns: vault.batleforc.fr
 
 repo: ""
