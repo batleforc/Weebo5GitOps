@@ -7,7 +7,7 @@ resource "authentik_provider_oauth2" "s3" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://s3.batleforc.fr/rustfs/admin/v3/oidc/callback",
+      url           = "https://bucket.batleforc.fr/rustfs/admin/v3/oidc/callback",
     },
   ]
   property_mappings = [

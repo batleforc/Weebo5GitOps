@@ -1,4 +1,64 @@
 {{- if .Values.rustfs.enabled -}}
-
-
+# TODO: add storage size and persistence
+# TODO: add middleware to filter inbound traffic to rustfs
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rustfsç
+  namespace: argocd
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    chart: rustfs
+    repoURL: https://charts.rustfs.com/
+    targetRevision: {{ .Values.rustfs.version }}
+    helm:
+      releaseName: rustfs
+      valuesObject:
+        harborAdminPassword: "vault:mv/data/registry/config#HARBOR_ADMIN_PASSWORD"
+        podAnnotations:
+          vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+          vault.security.banzaicloud.io/vault-role: "default"
+          vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+          vault.security.banzaicloud.io/vault-agent: "false"
+          vault.security.banzaicloud.io/vault-path: "kubernetes"
+        secret:
+          rustfs:
+            access_key: "vault:mv/data/s3/config#S3_ADMIN_ID"
+            secret_key: "vault:mv/data/s3/config#S3_ADMIN_PASSWORD"
+        extraEnv:
+          RUSTFS_IDENTITY_OPENID_ENABLE: on
+          RUSTFS_IDENTITY_OPENID_CONFIG_URL: "vault:mv/data/s3/auth#AUTHENTIK_URL"
+          RUSTFS_IDENTITY_OPENID_CLIENT_ID: "vault:mv/data/s3/auth#AUTHENTIK_CLIENT_ID"
+          RUSTFS_IDENTITY_OPENID_CLIENT_SECRET: "vault:mv/data/s3/auth#AUTHENTIK_CLIENT_SECRET"
+          RUSTFS_IDENTITY_OPENID_GROUPS_CLAIM: "groups"
+          RUSTFS_IDENTITY_OPENID_ROLES_CLAIM: "roles"
+          RUSTFS_IDENTITY_OPENID_REDIRECT_URI: "http://localhost:9901/oauth_callback"
+          RUSTFS_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
+          RUSTFS_IDENTITY_OPENID_DISPLAY_NAME: "Batleforc SSO"
+        mode:
+          standalone:
+            enabled: true
+          distributed:
+            enabled: false
+        ingress:
+          className: traefik
+          enabled: false
+          hosts:
+            - host: {{ .Values.rustfs.domain.core }}
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
+          tls:
+            enabled: true
+        ingressAnnotations:
+          cert-manager.io/cluster-issuer: "outbound"
+        storageclass:
+          name: "local-path"
+          dataStorageSize: "40Gi"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{ .Release.Namespace }}
 {{- end -}}

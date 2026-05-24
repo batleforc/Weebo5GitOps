@@ -1,9 +1,9 @@
-{{- if .Values.vault.enabled -}}
+{{- if .Values.s3.enabled -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault
+  name: s3
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
@@ -11,16 +11,16 @@ spec:
   project: default
   source:
     repoURL: '{{ .Values.repo }}'
-    path: '1.argo/helm/vault/main'
+    path: '1.argo/helm/s3'
     helm:
-      releaseName: vault
+      releaseName: s3
       valuesObject:
         repo: "{{ .Values.repo }}"
         traefik:
           ips: "{{ .Values.traefik.ips }}"
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: 'argocd'
+    namespace: 's3'
   syncPolicy:
     automated:
       selfHeal: true

@@ -1,0 +1,36 @@
+{{- if .Values.enabled -}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rustfs-http
+  labels:
+    app: rustfs
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-to-https@kubernetescrd,traefik-vpn-only@kubernetescrd
+spec:
+  rules:
+    - host: {{ .Values.rustfs.domain.core }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rustfs
+                port:
+                  number: 9001
+    {{- range .Values.rustfs.domain.additional }}
+    - host: {{ .name }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rustfs
+                port:
+                  number: 9001
+    {{- end }}
+{{- end -}}

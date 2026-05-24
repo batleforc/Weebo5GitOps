@@ -3,3 +3,11 @@ rustfs:
   version: 0.4.0
   domain:
     core: bucket.batleforc.fr
+    additional:
+      - name: bucket.batleforc.fr
+        cert: bucket-tls
+  expose:
+    enabled: true
+    issuerRef: "outbound"
+    issuerRefKind: ClusterIssuer
+    certName: bucket-tls
