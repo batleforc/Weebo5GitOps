@@ -1,5 +1,5 @@
 resource "rustfs_bucket" "git_pages" {
-  bucket = "git-pages"
+  name = "git-pages"
 }
 resource "random_password" "git_pages_sa_password" {
   length           = 42
@@ -19,7 +19,7 @@ resource "rustfs_serviceaccount" "git_pages" {
 }
 
 resource "rustfs_bucket_policy" "git_pages_policy" {
-  bucket = rustfs_bucket.git_pages.bucket
+  bucket = rustfs_bucket.git_pages.name
   policy = <<EOF
 {
   "Version": "2012-10-17",
