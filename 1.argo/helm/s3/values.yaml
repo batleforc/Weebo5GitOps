@@ -9,3 +9,5 @@ rustfs:
     issuerRef: "outbound"
     issuerRefKind: ClusterIssuer
     certName: bucket-tls
+
+repo: ""

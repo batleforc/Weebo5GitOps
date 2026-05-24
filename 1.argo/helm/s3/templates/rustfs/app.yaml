@@ -9,9 +9,8 @@ spec:
   syncPolicy:
     automated: {}
   source:
-    chart: rustfs
-    repoURL: https://charts.rustfs.com/
-    targetRevision: {{ .Values.rustfs.version }}
+    repoURL: '{{ .Values.repo }}'
+    path: '1.helm/rustfs'
     helm:
       releaseName: rustfs
       valuesObject:
