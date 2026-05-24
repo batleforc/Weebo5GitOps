@@ -26,7 +26,7 @@ resource "rustfs_policy" "git_pages_policy" {
     resource = ["arn:aws:s3:::${rustfs_bucket.git_pages.name}/*"]
     condition = {
       string_equals = {
-        "s3:username" = ["${rustfs_policy.git_pages.access_key}"]
+        "s3:username" = ["${rustfs_serviceaccount.git_pages.access_key}"]
       }
     }
   }]
