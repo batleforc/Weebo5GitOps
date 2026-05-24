@@ -9,6 +9,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    traefik.ingress.kubernetes.io/service.serversscheme: https
     cert-manager.io/cluster-issuer: "outbound"
     traefik.ingress.kubernetes.io/router.middlewares: traefik-vpn-only@kubernetescrd
 spec:
