@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: git-pages
-          image: ghcr.io/weebo5/git-pages:latest
+          image: codeberg.org/git-pages/git-pages:latest
           ports:
             - containerPort: 3000
           env:
