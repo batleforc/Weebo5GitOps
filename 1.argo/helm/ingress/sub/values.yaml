@@ -7,7 +7,7 @@ certManager:
     name: outbound
     email: "maxleriche.60@gmail.com"
   certIssuerDNS01:
-    enabled: false
+    enabled: true
     name: dns-01
     email: "maxleriche.60@gmail.com"
     nameservers: "dns-server-in.dns.svc.cluster.local"
