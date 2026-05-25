@@ -16,7 +16,7 @@ spec:
       releaseName: forgejo-git-pages
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: 'forgejo-git-pages'
+    namespace: 'git_pages'
   syncPolicy:
     automated:
       selfHeal: true
