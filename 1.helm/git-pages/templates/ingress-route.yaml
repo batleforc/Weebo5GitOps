@@ -11,7 +11,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`*.{{ .Values.gitPages.dnsWildcardDomain.domain }}`)
+      match: HostRegexp(`^.+{{ .Values.gitPages.dnsWildcardDomain.domain | replace "." "\\." }}$`)
       priority: 1
       services:
         - name: git-pages
@@ -37,7 +37,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`*.{{ .Values.gitPages.dnsWildcardDomain.domain }}`)
+      match: HostRegexp(`^.+{{ .Values.gitPages.dnsWildcardDomain.domain | replace "." "\\." }}$`)
       priority: 1
       services:
         - name: git-pages
