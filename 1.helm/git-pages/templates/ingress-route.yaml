@@ -3,7 +3,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: git-pages
+  name: git-pages-https
   labels:
     argocd.argoproj.io/instance: git-pages
 spec:
@@ -29,7 +29,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: git-pages
+  name: git-pages-http
   labels:
     argocd.argoproj.io/instance: git-pages
 spec:
