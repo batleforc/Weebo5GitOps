@@ -4,7 +4,7 @@ gitPages:
     PAGES_WILDCARD_0_DOMAIN: "git.batleforc.fr"
     PAGES_WILDCARD_0_CLONE_URL: "https://git.batleforc.fr/<user>/<project>.git"
     PAGES_WILDCARD_0_INDEX_REPO: "<user>.git.batleforc.fr"
-    PAGES_WILDCARD_0_INDEX_AUTHORIZATION: "forgejo"
+    PAGES_WILDCARD_0_AUTHORIZATION: "forgejo"
   dnsWildcardDomain:
     enabled: true
     domain: "git.batleforc.fr"

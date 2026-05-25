@@ -1,0 +1,16 @@
+{{- if .Values.gitPages.enabled -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: git-pages-config
+  labels:
+    app: git-pages
+data:
+  config.toml: |
+    [[wildcard]]
+      domain = "{{ .Values.gitPages.dnsWildcardDomain.domain }}"
+      clone-url = "https://{{ .Values.gitPages.dnsWildcardDomain.domain }}/<user>/<project>.git"
+      index-repo = "<user>.{{ .Values.gitPages.dnsWildcardDomain.domain }}"
+      authorization = "forgejo"
+{{- end -}}
