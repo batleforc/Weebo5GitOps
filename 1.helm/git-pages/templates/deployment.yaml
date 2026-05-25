@@ -28,6 +28,8 @@ spec:
           image: codeberg.org/git-pages/git-pages:latest
           ports:
             - containerPort: 3000
+          command: ["git-pages"]
+          args: ["--config", "/etc/git-pages/config.toml"]
           env:
             - name: PAGES_STORAGE_TYPE
               value: s3
@@ -45,4 +47,12 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.gitPages.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/git-pages
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: git-pages-config
 {{- end -}}
