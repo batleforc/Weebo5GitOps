@@ -38,5 +38,6 @@ runner:
           labels:
             - "kubernetes:k8spod:///config/podspec-default.yaml"
             - "buildah:k8spod:///config/podspec-buildah.yaml"
+            - "git-pages:k8spod:///config/podspec-git-pages.yaml"
   secretStore:
     enabled: true
