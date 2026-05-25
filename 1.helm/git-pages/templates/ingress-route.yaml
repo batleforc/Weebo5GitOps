@@ -18,11 +18,11 @@ spec:
           namespace: "{{ .Release.Namespace }}"
           passHostHeader: true
           port: 3000
-      {{ if .Values.gitPages.middleware.strictSource.enabled -}}
+      {{ if .Values.gitPages.middleware.strictSource.enabled }}
       middlewares:
       - name: vpn-only
         namespace: traefik
-      {{- end }}
+      {{ end }}
   tls:
     secretName: "{{ .Values.gitPages.dnsWildcardDomain.certificateName }}"
 ---
@@ -46,11 +46,11 @@ spec:
           port: 3000
       {{ if .Values.gitPages.middleware.enabled -}}
       middlewares:
-      {{ if .Values.gitPages.middleware.redirectToHttps.enabled -}}
+      {{- if .Values.gitPages.middleware.redirectToHttps.enabled }}
       - name: redirect-to-https
         namespace: traefik
-      {{- end -}}
-      {{ if .Values.gitPages.middleware.strictSource.enabled -}}
+      {{- end }}
+      {{- if .Values.gitPages.middleware.strictSource.enabled }}
       - name: vpn-only
         namespace: traefik
       {{- end -}}
