@@ -22,7 +22,7 @@ containers:
       runAsUser: 0
       runAsGroup: 0
       allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
+      readOnlyRootFilesystem: false
       fsGroup: 0
       # capabilities: drop: ALL empties the OCI bounding set before the process starts,
       # overriding the K8s userns capability grant. We add back only what buildah needs:
