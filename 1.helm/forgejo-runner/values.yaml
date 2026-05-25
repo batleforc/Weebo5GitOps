@@ -6,6 +6,7 @@ runner:
   podSpecToInclude:
     - buildah.yaml
     - default.yaml
+    - git-pages.yaml
   runnerConfig:
     log:
       level: info
