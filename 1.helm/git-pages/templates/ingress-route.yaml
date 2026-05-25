@@ -15,7 +15,6 @@ spec:
       priority: 1
       services:
         - name: git-pages
-          namespace: "{{ .Release.Namespace }}"
           passHostHeader: true
           port: 3000
       {{- if .Values.gitPages.middleware.strictSource.enabled -}}
