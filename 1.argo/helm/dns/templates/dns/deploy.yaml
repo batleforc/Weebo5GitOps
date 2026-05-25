@@ -44,12 +44,12 @@ spec:
             - name: zone-map
               mountPath: "/var/lib/bind/pri/{{ $value.zone }}/{{ $key }}"
               subPath: {{ $key }}
+            - name: empty-dir-{{ $key | replace "." "-" }}
+              mountPath: /var/lib/bind/pri/{{ $value.zone }}
             {{- end }}
             - name: tsig-key
               mountPath: /val/lib/bind/pri/tsig.key
               subPath: tsig.key
-            - name: empty-dir
-              mountPath: /var/lib/bind/pri/weebo.poc
             {{- if .Values.httpsNsServeur.enabled }}
             - name: ns-server-tls
               mountPath: /var/lib/bind/pri/ns-server-tls
@@ -83,8 +83,10 @@ spec:
         - name: tsig-key
           secret:
             secretName: tsig-key-secret
-        - name: empty-dir
+        {{- range $key, $value := .Values.zone }}
+        - name: empty-dir-{{ $key | replace "." "-" }}
           emptyDir: {}
+        {{- end }}
         {{- if .Values.httpsNsServeur.enabled }}
         - name: ns-server-tls
           secret:
