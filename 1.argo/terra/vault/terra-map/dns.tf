@@ -18,7 +18,7 @@ path "${vault_mount.main-vault.path}/data/cert-manager/tsig" {
   capabilities = ["create", "read", "update", "delete", "list"]
 }
 path "${vault_mount.main-vault.path}/metadata/cert-manager/tsig" {
-  capabilities = ["read","list"]
+  capabilities = ["create", "read", "update", "delete", "list"]
 }
 path "${vault_mount.main-vault.path}/data/{{identity.entity.aliases.${data.vault_auth_backend.kubernetes.accessor}.metadata.service_account_namespace}}/monitoring" {
   capabilities = ["read","list"]
