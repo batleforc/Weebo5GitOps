@@ -170,6 +170,9 @@ annotations:
   metallb.io/ip-allocated-from-pool: one
   metallb.universe.tf/allow-shared-ip: one
 
+pushTsig:
+  enabled: true
+
 blocky:
   enabled: true
 
