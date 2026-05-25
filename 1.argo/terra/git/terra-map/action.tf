@@ -33,3 +33,11 @@ resource "forgejo_repository" "rust-toolchain" {
   mirror          = true
   mirror_interval = "12h0m0s" # optional
 }
+
+resource "forgejo_repository" "git-pages" {
+  owner           = forgejo_organization.action.name
+  name            = "git-pages"
+  clone_addr      = "https://codeberg.org/git-pages/action"
+  mirror          = true
+  mirror_interval = "12h0m0s" # optional
+}

@@ -1,0 +1,31 @@
+{{- if and .Values.forgejo.enabled .Values.forgejo.gitPages.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo-git-pages
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: '{{ .Values.repo }}'
+    path: '1.helm/git-pages'
+    helm:
+      releaseName: forgejo-git-pages
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'forgejo-git-pages'
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+{{- end -}}
