@@ -8,6 +8,8 @@ metadata:
   labels:
     app: git-pages
 spec:
+  ipFamilyPolicy: PreferDualStack
+  type: ClusterIP
   selector:
     app: git-pages
   ports:
