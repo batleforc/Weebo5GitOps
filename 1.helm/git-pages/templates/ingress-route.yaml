@@ -34,6 +34,7 @@ spec:
           passHostHeader: true
           port: 3000
     {{- end }}
+    {{- end }}
   tls:
     secretName: "{{ .Values.gitPages.dnsWildcardDomain.certificateName }}"
 ---
