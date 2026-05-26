@@ -22,6 +22,7 @@ spec:
         vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
         vault.security.banzaicloud.io/vault-agent: "false"
         vault.security.banzaicloud.io/vault-path: "kubernetes"
+        checksum/config: '{{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}'
     spec:
       containers:
         - name: git-pages
@@ -29,7 +30,7 @@ spec:
           ports:
             - containerPort: 3000
           command: ["git-pages"]
-          args: ["--config", "/etc/git-pages/config.toml"]
+          args: ["-config", "/etc/git-pages/config.toml"]
           env:
             - name: PAGES_STORAGE_TYPE
               value: s3
