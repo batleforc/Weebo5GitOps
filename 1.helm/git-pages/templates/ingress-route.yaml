@@ -30,7 +30,7 @@ spec:
       priority: 2
       services:
         - name: git-pages
-          namespace: "{{ .Release.Namespace }}"
+          namespace: "{{ $.Release.Namespace }}"
           passHostHeader: true
           port: 3000
     {{- end }}
