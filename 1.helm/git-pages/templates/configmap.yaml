@@ -8,6 +8,9 @@ metadata:
     app: git-pages
 data:
   config.toml: |
+    [server]
+    pages = "tcp/localhost:3000"
+
     [[wildcard]]
       domain = "{{ .Values.gitPages.dnsWildcardDomain.domain }}"
       clone-url = "https://{{ .Values.gitPages.dnsWildcardDomain.domain }}/<user>/<project>.git"
