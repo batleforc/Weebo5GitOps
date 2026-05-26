@@ -22,3 +22,7 @@ gitPages:
     requests:
       cpu: 50m
       memory: 64Mi
+  publicUrl:
+    - enabled: true
+      url: "batleforc.git.batleforc.fr"
+      pathPrefix: "/batlehub"

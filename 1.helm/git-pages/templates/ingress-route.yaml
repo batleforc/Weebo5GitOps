@@ -23,6 +23,17 @@ spec:
       - name: vpn-only
         namespace: traefik
       {{ end }}
+    {{- range .Values.gitPages.publicUrl }}
+    {{- if .enabled }}
+    - kind: Rule
+      match: Host(`{{ .url | replace "https://" "" | replace "http://" "" }}`) {{ if .pathPrefix }} && PathPrefix(`{{ .pathPrefix }}`) {{ end }}
+      priority: 2
+      services:
+        - name: git-pages
+          namespace: "{{ .Release.Namespace }}"
+          passHostHeader: true
+          port: 3000
+    {{- end }}
   tls:
     secretName: "{{ .Values.gitPages.dnsWildcardDomain.certificateName }}"
 ---
@@ -44,15 +55,9 @@ spec:
           namespace: "{{ .Release.Namespace }}"
           passHostHeader: true
           port: 3000
-      {{ if .Values.gitPages.middleware.enabled -}}
+      {{ if and .Values.gitPages.middleware.enabled .Values.gitPages.middleware.redirectToHttps.enabled }}
       middlewares:
-      {{- if .Values.gitPages.middleware.redirectToHttps.enabled }}
       - name: redirect-to-https
         namespace: traefik
-      {{- end }}
-      {{- if .Values.gitPages.middleware.strictSource.enabled }}
-      - name: vpn-only
-        namespace: traefik
-      {{- end -}}
       {{- end }}
 {{- end -}}
