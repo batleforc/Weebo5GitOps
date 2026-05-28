@@ -1,0 +1,23 @@
+containers:
+  - name: main
+    image: registry.batleforc.fr/forgejo-action/mise:main
+    imagePullPolicy: Always
+    resources:
+      requests:
+        cpu: "500m"
+        memory: 512Mi
+      limits:
+        cpu: "2"
+        memory: 4Gi
+        ephemeral-storage: 10Gi
+    volumeMounts:
+      - name: vault-tls
+        mountPath: /vault-tls
+        readOnly: true
+imagePullSecrets:
+  - name: docker-config
+volumes:
+  - name: vault-tls
+    secret:
+      secretName: vault-tls
+restartPolicy: Never

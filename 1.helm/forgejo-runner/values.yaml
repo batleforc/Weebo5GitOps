@@ -7,6 +7,7 @@ runner:
     - buildah.yaml
     - default.yaml
     - git-pages.yaml
+    - mise.yaml
   runnerConfig:
     log:
       level: info
@@ -18,6 +19,7 @@ runner:
         - "kubernetes:k8spod:///config/podspec-default.yaml"
         - "buildah:k8spod:///config/podspec-buildah.yaml"
         - "git-pages:k8spod:///config/podspec-git-pages.yaml"
+        - "mise:k8spod:///config/podspec-mise.yaml"
 
     kubernetes:
       namespace: forgejo-action
@@ -40,5 +42,6 @@ runner:
             - "kubernetes:k8spod:///config/podspec-default.yaml"
             - "buildah:k8spod:///config/podspec-buildah.yaml"
             - "git-pages:k8spod:///config/podspec-git-pages.yaml"
+            - "mise:k8spod:///config/podspec-mise.yaml"
   secretStore:
     enabled: true
