@@ -1,8 +1,25 @@
 resource "harbor_project" "batleforc" {
   name                 = "batleforc"
   public               = "false"
-  storage_quota        = 10
+  storage_quota        = 20
   auto_sbom_generation = true
+}
+
+resource "harbor_retention_policy" "main" {
+  scope    = harbor_project.batleforc.id
+  schedule = "Daily"
+  rule {
+    repo_matching        = "batleforc/monofolio-rs"
+    tag_matching         = "**"
+    always_retain        = true
+    most_recently_pushed = 2
+  }
+  rule {
+    most_recently_pushed = 2
+    repo_matching        = "batleforc/monofolio-rs/cache"
+    tag_matching         = "**"
+    always_retain        = true
+  }
 }
 
 resource "harbor_robot_account" "rw-batleforc" {
