@@ -192,7 +192,7 @@ resource "vault_kv_secret_v2" "r-monofolio-rs" {
 
 resource "vault_kv_secret_v2" "rw-batlehub-rs" {
   mount = "git-vault"
-  name  = "batleforc/monofolio-rs/batlehub"
+  name  = "batleforc/batlehub/registry"
   data_json = jsonencode(
     {
       username = "${harbor_config_system.main.robot_name_prefix}${harbor_robot_account.rw-batleforc.name}"
