@@ -14,6 +14,13 @@ containers:
       - name: vault-tls
         mountPath: /vault-tls
         readOnly: true
+    env:
+      - name: VAULT_ADDR
+        value: "https://vault.vault:8200"
+      - name: VAULT_CA_CERT
+        value: /vault-tls/ca.crt
+      - name: VAULT_FORGEJO_ROLE
+        value: forgejo_default_policy
 imagePullSecrets:
   - name: docker-config
 volumes:
