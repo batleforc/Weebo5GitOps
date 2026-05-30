@@ -67,7 +67,7 @@ imagePullSecrets:
 volumes:
   - name: buildah-storage
     emptyDir:
-      sizeLimit: 20Gi
+      sizeLimit: 30Gi
   - name: tmp
     emptyDir:
       sizeLimit: 2Gi
