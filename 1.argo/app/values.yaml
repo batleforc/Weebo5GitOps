@@ -10,6 +10,9 @@ ingress:
 traefik:
   ips: ""
 
+external:
+  enabled: true
+
 storage:
   local:
     enabled: true
