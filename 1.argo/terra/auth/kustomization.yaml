@@ -31,3 +31,4 @@ configMapGenerator:
       - ./terra-map/guard.tf
       - ./terra-map/chat.tf
       - ./terra-map/s3.tf
+      - ./terra-map/ro.tf
