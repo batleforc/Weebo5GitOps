@@ -46,6 +46,7 @@ spec:
     - 161.97.160.0/20 # Contabo - Germany
     - 103.123.44.0/22 # Unigro - India
     - 181.37.240.89/32
+    - 206.166.251.193/32
   ingress:
   - fromEntities:
     - "all"
