@@ -19,6 +19,11 @@ secretStore:
 env:
   TRACKING_SCRIPT_SRC: "https://track.batleforc.fr/api/script.js"
   TRACKING_SITE_ID: "2080a0eb6b62"
+  OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "https://coroot.batleforc.fr/v1/traces"
+  OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "https://coroot.batleforc.fr/v1/logs"
+  OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+  OTEL_EXPORTER_OTLP_HEADERS: "x-api-key=${vault:mv/data/chat/auth#AUTHENTIK_CLIENT_ID}"
+  OTEL_METRICS_EXPORTER: "none"
 
 resources:
   limits:

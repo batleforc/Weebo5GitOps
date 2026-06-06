@@ -16,6 +16,10 @@ spec:
         app: monofolio
       annotations:
         rollout: {{ randAlphaNum 10 | quote }}
+        vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+        vault.security.banzaicloud.io/vault-role: "auth-read"
+        vault.security.banzaicloud.io/vault-path: "kubernetes"
+        vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
     spec:
       {{- if .Values.secretStore.enabled }}
       imagePullSecrets:
