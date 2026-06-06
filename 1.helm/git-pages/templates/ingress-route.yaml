@@ -26,7 +26,7 @@ spec:
     {{- range .Values.gitPages.publicUrl }}
     {{- if .enabled }}
     - kind: Rule
-      match: Host(`{{ .url | replace "https://" "" | replace "http://" "" }}`) {{ if .pathPrefix }} && PathPrefix(`{{ .pathPrefix }}`) {{ end }}
+      match: Host(`{{ .url | replace "https://" "" | replace "http://" "" }}`) {{ if .pathPrefix }} && PathPrefix(`{{ .pathPrefix }}`) {{ end }} && (Method(`GET`) || Method(`HEAD`) || Method(`OPTIONS`))
       priority: 2
       services:
         - name: git-pages
