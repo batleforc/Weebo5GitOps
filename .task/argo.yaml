@@ -22,7 +22,7 @@ tasks:
   login:
     desc: "Login to ArgoCD CLI"
     cmds:
-      - argocd login localhost:8080 --username admin --password $(task argo:password) --insecure
+      - argocd login localhost:8080 --username admin --password $(task argo:pwd) --insecure --grpc-web --plaintext
   login-remote:
     desc: "Login to ArgoCD CLI for remote cluster"
     env:
