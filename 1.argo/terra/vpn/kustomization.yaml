@@ -22,3 +22,4 @@ configMapGenerator:
       - ./terra-map/exit-node-user.tf
       - ./terra-map/dns.tf
       - ./terra-map/ha.tf
+      - ./terra-map/lab.tf
