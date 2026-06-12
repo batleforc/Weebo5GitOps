@@ -7,6 +7,12 @@ resource "netbird_group" "lab" {
   name = "lab"
 }
 
+resource "netbird_network_router" "lab" {
+  network_id  = netbird_network.lab.id
+  peer_groups = [netbird_group.lab.id]
+  enabled     = true
+}
+
 resource "netbird_setup_key" "lab-master" {
   name                   = "lab-master setup key"
   expiry_seconds         = 0 # 30 days
