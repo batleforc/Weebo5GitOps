@@ -20,7 +20,7 @@ resource "netbird_setup_key" "lab-master" {
 
 resource "vault_kv_secret_v2" "lab" {
   mount = "mv"
-  name  = "reserved/lab"
+  name  = "reserved-lab/vpn-exit-node"
   data_json = jsonencode(
     {
       KUBERNETES_SETUP_KEY = netbird_setup_key.lab-master.key
