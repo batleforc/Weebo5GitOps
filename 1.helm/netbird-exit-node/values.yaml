@@ -1,7 +1,7 @@
 netbird:
   test: false
   enabled: true
-  version: "0.71"
+  version: "0.72"
   image: 11notes/netbird-exit-node
   url: "https://vpn.batleforc.fr"
   peer_name: "exit-node"
