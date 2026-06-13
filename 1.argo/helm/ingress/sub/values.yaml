@@ -15,7 +15,7 @@ certManager:
 
 traefik:
   enabled: true
-  version: 39.0.7
+  version: 40.3.0
   ips: ""
   kubeCRD:
     enabled: true
