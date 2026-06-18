@@ -22,7 +22,6 @@ resource "authentik_application" "lab" {
   name              = "lab"
   slug              = "lab"
   protocol_provider = authentik_provider_oauth2.lab.id
-  meta_icon         = "https://maxleriche.net/public/media/application/tuwunel.png"
   meta_launch_url   = "https://4.weebo.fr"
 }
 
