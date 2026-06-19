@@ -24,6 +24,10 @@ resource "authentik_provider_oauth2" "vault" {
     {
       matching_mode = "strict",
       url           = "http://localhost:8250/authentik/callback",
+    },
+    {
+      matching_mode = "strict",
+      url           = "http://localhost:8250/oidc/callback",
     }
   ]
   property_mappings = [
