@@ -27,3 +27,4 @@ configMapGenerator:
       - ./terra-map/forgejo.tf
       - ./terra-map/s3.tf
       - ./terra-map/dns.tf
+      - ./terra-map/dev.tf
