@@ -102,6 +102,7 @@ resource "vault_jwt_auth_backend_role" "vault_authentik_weebo_admin" {
     "https://vault.weebo.poc/ui/vault/auth/authentik/oidc/callback",
     "https://vault.weebo.poc/authentik/callback",
     "http://localhost:8250/authentik/callback",
+    "http://localhost:8250/oidc/callback"
   ]
   groups_claim = "groups"
   oidc_scopes  = ["openid", "profile", "email"]
