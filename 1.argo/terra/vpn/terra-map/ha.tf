@@ -38,20 +38,12 @@ resource "vault_kv_secret_v2" "home-assistant" {
   )
 }
 
-# resource "netbird_route" "exit-node-ha" {
-#   network_id = "exit-node-ha"
-#   #access_control_groups = [data.netbird_group.weebo_admin.id]
-#   groups      = [data.netbird_group.weebo_admin.id]
-#   peer_groups = [netbird_group.home-assistant.id]
-#   description = "Ha Exit Node Route"
-#   network     = "0.0.0.0/0"
-# }
+resource "netbird_route" "exit-node-ha" {
+  network_id = "exit-node-ha"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.home-assistant.id]
+  description = "Ha Exit Node Route"
+  network     = "0.0.0.0/0"
+}
 
-# resource "netbird_route" "kubernetes-exit-node-ha" {
-#   network_id = "exit-node-ha"
-#   #access_control_groups = [data.netbird_group.weebo_admin.id]
-#   groups      = [data.netbird_group.weebo_user.id]
-#   peer_groups = [netbird_group.exit-node-base.id]
-#   description = "Kubernetes Exit Node Route for users"
-#   network     = "10.96.0.11/32"
-# }
