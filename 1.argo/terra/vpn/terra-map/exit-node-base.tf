@@ -31,15 +31,6 @@ resource "netbird_route" "kubernetes-exit-node-v4-2" {
   network     = "10.96.0.11/32"
 }
 
-resource "netbird_route" "kubernetes-exit-node-v6" {
-  network_id = "exit-node-base"
-  #access_control_groups = [data.netbird_group.weebo_admin.id]
-  groups      = [data.netbird_group.weebo_admin.id]
-  peer_groups = [netbird_group.exit-node-base.id]
-  description = "Kubernetes Exit Node Route v6"
-  network     = "::/0"
-}
-
 # Uncomment if you want to add IPv6 support for the exit node, at the moment netbird does not support IPv6 routes
 # resource "netbird_route" "kubernetes-exit-node-ipv6" {
 #   network_id = "exit-node-base"
