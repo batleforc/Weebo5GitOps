@@ -1,0 +1,6 @@
+banList:
+  - https://blocklist.greensnow.co/greensnow.txt
+  - https://github.com/firehol/blocklist-ipsets
+
+whitelist:
+  -

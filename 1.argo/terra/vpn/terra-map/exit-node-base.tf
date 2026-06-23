@@ -23,7 +23,7 @@ resource "netbird_route" "kubernetes-exit-node-v4" {
 }
 
 resource "netbird_route" "kubernetes-exit-node-v4-2" {
-  network_id = "exit-node-base"
+  network_id = "exit-node-base-dns"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_user.id]
   peer_groups = [netbird_group.exit-node-base.id]
