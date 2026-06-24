@@ -7,6 +7,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
+  cacheTTL: 14d
+  tracesTTL: 7d
+  logsTTL: 7d
+  profilesTTL: 7d
   ingress: # Ingress configuration for Coroot.
     className: traefik
     host: coroot.batleforc.fr
