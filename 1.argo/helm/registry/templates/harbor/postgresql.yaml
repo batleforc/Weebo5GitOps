@@ -9,7 +9,7 @@ spec:
     topologyKey: topology.kubernetes.io/zone
   bootstrap:
     initdb: null
-  enablePDB: true
+  enablePDB: false
   enableSuperuserAccess: true
   imageName: ghcr.io/cloudnative-pg/postgresql:15
   imagePullPolicy: IfNotPresent
