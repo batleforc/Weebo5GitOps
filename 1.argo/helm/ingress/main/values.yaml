@@ -23,6 +23,10 @@ traefik:
     enabled: true
   gatewayAPI:
     enabled: false
+  plugins:
+    bouncer:
+      moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+      version: "v1.6.0"
 
 authentik:
   enabled: false
