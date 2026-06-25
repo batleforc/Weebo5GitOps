@@ -109,12 +109,48 @@ resource "netbird_network_resource" "lab-weebo-poc" {
 }
 
 resource "netbird_route" "lab-dns" {
-  network_id = netbird_network.lab.id
+  network_id = "lab-network"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
   description = "Lab DNS server"
   network     = "10.128.0.10/32"
+}
+
+resource "netbird_route" "lab-pod-4" {
+  network_id = "lab-network"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Lab pod server"
+  network     = "10.245.0.0/16"
+}
+
+resource "netbird_route" "lab-pod-6" {
+  network_id = "lab-network"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Lab pod server"
+  network     = "fd00:10:245::/56"
+}
+
+resource "netbird_route" "lab-service-4" {
+  network_id = "lab-network"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Lab service server"
+  network     = "10.128.0.0/12"
+}
+
+resource "netbird_route" "lab-service-6" {
+  network_id = "lab-network"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Lab service server"
+  network     = "fd00:10:128::/112"
 }
 
 resource "netbird_nameserver_group" "lab-dns" {
