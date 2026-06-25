@@ -115,6 +115,20 @@ resource "netbird_route" "lab-dns" {
   peer_groups = [netbird_group.lab.id]
   description = "Lab DNS server"
   network     = "10.128.0.10/32"
+}
+
+resource "netbird_nameserver_group" "lab-dns" {
+  name        = "lab-dns"
+  description = "lab-dns"
+  nameservers = [
+    {
+      ip = "10.128.0.10"
+    },
+  ]
+  groups                 = [data.netbird_group.weebo_admin.id]
+  search_domains_enabled = false
+  enabled                = true
+  primary                = false
   domains = [
     "weebo.poc"
   ]
