@@ -38,6 +38,22 @@ resource "vault_kv_secret_v2" "lab" {
   )
 }
 
+resource "netbird_policy" "lab" {
+  name    = "Lab"
+  enabled = true
+
+  rule {
+    action        = "accept"
+    bidirectional = false
+    enabled       = true
+    protocol      = "all"
+    name          = "lab"
+    sources       = [data.netbird_group.weebo_admin.id]
+    destinations  = [netbird_group.lab.id]
+  }
+}
+
+
 resource "netbird_network_resource" "lab-pod-cidr-v4" {
   network_id  = netbird_network.lab.id
   name        = "Lab POD IPV4 CIDR"
