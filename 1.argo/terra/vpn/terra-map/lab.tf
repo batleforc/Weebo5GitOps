@@ -5,7 +5,7 @@ resource "netbird_network" "lab" {
 
 variable "assign_group" {
   type    = set(string)
-  default = toset([data.netbird_group.weebo_admin.id])
+  default = [data.netbird_group.weebo_admin.id]
 }
 
 resource "netbird_group" "lab" {
