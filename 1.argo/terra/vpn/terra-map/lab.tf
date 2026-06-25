@@ -109,7 +109,7 @@ resource "netbird_policy" "lab" {
 # }
 
 resource "netbird_route" "lab-dns" {
-  network_id = "lab-network"
+  network_id = "lab-network-dns"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
