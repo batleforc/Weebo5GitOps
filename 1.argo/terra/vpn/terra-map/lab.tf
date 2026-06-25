@@ -4,8 +4,8 @@ resource "netbird_network" "lab" {
 }
 
 variable "assign_group" {
-  type    = tuples(string)
-  default = [data.netbird_group.weebo_admin.id]
+  type    = set(string)
+  default = toset([data.netbird_group.weebo_admin.id])
 }
 
 resource "netbird_group" "lab" {
