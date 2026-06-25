@@ -4,7 +4,7 @@ resource "netbird_network" "lab" {
 }
 
 locals {
-  assign_group = [data.netbird_group.weebo_admin.id]
+  assign_group = [netbird_group.lab.id]
 }
 
 resource "netbird_group" "lab" {
