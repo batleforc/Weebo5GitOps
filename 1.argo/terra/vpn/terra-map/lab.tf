@@ -107,3 +107,15 @@ resource "netbird_network_resource" "lab-weebo-poc" {
   groups      = local.assign_group
   enabled     = true
 }
+
+resource "netbird_route" "lab-dns" {
+  network_id = netbird_network.lab.id
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Lab DNS server"
+  network     = "10.128.0.10/32"
+  domains = [
+    "weebo.poc"
+  ]
+}
