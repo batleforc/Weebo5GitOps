@@ -137,8 +137,5 @@ resource "netbird_nameserver_group" "lab-dns" {
   groups                 = [data.netbird_group.weebo_admin.id]
   search_domains_enabled = false
   enabled                = true
-  primary                = false
-  domains = [
-    "weebo.poc"
-  ]
+  primary                = true
 }
