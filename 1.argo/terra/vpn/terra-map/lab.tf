@@ -3,6 +3,11 @@ resource "netbird_network" "lab" {
   description = "Network for the lab environment also named Weebo SI"
 }
 
+variable "assign_group" {
+  type    = tuples(string)
+  default = [data.netbird_group.weebo_admin.id]
+}
+
 resource "netbird_group" "lab" {
   name = "lab"
 }
@@ -32,4 +37,58 @@ resource "vault_kv_secret_v2" "lab" {
       KUBERNETES_SETUP_KEY = netbird_setup_key.lab-master.key
     }
   )
+}
+
+resource "netbird_network_resource" "lab-pod-cidr-v4" {
+  network_id  = netbird_network.lab.id
+  name        = "Lab POD IPV4 CIDR"
+  description = "Lab IPV4 CIDR"
+  address     = "10.244.0.0/16"
+  groups      = var.assign_group
+  enabled     = true
+}
+
+resource "netbird_network_resource" "lab-pod-cidr-v6" {
+  network_id  = netbird_network.lab.id
+  name        = "Lab POD IPV6 CIDR"
+  description = "Lab IPV6 CIDR"
+  address     = "fd00:10:244::/56"
+  groups      = var.assign_group
+  enabled     = true
+}
+
+resource "netbird_network_resource" "lab-service-cidr-v4" {
+  network_id  = netbird_network.lab.id
+  name        = "Lab Service IPV4 CIDR"
+  description = "Lab Service IPV4 CIDR"
+  address     = "10.96.0.0/12"
+  groups      = var.assign_group
+  enabled     = true
+}
+
+resource "netbird_network_resource" "lab-service-cidr-v6" {
+  network_id  = netbird_network.lab.id
+  name        = "Lab Service IPV6 CIDR"
+  description = "Lab Service IPV6 CIDR"
+  address     = "fd00:10:96::/112"
+  groups      = var.assign_group
+  enabled     = true
+}
+
+resource "netbird_network_resource" "lab-wildcard-weebo-poc" {
+  network_id  = netbird_network.lab.id
+  name        = "Lab Wildcard weebo poc"
+  description = "Lab *.weebo.poc"
+  address     = "*.weebo.poc"
+  groups      = var.assign_group
+  enabled     = true
+}
+
+resource "netbird_network_resource" "lab-weebo-poc" {
+  network_id  = netbird_network.lab.id
+  name        = "Lab weebo poc"
+  description = "Lab weebo.poc"
+  address     = "weebo.poc"
+  groups      = var.assign_group
+  enabled     = true
 }
