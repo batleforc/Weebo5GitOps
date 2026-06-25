@@ -58,7 +58,7 @@ resource "netbird_network_resource" "lab-pod-cidr-v4" {
   network_id  = netbird_network.lab.id
   name        = "Lab POD IPV4 CIDR"
   description = "Lab IPV4 CIDR"
-  address     = "10.244.0.0/16"
+  address     = "10.245.0.0/16"
   groups      = local.assign_group
   enabled     = true
 }
@@ -67,7 +67,7 @@ resource "netbird_network_resource" "lab-pod-cidr-v6" {
   network_id  = netbird_network.lab.id
   name        = "Lab POD IPV6 CIDR"
   description = "Lab IPV6 CIDR"
-  address     = "fd00:10:244::/56"
+  address     = "fd00:10:245::/56"
   groups      = local.assign_group
   enabled     = true
 }
@@ -76,7 +76,7 @@ resource "netbird_network_resource" "lab-service-cidr-v4" {
   network_id  = netbird_network.lab.id
   name        = "Lab Service IPV4 CIDR"
   description = "Lab Service IPV4 CIDR"
-  address     = "10.96.0.0/12"
+  address     = "10.128.0.0/12"
   groups      = local.assign_group
   enabled     = true
 }
@@ -85,7 +85,7 @@ resource "netbird_network_resource" "lab-service-cidr-v6" {
   network_id  = netbird_network.lab.id
   name        = "Lab Service IPV6 CIDR"
   description = "Lab Service IPV6 CIDR"
-  address     = "fd00:10:96::/112"
+  address     = "fd00:10:128::/112"
   groups      = local.assign_group
   enabled     = true
 }
