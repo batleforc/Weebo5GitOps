@@ -3,9 +3,8 @@ resource "netbird_network" "lab" {
   description = "Network for the lab environment also named Weebo SI"
 }
 
-variable "assign_group" {
-  type    = set(string)
-  default = [data.netbird_group.weebo_admin.id]
+locals {
+  assign_group = [data.netbird_group.weebo_admin.id]
 }
 
 resource "netbird_group" "lab" {
@@ -44,7 +43,7 @@ resource "netbird_network_resource" "lab-pod-cidr-v4" {
   name        = "Lab POD IPV4 CIDR"
   description = "Lab IPV4 CIDR"
   address     = "10.244.0.0/16"
-  groups      = var.assign_group
+  groups      = local.assign_group
   enabled     = true
 }
 
@@ -53,7 +52,7 @@ resource "netbird_network_resource" "lab-pod-cidr-v6" {
   name        = "Lab POD IPV6 CIDR"
   description = "Lab IPV6 CIDR"
   address     = "fd00:10:244::/56"
-  groups      = var.assign_group
+  groups      = local.assign_group
   enabled     = true
 }
 
@@ -62,7 +61,7 @@ resource "netbird_network_resource" "lab-service-cidr-v4" {
   name        = "Lab Service IPV4 CIDR"
   description = "Lab Service IPV4 CIDR"
   address     = "10.96.0.0/12"
-  groups      = var.assign_group
+  groups      = local.assign_group
   enabled     = true
 }
 
@@ -71,7 +70,7 @@ resource "netbird_network_resource" "lab-service-cidr-v6" {
   name        = "Lab Service IPV6 CIDR"
   description = "Lab Service IPV6 CIDR"
   address     = "fd00:10:96::/112"
-  groups      = var.assign_group
+  groups      = local.assign_group
   enabled     = true
 }
 
@@ -80,7 +79,7 @@ resource "netbird_network_resource" "lab-wildcard-weebo-poc" {
   name        = "Lab Wildcard weebo poc"
   description = "Lab *.weebo.poc"
   address     = "*.weebo.poc"
-  groups      = var.assign_group
+  groups      = local.assign_group
   enabled     = true
 }
 
@@ -89,6 +88,6 @@ resource "netbird_network_resource" "lab-weebo-poc" {
   name        = "Lab weebo poc"
   description = "Lab weebo.poc"
   address     = "weebo.poc"
-  groups      = var.assign_group
+  groups      = local.assign_group
   enabled     = true
 }
