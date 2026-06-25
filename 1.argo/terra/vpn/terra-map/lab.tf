@@ -118,7 +118,7 @@ resource "netbird_route" "lab-dns" {
 }
 
 resource "netbird_route" "lab-pod-4" {
-  network_id = "lab-network"
+  network_id = "lab-network-pod-4"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
@@ -127,7 +127,7 @@ resource "netbird_route" "lab-pod-4" {
 }
 
 resource "netbird_route" "lab-pod-6" {
-  network_id = "lab-network"
+  network_id = "lab-network-pod-6"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
@@ -136,7 +136,7 @@ resource "netbird_route" "lab-pod-6" {
 }
 
 resource "netbird_route" "lab-service-4" {
-  network_id = "lab-network"
+  network_id = "lab-network-svc-4"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
@@ -145,7 +145,7 @@ resource "netbird_route" "lab-service-4" {
 }
 
 resource "netbird_route" "lab-service-6" {
-  network_id = "lab-network"
+  network_id = "lab-network-svc-6"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
