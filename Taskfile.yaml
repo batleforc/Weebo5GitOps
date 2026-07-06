@@ -39,6 +39,12 @@ tasks:
       KUBECONFIG: 0.config/kubeconfig.yaml
     cmds:
       - kubectl {{ .CLI_ARGS }}
+  k-oidc:
+    silent: true
+    env:
+      KUBECONFIG: "0.config/kubeconfig.oidc.yaml"
+    cmds:
+      - kubectl {{ .CLI_ARGS }}
   k9s:
     desc: "Run k9s on the cluster"
     silent: true
