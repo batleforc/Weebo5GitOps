@@ -32,7 +32,7 @@ authentik:
   enabled: false
 
 rybbit:
-  enabled: true
+  enabled: false
   dns: "track.batleforc.fr"
   disableSignup: true
   additionalDomain:
