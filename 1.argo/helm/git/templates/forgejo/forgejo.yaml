@@ -39,6 +39,10 @@ spec:
           rootless: true
         persistence:
           enabled: true
+        deployment:
+          env:
+            - name: ENABLE_REVERSE_PROXY_AUTHENTICATION
+              value: "false"
 
         gitea:
           admin:

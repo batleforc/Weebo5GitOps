@@ -1,6 +1,6 @@
 forgejo:
   enabled: true
-  version: "17.1.1"
+  version: "17.1.2"
   dns: "git.batleforc.fr"
   runner:
     enabled: true
