@@ -7,7 +7,7 @@ resource "authentik_provider_oauth2" "weebo-runner" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://wr.batleforc.fr/callback",
+      url           = "https://wr.weebo.fr/callback",
     },
   ]
   property_mappings = [
@@ -22,7 +22,7 @@ resource "authentik_application" "weebo-runner" {
   name              = "weebo-runner"
   slug              = "weebo-runner"
   protocol_provider = authentik_provider_oauth2.weebo-runner.id
-  meta_launch_url   = "https://wr.batleforc.fr"
+  meta_launch_url   = "https://wr.weebo.fr"
 }
 
 resource "vault_kv_secret_v2" "weebo-runner" {
