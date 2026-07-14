@@ -33,3 +33,4 @@ configMapGenerator:
       - ./terra-map/s3.tf
       - ./terra-map/ro.tf
       - ./terra-map/lab.tf
+      - ./terra-map/runner.tf

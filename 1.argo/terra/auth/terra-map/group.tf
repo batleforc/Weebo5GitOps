@@ -9,9 +9,15 @@ resource "authentik_group" "weebo_moderator" {
   parents      = [authentik_group.weebo_user.id]
 }
 
+resource "authentik_group" "weebo_partner" {
+  name         = "weebo_partner"
+  is_superuser = false
+  parents      = [authentik_group.weebo_user.id]
+}
+
 
 resource "authentik_group" "weebo_admin" {
   name         = "weebo_admin"
   is_superuser = true
-  parents       = [authentik_group.weebo_moderator.id]
+  parents      = [authentik_group.weebo_moderator.id, authentik_group.weebo_partner.id]
 }
