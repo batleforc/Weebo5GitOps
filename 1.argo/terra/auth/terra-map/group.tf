@@ -12,7 +12,6 @@ resource "authentik_group" "weebo_moderator" {
 resource "authentik_group" "weebo_partner" {
   name         = "weebo_partner"
   is_superuser = false
-  parents      = [authentik_group.weebo_user.id]
 }
 
 
