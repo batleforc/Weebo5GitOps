@@ -41,6 +41,15 @@ resource "netbird_route" "kubernetes-exit-node-v6-user" {
 #   network     = "::/0"
 # }
 
+resource "netbird_route" "kubernetes-exit-node-v4-2" {
+  network_id = "exit-node-base-dns"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_user.id, data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.exit-node-base.id]
+  description = "Kubernetes Exit Node Route for users"
+  network     = "10.96.0.11/32"
+}
+
 resource "netbird_policy" "exit-node-user" {
   name    = "Exit Node User"
   enabled = true
@@ -51,7 +60,7 @@ resource "netbird_policy" "exit-node-user" {
     enabled       = true
     protocol      = "all"
     name          = "exit-node-user"
-    sources       = [data.netbird_group.weebo_user.id]
+    sources       = [data.netbird_group.weebo_user.id, netbird_group.exit-node-base.id]
     destinations  = [netbird_group.exit-node-user.id]
   }
 }
