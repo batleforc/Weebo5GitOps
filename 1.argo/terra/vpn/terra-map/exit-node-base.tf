@@ -51,7 +51,7 @@ resource "netbird_policy" "exit-node-base" {
     enabled       = true
     protocol      = "all"
     name          = "exit-node-base"
-    sources       = [data.netbird_group.weebo_admin.id]
+    sources       = [data.netbird_group.weebo_admin.id, data.netbird_group.weebo_user.id]
     destinations  = [netbird_group.exit-node-base.id]
   }
 }
