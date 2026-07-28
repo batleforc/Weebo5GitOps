@@ -3,10 +3,10 @@ resource "netbird_nameserver_group" "dns-blocky" {
   description = "Blocky DNS"
   nameservers = [
     {
-      ip      = "10.96.0.11"
+      ip = "10.96.0.11"
     },
   ]
-  groups                 = [data.netbird_group.weebo_admin.id]
+  groups                 = [data.netbird_group.weebo_admin.id, data.netbird_group.weebo_user.id]
   search_domains_enabled = false
   enabled                = true
   primary                = true
