@@ -10,7 +10,7 @@ metadata:
   name: weebo-editors-definitions
   namespace: eclipse-che
 data:
-  che-code-insiders.yaml: |
+  che-code-insiders-weebo.yaml: |
     commands:
     - apply:
         component: che-code-injector
