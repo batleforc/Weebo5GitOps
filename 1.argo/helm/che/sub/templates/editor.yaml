@@ -139,13 +139,13 @@ data:
         iconMediatype: image/svg+xml
         publisher: weebo
         repository: https://github.com/che-incubator/che-code
-        title: Microsoft Visual Studio Code - Open Source IDE for Eclipse Che - Insiders
+        title: Microsoft Visual Studio Code - Open Source IDE for Eclipse Che
           build
-        version: insiders
-      description: Microsoft Visual Studio Code - Open Source IDE for Eclipse Che - Insiders
+        version: next
+      description: Microsoft Visual Studio Code - Open Source IDE for Eclipse Che
         build
       displayName: "Weebo : VS Code - Open Source"
-      name: che-code
+      name: che-code-weebo
       tags:
       - weebo
       - Tech-Preview
