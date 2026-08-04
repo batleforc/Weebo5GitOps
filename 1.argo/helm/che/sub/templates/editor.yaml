@@ -144,7 +144,7 @@ data:
         version: insiders
       description: Microsoft Visual Studio Code - Open Source IDE for Eclipse Che - Insiders
         build
-      displayName: Weebo : VS Code - Open Source
+      displayName: "Weebo : VS Code - Open Source"
       name: che-code
       tags:
       - weebo
