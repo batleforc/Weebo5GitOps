@@ -4,9 +4,9 @@ netbird:
   enabled: true
   domain: vpn.batleforc.fr
   dashboard:
-    version: "v2.80.0"
+    version: "v2.90.9"
   server:
-    version: "0.73.2"
+    version: "0.76.1"
 
 traefik:
   ips: ""
