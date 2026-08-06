@@ -4,6 +4,7 @@ resource "authentik_provider_oauth2" "weebo-runner" {
   invalidation_flow  = data.authentik_flow.default-invalidation-flow.id
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   signing_key        = data.authentik_certificate_key_pair.generated.id
+  client_type        = "public"
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
