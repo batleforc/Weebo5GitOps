@@ -36,7 +36,7 @@ resource "netbird_route" "access-node-v4-user" {
   network_id = "exit-node-node"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
-  peer_groups = [netbird_group.exit-node-user.id]
+  peer_groups = [netbird_group.exit-node-base.id]
   description = "Kubernetes Exit Node Route"
   network     = "94.23.38.81/32"
 }
@@ -45,7 +45,7 @@ resource "netbird_route" "access-node-v6-user" {
   network_id = "exit-node-node"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
-  peer_groups = [netbird_group.exit-node-user.id]
+  peer_groups = [netbird_group.exit-node-base.id]
   description = "Kubernetes Exit Node Route v6"
   network     = "2001:41d0:2:2751::1/128"
 }
@@ -54,7 +54,7 @@ resource "netbird_route" "access-lab-v4-user" {
   network_id = "exit-node-lab-node"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
-  peer_groups = [netbird_group.exit-node-user.id]
+  peer_groups = [netbird_group.exit-node-base.id]
   description = "Kubernetes Exit Node Route"
   network     = "37.187.255.5/32"
 }
@@ -63,7 +63,7 @@ resource "netbird_route" "access-lab-v6-user" {
   network_id = "exit-node-lab-node"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
-  peer_groups = [netbird_group.exit-node-user.id]
+  peer_groups = [netbird_group.exit-node-base.id]
   description = "Kubernetes Exit Node Route v6"
   network     = "2001:41d0:c:705::1/128"
 }
