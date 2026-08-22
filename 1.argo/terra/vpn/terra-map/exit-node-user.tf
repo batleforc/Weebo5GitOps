@@ -31,6 +31,43 @@ resource "netbird_route" "kubernetes-exit-node-v6-user" {
   network     = "::/0"
 }
 
+
+resource "netbird_route" "access-node-v4-user" {
+  network_id = "exit-node-user"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.exit-node-user.id]
+  description = "Kubernetes Exit Node Route"
+  network     = "94.23.38.81/32"
+}
+
+resource "netbird_route" "access-node-v6-user" {
+  network_id = "exit-node-user"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.exit-node-user.id]
+  description = "Kubernetes Exit Node Route v6"
+  network     = "2001:41d0:2:2751::1/128"
+}
+
+resource "netbird_route" "access-lab-v4-user" {
+  network_id = "exit-node-user"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.exit-node-user.id]
+  description = "Kubernetes Exit Node Route"
+  network     = "37.187.255.5/32"
+}
+
+resource "netbird_route" "access-lab-v6-user" {
+  network_id = "exit-node-user"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.exit-node-user.id]
+  description = "Kubernetes Exit Node Route v6"
+  network     = "2001:41d0:c:705::1/128"
+}
+
 # Uncomment if you want to add IPv6 support for the exit node, at the moment netbird does not support IPv6 routes
 # resource "netbird_route" "kubernetes-exit-node-ipv6" {
 #   network_id = "exit-node-user"
