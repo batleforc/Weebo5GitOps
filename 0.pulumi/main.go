@@ -211,6 +211,7 @@ func main() {
 					"kubelet": map[string]interface{}{
 						"extraArgs": map[string]interface{}{
 							"rotate-server-certificates": true,
+							"allowed-unsafe-sysctls":     "net.ipv4.conf.all.src_valid_mark",
 						},
 						"extraMounts": []map[string]interface{}{
 							{
