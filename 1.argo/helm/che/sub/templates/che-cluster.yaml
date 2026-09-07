@@ -73,6 +73,9 @@ spec:
                 enable: true
               dashboard:
                 logLevel: INFO
+                containers:
+                  - name: che-dashboard
+                    image: quay.io/eclipse/che-dashboard:pr-1663
 
   data:
     - secretKey: url
