@@ -30,6 +30,10 @@ spec:
               rm -rf *.tf
               cp /scripts/*.tf .
               terraform init --upgrade
+              # Left over from MinIO: RustFS answers NotImplemented to the MinIO admin API,
+              # so these can be neither read nor destroyed — only forgotten. A no-op once
+              # they are out of the state.
+              terraform state rm minio_iam_policy.test_policy minio_iam_group.weebo_admin || true
               terraform apply -auto-approve
           env:
             - name: TF_VAR_s3_token
