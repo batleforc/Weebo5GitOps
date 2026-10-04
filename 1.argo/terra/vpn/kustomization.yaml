@@ -23,3 +23,4 @@ configMapGenerator:
       - ./terra-map/dns.tf
       - ./terra-map/ha.tf
       - ./terra-map/lab.tf
+      - ./terra-map/rift-ci.tf
