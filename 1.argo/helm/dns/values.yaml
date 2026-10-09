@@ -158,6 +158,38 @@ zone:
       *.game              3600    A                   94.23.38.81
       *.game              3600    AAAA                2001:41d0:2:2751::1
 
+  "db.batlehub.dev":
+    zone: "batlehub.dev."
+    file: |
+      $TTL 1h ;
+      $ORIGIN batlehub.dev.
+      @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
+                              2026042064; serial
+                              7200; refresh
+                              3600; retry
+                              1209600; expire
+                              38400 ) ; minimum
+      @                   IN      NS                  batleforc.fr.
+      @                   IN      NS                  ns3082912.ip-94-23-38.eu.
+      @                   3600    CAA       0  issue "letsencrypt.org"
+      batlehub.dev.       3600    A                   94.23.38.81
+      batlehub.dev.       3600    AAAA                2001:41d0:2:2751::1
+      batlehub.dev.       3600    TXT                 "v=spf1 include:mx.ovh.com -all"
+      batlehub.dev.       3600    MX 1                 mx1.mail.ovh.net.
+      batlehub.dev.       3600    MX 5                 mx2.mail.ovh.net.
+      batlehub.dev.       3600    MX 100               mx3.mail.ovh.net.
+      _imaps._tcp.batlehub.dev.            3600    SRV                 0 0 993 ssl0.ovh.net.
+      _submission._tcp.batlehub.dev.       3600    SRV                 0 0 465 ssl0.ovh.net.
+      _autodiscover._tcp.batlehub.dev.       3600    SRV               0 0 443 mailconfig.ovh.net.
+      mail.batlehub.dev.       3600    CNAME               ssl0.ovh.net.
+      smtp.batlehub.dev.       3600    CNAME               ssl0.ovh.net.
+      pop3.batlehub.dev.       3600    CNAME               ssl0.ovh.net.
+      imap.batlehub.dev.       3600    CNAME               ssl0.ovh.net.
+      autoconfig.batlehub.dev.       3600    CNAME               mailconfig.ovh.net.
+      autodiscover.batlehub.dev.       3600    CNAME               mailconfig.ovh.net.
+      ovhmo-selector-1._domainkey.batlehub.dev.      3600    CNAME               ovhmo-selector-1._domainkey.4982726.fv.dkim.mail.ovh.net.
+      ovhmo-selector-2._domainkey.batlehub.dev.      3600    CNAME               ovhmo-selector-2._domainkey.4982727.fv.dkim.mail.ovh.net.
+
 forwarders:
   - 10.96.0.10
   #- 8.8.8.8
