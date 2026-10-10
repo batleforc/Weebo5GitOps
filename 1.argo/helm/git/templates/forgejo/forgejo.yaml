@@ -37,6 +37,9 @@ spec:
             secretName: git-tls
         image:
           rootless: true
+          {{- with .Values.forgejo.appVersion }}
+          tag: {{ . | quote }}
+          {{- end }}
         persistence:
           enabled: true
         deployment:

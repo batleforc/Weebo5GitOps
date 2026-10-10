@@ -1,6 +1,8 @@
 forgejo:
   enabled: true
   version: "17.2.0"
+  # Forgejo app version (overrides chart appVersion, 17.2.0 ships 15.0.9)
+  appVersion: "16.0.5"
   dns: "git.batleforc.fr"
   runner:
     enabled: true
