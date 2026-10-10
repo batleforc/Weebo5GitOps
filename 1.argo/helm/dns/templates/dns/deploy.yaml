@@ -18,6 +18,33 @@ spec:
       labels:
         app: dns-server
     spec:
+      initContainers:
+        # Les ConfigMaps sont en lecture seule : on copie les zones dans un volume inscriptible
+        - name: copy-zones
+          image: {{ .Values.bind9.image }}:{{ .Values.bind9.tag }}
+          command:
+            - sh
+            - -c
+            - |
+              cp -L /zones-src/* /var/lib/bind/zones/
+              # Serial = date/heure du démarrage (YYYYMMDDHH, UTC) pour qu'il ne régresse pas après un
+              # redémarrage (updates dynamiques perdus) et que le secondaire OVH reprenne bien la zone.
+              # On garde le serial du fichier s'il est plus grand.
+              NEW=$(date -u +%Y%m%d%H)
+              for f in /var/lib/bind/zones/*; do
+                CUR=$(grep -oE '[0-9]+; *serial' "$f" | grep -oE '^[0-9]+')
+                if [ -n "$CUR" ] && [ "$NEW" -gt "$CUR" ]; then
+                  sed -i -E "s/[0-9]+(; *serial)/$NEW\1/" "$f"
+                fi
+                echo "$f: serial ${CUR} -> $(grep -oE '[0-9]+; *serial' "$f" | grep -oE '^[0-9]+')"
+              done
+              chown -R bind:bind /var/lib/bind/zones || chmod -R a+rwX /var/lib/bind/zones
+          volumeMounts:
+            - name: zone-map
+              mountPath: /zones-src
+              readOnly: true
+            - name: zone-data
+              mountPath: /var/lib/bind/zones
       containers:
         - name: dns-server
           image: {{ .Values.bind9.image }}:{{ .Values.bind9.tag }}
@@ -39,14 +66,9 @@ spec:
             - name: named-map
               mountPath: /etc/bind/named.conf
               subPath: named.conf
-            # Create a volumeMount for each zone
-            {{- range $key, $value := .Values.zone }}
-            - name: zone-map
-              mountPath: "/var/lib/bind/pri/{{ $value.zone }}/{{ $key }}"
-              subPath: {{ $key }}
-            - name: empty-dir-{{ $key | replace "." "-" }}
-              mountPath: /var/lib/bind/pri/{{ $value.zone }}
-            {{- end }}
+            # Zones copiées par l'initContainer : modifiables par BIND (journal, dump des updates dynamiques)
+            - name: zone-data
+              mountPath: /var/lib/bind/zones
             - name: tsig-key
               mountPath: /val/lib/bind/pri/tsig.key
               subPath: tsig.key
@@ -76,17 +98,14 @@ spec:
         - name: zone-map
           configMap:
             name: zone-map
-            defaultMode: 0755
         - name: named-map
           configMap:
             name: named-map
         - name: tsig-key
           secret:
             secretName: tsig-key-secret
-        {{- range $key, $value := .Values.zone }}
-        - name: empty-dir-{{ $key | replace "." "-" }}
+        - name: zone-data
           emptyDir: {}
-        {{- end }}
         {{- if .Values.httpsNsServeur.enabled }}
         - name: ns-server-tls
           secret:

@@ -5,16 +5,18 @@ zone:
       $TTL 1h ;
       $ORIGIN batleforc.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026101001; serial
+                              2026101002; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
-                              38400 ) ; minimum
+                              3600 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
       @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       @                   600     IN TXT              "google-site-verification=6V23ppVxZ_rzTlJ8QO01KYH1J0bTGRN5JPc6eKavqeU"
+      @                   3600    TXT                 "v=spf1 -all"
+      _dmarc              3600    TXT                 "v=DMARC1; p=reject"
       ns1                 IN      A                   94.23.38.81
       ns1                 IN      AAAA                2001:41d0:2:2751::1
       ns2                 IN      A                   94.23.38.81
@@ -66,11 +68,11 @@ zone:
       $TTL 1h;
       $origin maxleriche.net.
       @       IN      SOA     batleforc.fr. maxleriche\.60.gmail.com. (
-                              2026101001; serial
+                              2026101002; serial
                               10800; refresh
                               3600; retry
                               604800; expire
-                              38400 ); minimum
+                              3600 ); minimum
                             IN      NS                              batleforc.fr.
                             IN      NS                              ns3082912.ip-94-23-38.eu.
                             IN      NS                              sdns2.ovh.net.
@@ -93,51 +95,23 @@ zone:
       _dmarc                 3600    TXT                            "v=DMARC1; p=quarantine"
       _atproto         3600    TXT                            "did=did:plc:omws73kv4dp3inakwy3srhn2"
 
-  "38.23.94.in-addr.arpa":
-    zone: "38.23.94.in-addr.arpa."
-    file: |
-      $TTL 1h ;
-      $ORIGIN 38.23.94.in-addr.arpa.
-      @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2024011942; serial
-                              7200; refresh
-                              3600; retry
-                              1209600; expire
-                              38400 ) ; minimum
-      @                   IN      NS                  batleforc.fr.
-      @                   IN      NS                  ns3082912.ip-94-23-38.eu.
-      81                  IN      PTR                 batleforc.fr.
-
-  "1.5.7.2.2.0.0.0.0.d.1.4.1.0.0.2.ip6.arpa":
-    zone: "1.5.7.2.2.0.0.0.0.d.1.4.1.0.0.2.ip6.arpa."
-    file: |
-      $TTL 1h ;
-      $ORIGIN 1.5.7.2.2.0.0.0.0.d.1.4.1.0.0.2.ip6.arpa.
-      @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026040501; serial
-                              7200; refresh
-                              3600; retry
-                              1209600; expire
-                              38400 ) ; minimum
-      @                   IN      NS                  batleforc.fr.
-      @                   IN      NS                  ns3082912.ip-94-23-38.eu.
-      1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN PTR        batleforc.fr.
   "db.weebo.fr":
     zone: "weebo.fr."
     file: |
       $TTL 1h ;
       $ORIGIN weebo.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026101001; serial
+                              2026101002; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
-                              38400 ) ; minimum
+                              3600 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
       @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
-      weebo.fr.       600     IN TXT "v=spf1 mx a:mail.weebo.fr ~all"
+      weebo.fr.       600     IN TXT "v=spf1 -all"
+      _dmarc          3600    TXT    "v=DMARC1; p=reject"
       weebo.fr.       600     IN TXT "google-site-verification=0N1vTehQGI2Bc_p08SeijHssABbML4WF6OUAtKDCeMU"
       @               600     IN TXT "mlab-domain-e02d707d-376b-4715-9363-9075ec5e7315"
       weebo.fr.       3600    A                               94.23.38.81
@@ -167,13 +141,14 @@ zone:
       $TTL 1h ;
       $ORIGIN batlehub.dev.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026042064; serial
+                              2026101002; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
-                              38400 ) ; minimum
+                              3600 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
+      @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       batlehub.dev.       3600    A                   94.23.38.81
       batlehub.dev.       3600    AAAA                2001:41d0:2:2751::1

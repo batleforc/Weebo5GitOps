@@ -36,7 +36,7 @@ data:
     {{ range $key, $value := .Values.zone }}
     zone "{{ $value.zone }}" {
       type primary;
-      file "/var/lib/bind/pri/{{$value.zone}}/{{ $key}}";
+      file "/var/lib/bind/zones/{{ $key }}";
       allow-transfer {
         key "tsig-key";
         {{- range $.Values.secondaryDns.ips }}
