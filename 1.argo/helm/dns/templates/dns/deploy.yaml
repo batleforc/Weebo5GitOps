@@ -28,10 +28,11 @@ spec:
             - -c
             - |
               cp -L /zones-src/* /var/lib/bind/zones/
-              # Serial = date/heure du démarrage (YYYYMMDDHH, UTC) pour qu'il ne régresse pas après un
+              # Serial = date/heure du démarrage (YYMMDDHHMM, UTC) pour qu'il ne régresse pas après un
               # redémarrage (updates dynamiques perdus) et que le secondaire OVH reprenne bien la zone.
-              # On garde le serial du fichier s'il est plus grand.
-              NEW=$(date -u +%Y%m%d%H)
+              # Précision à la minute : deux déploiements dans la même heure ont bien des serials différents.
+              # YYMMDDHHMM (> 2026101010) reste sous 2^32 jusqu'en 2042. On garde le serial du fichier s'il est plus grand.
+              NEW=$(date -u +%y%m%d%H%M)
               for f in /var/lib/bind/zones/*; do
                 CUR=$(grep -oE '[0-9]+; *serial' "$f" | grep -oE '^[0-9]+')
                 if [ -n "$CUR" ] && [ "$NEW" -gt "$CUR" ]; then
