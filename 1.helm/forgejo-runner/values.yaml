@@ -1,47 +1,214 @@
-runner:
+secretStore:
   enabled: true
+
+# Values for the upstream chart: https://git.erwanleboucher.dev/eleboucher/runner-k8s-plugin
+runner:
+  # Keep the "forgejo-runner" ServiceAccount name, it is bound in vault (forgejo-readwrite role)
+  fullnameOverride: forgejo-runner
+
+  forgejo:
+    url: https://git.batleforc.fr
+    # Synced from vault (mv/<namespace>/sub) by templates/runner-secret.yaml
+    existingSecret: forgejo-runner-secret
+
   image:
-    repository: registry.batleforc.fr/forgejo-action/forgejo-runner
-    tag: latest
-  podSpecToInclude:
-    - buildah.yaml
-    - default.yaml
-    - git-pages.yaml
-    - mise.yaml
-  runnerConfig:
+    repository: data.forgejo.org/forgejo/runner
+    tag: "13.2.0"
+
+  imagePullSecrets:
+    - name: docker-config
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi
+
+  runnerConfig: |
     log:
       level: info
-
     runner:
       capacity: 4
       timeout: 3h
+      shutdown_timeout: 3m
       labels:
-        - "kubernetes:k8spod:///config/podspec-default.yaml"
-        - "buildah:k8spod:///config/podspec-buildah.yaml"
-        - "git-pages:k8spod:///config/podspec-git-pages.yaml"
-        - "mise:k8spod:///config/podspec-mise.yaml"
-
-    kubernetes:
-      namespace: forgejo-action
-      poll_timeout: 30s
-
+        - "kubernetes:k8s:///config/podspec-default.yaml"
+        - "buildah:k8s:///config/podspec-buildah.yaml"
+        - "git-pages:k8s:///config/podspec-git-pages.yaml"
+        - "mise:k8s:///config/podspec-mise.yaml"
     container:
       # Disables Docker socket check — not needed with K8s backend
       docker_host: "-"
-
     cache:
       enabled: false
+    plugins:
+      k8s:
+        address: "unix:///plugin/forgejo-runner-k8s.sock"
+        options:
+          namespace: forgejo-action
+          poll_timeout: 10m
 
-    server:
-      connections:
-        forgejo:
-          url: https://git.batleforc.fr
-          uuid: "{{RUNNER_UUID}}" # filled in at deploy time
-          token: "{{RUNNER_TOKEN}}" # filled in at deploy time
-          labels:
-            - "kubernetes:k8spod:///config/podspec-default.yaml"
-            - "buildah:k8spod:///config/podspec-buildah.yaml"
-            - "git-pages:k8spod:///config/podspec-git-pages.yaml"
-            - "mise:k8spod:///config/podspec-mise.yaml"
-  secretStore:
-    enabled: true
+  podSpecs:
+    podspec-default.yaml: |
+      containers:
+        - name: main
+          image: node:22-bookworm
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+              ephemeral-storage: 10Gi
+          volumeMounts:
+            - name: vault-tls
+              mountPath: /vault-tls
+              readOnly: true
+
+      volumes:
+        - name: vault-tls
+          secret:
+            secretName: vault-tls
+      restartPolicy: Never
+    podspec-buildah.yaml: |
+      hostUsers: false
+      containers:
+        - name: main
+          image: registry.batleforc.fr/forgejo-action/buildah:main
+          imagePullPolicy: Always
+          env:
+            - name: BUILDAH_ISOLATION
+              value: chroot
+            - name: STORAGE_DRIVER
+              value: overlay
+            # Fix tar fchmodat EPERM: emptyDir superblocks are in the init user namespace,
+            # making CAP_FOWNER ineffective across the boundary. Skip mode/owner restoration.
+            - name: TAR_OPTIONS
+              value: "--no-same-permissions --no-same-owner"
+            - name: VAULT_ADDR
+              value: "https://vault.vault:8200"
+            - name: VAULT_CA_CERT
+              value: /vault-tls/ca.crt
+            - name: VAULT_FORGEJO_ROLE
+              value: forgejo_default_policy
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            fsGroup: 0
+            # capabilities: drop: ALL empties the OCI bounding set before the process starts,
+            # overriding the K8s userns capability grant. We add back only what buildah needs:
+            # SETUID/SETGID: writing uid_map/gid_map for buildah's internal user namespace (login, build)
+            # SYS_CHROOT: chroot(2) for BUILDAH_ISOLATION=chroot
+            # SETFCAP: setting file capabilities inside built images
+            # CHOWN: chown(2) during image layer extraction
+            capabilities:
+              add:
+                - SETUID
+                - SETGID
+                - SYS_CHROOT
+                - SETFCAP
+                - CHOWN
+              drop:
+                - ALL
+            seccompProfile:
+              type: Localhost
+              localhostProfile: profiles/ci-build.json
+          volumeMounts:
+            - name: buildah-storage
+              mountPath: /var/lib/containers/storage
+            - name: tmp
+              mountPath: /tmp
+            - name: var-tmp
+              mountPath: /var/tmp
+            - name: run
+              mountPath: /run
+            - name: vault-tls
+              mountPath: /vault-tls
+              readOnly: true
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+            limits:
+              cpu: "4"
+              memory: 4Gi
+              ephemeral-storage: 20Gi
+      imagePullSecrets:
+        - name: docker-config
+      volumes:
+        - name: buildah-storage
+          emptyDir:
+            sizeLimit: 30Gi
+        - name: tmp
+          emptyDir:
+            sizeLimit: 2Gi
+        - name: var-tmp
+          emptyDir:
+            sizeLimit: 15Gi
+        - name: run
+          emptyDir:
+            sizeLimit: 256Mi
+        - name: vault-tls
+          secret:
+            secretName: vault-tls
+      restartPolicy: Never
+    podspec-git-pages.yaml: |
+      containers:
+        - name: main
+          image: registry.batleforc.fr/forgejo-action/git-pages:main
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+              ephemeral-storage: 10Gi
+          volumeMounts:
+            - name: vault-tls
+              mountPath: /vault-tls
+              readOnly: true
+      imagePullSecrets:
+        - name: docker-config
+      volumes:
+        - name: vault-tls
+          secret:
+            secretName: vault-tls
+      restartPolicy: Never
+    podspec-mise.yaml: |
+      containers:
+        - name: main
+          image: registry.batleforc.fr/forgejo-action/mise:main
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+              ephemeral-storage: 10Gi
+          volumeMounts:
+            - name: vault-tls
+              mountPath: /vault-tls
+              readOnly: true
+          env:
+            - name: VAULT_ADDR
+              value: "https://vault.vault:8200"
+            - name: VAULT_CA_CERT
+              value: /vault-tls/ca.crt
+            - name: VAULT_FORGEJO_ROLE
+              value: forgejo_default_policy
+      imagePullSecrets:
+        - name: docker-config
+      volumes:
+        - name: vault-tls
+          secret:
+            secretName: vault-tls
+      restartPolicy: Never

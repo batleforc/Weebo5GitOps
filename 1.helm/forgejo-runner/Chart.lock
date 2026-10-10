@@ -1,0 +1,6 @@
+dependencies:
+- name: forgejo-runner
+  repository: oci://git.erwanleboucher.dev/eleboucher/charts
+  version: 13.2.1
+digest: sha256:efaa0bae64c31274f91ae4f0f8b2509c87badab4818407a92ffe69463e74702a
+generated: "2026-10-10T18:47:30.787233843+02:00"

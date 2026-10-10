@@ -14,7 +14,7 @@ J'ai actuellement 2 CI en vision, l'historique qui est Tekton et la nouvelle qui
 
 Pour l'usage que je souhaite en faire, je pense uttilisé la solution en cours de développement basé sur les repos suivant:
 
-- [Forgejo runner but with kube](https://github.com/eleboucher/runner)
+- [Forgejo runner k8s plugin](https://git.erwanleboucher.dev/eleboucher/runner-k8s-plugin)
 - [Hardened Kubernetes runner](https://codeberg.org/ppaslan/forgejo-kubernetes-runners)
 - [Register runner](https://forgejo.org/docs/next/admin/actions/registration/#offline-registration)
 
