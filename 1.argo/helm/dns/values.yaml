@@ -94,6 +94,7 @@ zone:
       protonmail3._domainkey 3600    CNAME                          protonmail3.domainkey.dokpfhrmhsyhdvnrkoythmysqusv3yw6i5wxyt45gziglhzwcfcba.domains.proton.ch.
       _dmarc                 3600    TXT                            "v=DMARC1; p=quarantine"
       _atproto         3600    TXT                            "did=did:plc:omws73kv4dp3inakwy3srhn2"
+      ownercheck             3600    TXT                            "b67142a5"
 
   "db.weebo.fr":
     zone: "weebo.fr."
