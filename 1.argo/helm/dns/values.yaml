@@ -5,13 +5,14 @@ zone:
       $TTL 1h ;
       $ORIGIN batleforc.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026042064; serial
+                              2026101001; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
                               38400 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
+      @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       @                   600     IN TXT              "google-site-verification=6V23ppVxZ_rzTlJ8QO01KYH1J0bTGRN5JPc6eKavqeU"
       ns1                 IN      A                   94.23.38.81
@@ -65,13 +66,14 @@ zone:
       $TTL 1h;
       $origin maxleriche.net.
       @       IN      SOA     batleforc.fr. maxleriche\.60.gmail.com. (
-                              2026042048; serial
+                              2026101001; serial
                               10800; refresh
                               3600; retry
                               604800; expire
                               38400 ); minimum
                             IN      NS                              batleforc.fr.
                             IN      NS                              ns3082912.ip-94-23-38.eu.
+                            IN      NS                              sdns2.ovh.net.
       maxleriche.net.       3600    CAA                             0 issue "letsencrypt.org"
       maxleriche.net.       600     IN TXT                          "v=spf1 include:_spf.protonmail.ch ~all"
       @                     600     IN TXT                          "protonmail-verification=eb37b2ad8c95b91c0c993bcdb261f33ae27f9cfd"
@@ -126,13 +128,14 @@ zone:
       $TTL 1h ;
       $ORIGIN weebo.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026042057; serial
+                              2026101001; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
                               38400 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
+      @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       weebo.fr.       600     IN TXT "v=spf1 mx a:mail.weebo.fr ~all"
       weebo.fr.       600     IN TXT "google-site-verification=0N1vTehQGI2Bc_p08SeijHssABbML4WF6OUAtKDCeMU"
@@ -149,8 +152,8 @@ zone:
       *.lab              3600    AAAA                            2001:41d0:c:705::1
       lab              3600    A                               37.187.255.5
       lab              3600    AAAA                            2001:41d0:c:705::1
-      *.weebo.fr       3600    A                              37.187.255.5
-      *.weebo.fr       3600    AAAA                           2001:41d0:c:705::1
+      *                3600    A                              37.187.255.5
+      *                3600    AAAA                           2001:41d0:c:705::1
       ro             3600    A                               94.23.38.81
       ro             3600   AAAA                            2001:41d0:2:2751::1
       wr             3600    A                               94.23.38.81
@@ -189,6 +192,12 @@ zone:
       autodiscover.batlehub.dev.       3600    CNAME               mailconfig.ovh.net.
       ovhmo-selector-1._domainkey.batlehub.dev.      3600    CNAME               ovhmo-selector-1._domainkey.4982726.fv.dkim.mail.ovh.net.
       ovhmo-selector-2._domainkey.batlehub.dev.      3600    CNAME               ovhmo-selector-2._domainkey.4982727.fv.dkim.mail.ovh.net.
+
+# DNS secondaire OVH (sdns2.ovh.net) autorisé à faire l'AXFR
+secondaryDns:
+  ips:
+    - 213.251.188.141
+    - 2001:41d0:1:4a8d::1
 
 forwarders:
   - 10.96.0.10

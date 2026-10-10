@@ -8,6 +8,8 @@ metadata:
   annotations:
     {{ toYaml .Values.annotations | nindent 4 }}
 spec:
+  # Préserve l'IP source (nécessaire pour allow-transfer par IP du DNS secondaire)
+  externalTrafficPolicy: Local
   ipFamilyPolicy: PreferDualStack
   ipFamilies:
     - IPv4

@@ -39,6 +39,9 @@ data:
       file "/var/lib/bind/pri/{{$value.zone}}/{{ $key}}";
       allow-transfer {
         key "tsig-key";
+        {{- range $.Values.secondaryDns.ips }}
+        {{ . }};
+        {{- end }}
       };
       update-policy {
         grant tsig-key zonesub ANY;
