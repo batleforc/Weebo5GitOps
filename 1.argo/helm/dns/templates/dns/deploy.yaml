@@ -73,6 +73,9 @@ spec:
             # Zones copiées par l'initContainer : modifiables par BIND (journal, dump des updates dynamiques)
             - name: zone-data
               mountPath: /var/lib/bind/zones
+            # named (utilisateur bind) doit pouvoir écrire son pid et sa session key
+            - name: run-named
+              mountPath: /run/named
             - name: tsig-key
               mountPath: /val/lib/bind/pri/tsig.key
               subPath: tsig.key
@@ -109,6 +112,8 @@ spec:
           secret:
             secretName: tsig-key-secret
         - name: zone-data
+          emptyDir: {}
+        - name: run-named
           emptyDir: {}
         {{- if .Values.httpsNsServeur.enabled }}
         - name: ns-server-tls
