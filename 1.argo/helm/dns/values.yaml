@@ -182,6 +182,7 @@ forwarders:
 bind9:
   image: ubuntu/bind9
   tag: 9.20-26.04_edge
+  initImage: busybox:1.37
 
 tsig:
   secretCreatorImage: alpine/k8s:1.35.3

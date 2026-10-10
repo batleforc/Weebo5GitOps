@@ -21,7 +21,8 @@ spec:
       initContainers:
         # Les ConfigMaps sont en lecture seule : on copie les zones dans un volume inscriptible
         - name: copy-zones
-          image: {{ .Values.bind9.image }}:{{ .Values.bind9.tag }}
+          # L'image bind9 n'a pas de shell
+          image: {{ .Values.bind9.initImage }}
           command:
             - sh
             - -c
@@ -38,7 +39,9 @@ spec:
                 fi
                 echo "$f: serial ${CUR} -> $(grep -oE '[0-9]+; *serial' "$f" | grep -oE '^[0-9]+')"
               done
-              chown -R bind:bind /var/lib/bind/zones || chmod -R a+rwX /var/lib/bind/zones
+              # L'utilisateur bind n'existe pas dans busybox : on ouvre les droits pour que named puisse écrire
+              chmod 0777 /var/lib/bind/zones
+              chmod 0666 /var/lib/bind/zones/*
           volumeMounts:
             - name: zone-map
               mountPath: /zones-src
