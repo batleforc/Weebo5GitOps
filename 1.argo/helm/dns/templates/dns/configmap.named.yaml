@@ -22,6 +22,17 @@ data:
       listen-on-v6 port 443 tls local-tls http default {any;};
       {{- end }}
 
+      # Ne pas exposer la version de BIND
+      version "none";
+
+      # Response Rate Limiting : limite l'usage du serveur pour des attaques par amplification (UDP uniquement)
+      rate-limit {
+        responses-per-second 10;
+        window 5;
+        # Clients internes au cluster (pods, CoreDNS, blocky) non limités
+        exempt-clients { 10.0.0.0/8; fd00::/8; };
+      };
+
       allow-query { any; };
       allow-recursion {
         none;

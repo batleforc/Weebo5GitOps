@@ -17,10 +17,6 @@ zone:
       @                   600     IN TXT              "google-site-verification=6V23ppVxZ_rzTlJ8QO01KYH1J0bTGRN5JPc6eKavqeU"
       @                   3600    TXT                 "v=spf1 -all"
       _dmarc              3600    TXT                 "v=DMARC1; p=reject"
-      ns1                 IN      A                   94.23.38.81
-      ns1                 IN      AAAA                2001:41d0:2:2751::1
-      ns2                 IN      A                   94.23.38.81
-      ns2                 IN      AAAA                2001:41d0:2:2751::2
       batleforc.fr.       3600    A                   94.23.38.81
       batleforc.fr.       3600    AAAA                2001:41d0:2:2751::1
       argo                3600    A                   94.23.38.81
@@ -182,7 +178,7 @@ forwarders:
 
 bind9:
   image: ubuntu/bind9
-  tag: 9.20-26.04_edge
+  tag: 9.20-26.04_stable
   initImage: busybox:1.37
 
 tsig:
