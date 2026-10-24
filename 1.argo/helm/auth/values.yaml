@@ -5,7 +5,7 @@ kaniop:
 
 authentik:
   enabled: true
-  version: 2026.5.6
+  version: 2026.8.5
   argoAuth:
     enabled: true
 
