@@ -188,7 +188,7 @@ tsig:
   bind9Image: ubuntu/bind9:9.20-24.10_beta
 
 externalDns:
-  version: v0.20.0
+  version: v0.24.0
   zone: batleforc.fr
 
 httpsNsServeur:

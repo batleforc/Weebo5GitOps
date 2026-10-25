@@ -17,6 +17,7 @@ spec:
       - name: external-dns
         image: registry.k8s.io/external-dns/external-dns:{{ .Values.externalDns.version }}
         args:
+        - --policy=sync
         - --registry=txt
         - --txt-prefix=external-dns-
         - --txt-owner-id=k8s
@@ -27,7 +28,7 @@ spec:
         - --rfc2136-tsig-secret=$(TSIG_KEY)
         - --rfc2136-tsig-secret-alg=hmac-sha512
         - --rfc2136-tsig-keyname=tsig-key
-        - --rfc2136-tsig-axfr
+        - --rfc2136-axfr
         - --source=crd
         - --source=service
         - --domain-filter={{ .Values.externalDns.zone }}

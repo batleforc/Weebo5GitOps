@@ -1,6 +1,6 @@
 certManager:
   enabled: true
-  version: 1.20.0
+  version: v1.21.3
   installCRDs: true
   certIssuer:
     enabled: true
