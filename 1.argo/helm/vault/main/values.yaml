@@ -12,7 +12,7 @@ vaultApp:
 
 vaultInstance:
   enabled: true
-  version: "2.0.4"
+  version: "2.2.1"
   image: hashicorp/vault
   hook:
     enabled: true
