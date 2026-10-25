@@ -182,8 +182,10 @@ bind9:
   initImage: busybox:1.38.0
 
 tsig:
-  secretCreatorImage: alpine/k8s:1.35.9
-  bind9Image: ubuntu/bind9:9.20-26.04_stable
+  # One-shot job: changing these images makes the Job spec immutable-conflict,
+  # and deleting it to re-run would rotate the TSIG key. Leave as-is.
+  secretCreatorImage: alpine/k8s:1.35.3
+  bind9Image: ubuntu/bind9:9.20-24.10_beta
 
 externalDns:
   version: v0.20.0

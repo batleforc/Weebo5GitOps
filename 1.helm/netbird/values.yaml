@@ -387,10 +387,12 @@ managementTokenSecretJob:
 
   ## @param managementTokenSecretJob.image Docker image for the job that creates the management token secret.
   ##
+  ## One-shot job: changing the image conflicts with the immutable Job spec and
+  ## re-running it would mint a new management token. Leave as-is.
   image:
     repository: alpine/k8s
     pullPolicy: Always
-    tag: "1.35.9"
+    tag: "1.35.3"
 
   ## @param managementTokenSecretJob.serviceAccount Service account for the management token secret job.
   ##
