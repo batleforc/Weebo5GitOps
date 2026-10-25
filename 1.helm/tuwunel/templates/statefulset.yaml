@@ -35,6 +35,7 @@ spec:
         {{- toYaml .Values.podAnnotations | nindent 8 }}
         {{- end }}
     spec:
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
         - name: tuwunel
           image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"

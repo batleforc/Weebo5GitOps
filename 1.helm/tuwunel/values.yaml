@@ -11,7 +11,7 @@ server_name: "tuwunel.truc"
 
 image:
   repository: ghcr.io/matrix-construct/tuwunel
-  tag: v1.6.1
+  tag: v1.9.4
   pullPolicy: IfNotPresent
 
 ## The keys under config must be valid for the configuration file of
@@ -97,7 +97,11 @@ resources:
     memory: "256Mi"
   limits:
     cpu: "1"
-    memory: "512Mi"
+    memory: "2Gi"
+
+# Long grace period so a stop request never force-kills an in-progress
+# database migration (tuwunel >= 1.9 resumes it cleanly on restart)
+terminationGracePeriodSeconds: 3600
 
 nodeSelector: {}
 
