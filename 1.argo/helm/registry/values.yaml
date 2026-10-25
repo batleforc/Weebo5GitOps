@@ -1,6 +1,6 @@
 harbor:
   enabled: true
-  version: 1.18.4
+  version: 1.19.4
   domain:
     core: registry.batleforc.fr
     notary: notary.batleforc.fr
