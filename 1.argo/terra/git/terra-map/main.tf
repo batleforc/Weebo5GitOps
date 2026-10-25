@@ -1,7 +1,8 @@
 terraform {
   required_providers {
     forgejo = {
-      source = "svalabs/forgejo"
+      source  = "svalabs/forgejo"
+      version = "1.7.0"
     }
     vault = {
       source  = "hashicorp/vault"

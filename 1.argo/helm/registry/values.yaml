@@ -3,6 +3,5 @@ harbor:
   version: 1.19.4
   domain:
     core: registry.batleforc.fr
-    notary: notary.batleforc.fr
 
 repo: ""

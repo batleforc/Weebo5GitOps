@@ -1,7 +1,8 @@
 terraform {
   required_providers {
     netbird = {
-      source = "registry.terraform.io/netbirdio/netbird"
+      source  = "registry.terraform.io/netbirdio/netbird"
+      version = "0.0.10"
     }
     vault = {
       source  = "hashicorp/vault"
