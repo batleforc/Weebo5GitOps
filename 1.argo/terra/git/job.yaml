@@ -18,7 +18,7 @@ spec:
       serviceAccountName: "default"
       containers:
         - name: terraform
-          image: hashicorp/terraform:latest
+          image: hashicorp/terraform:1.17.0
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
         - name: create-in-vault
-          image: hashicorp/terraform:latest
+          image: hashicorp/terraform:1.17.0
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh

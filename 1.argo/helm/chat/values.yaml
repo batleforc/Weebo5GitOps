@@ -12,4 +12,4 @@ elementWeb:
   domain: "chat-web.batleforc.fr"
   image:
     url: "vectorim/element-web"
-    version: "latest"
+    version: "v1.12.32"

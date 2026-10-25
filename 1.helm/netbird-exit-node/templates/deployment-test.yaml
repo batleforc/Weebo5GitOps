@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: netbird
-          image: netbirdio/netbird:latest
+          image: "{{ .Values.netbird.adminMode.image }}:{{ .Values.netbird.adminMode.version }}"
           env:
             - name: NB_SETUP_KEY
               value: "{{ tpl .Values.netbird.setup_key . }}" # replace with your setup key

@@ -10,8 +10,8 @@
 server_name: "tuwunel.truc"
 
 image:
-  repository: forgejo.ellis.link/continuwuation/continuwuity
-  tag: latest-maxperf
+  repository: ghcr.io/matrix-construct/tuwunel
+  tag: v1.6.1
   pullPolicy: IfNotPresent
 
 ## The keys under config must be valid for the configuration file of

@@ -32,7 +32,7 @@ spec:
         {{- end }}
       initContainers:
         - name: wait-for-clickhouse
-          image: busybox:1.35
+          image: busybox:1.38.0
           command:
             - sh
             - -c
