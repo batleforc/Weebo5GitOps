@@ -14,7 +14,7 @@ terraform {
     }
     rustfs = {
       source  = "weinmann-emt/rustfs"
-      version = "0.0.6"
+      version = "0.0.7"
     }
   }
 }
