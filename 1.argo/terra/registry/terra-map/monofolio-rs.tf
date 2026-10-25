@@ -11,14 +11,12 @@ resource "harbor_retention_policy" "main" {
   rule {
     repo_matching        = "batleforc/monofolio-rs"
     tag_matching         = "**"
-    always_retain        = true
     most_recently_pushed = 2
   }
   rule {
     most_recently_pushed = 2
     repo_matching        = "batleforc/monofolio-rs/cache"
     tag_matching         = "**"
-    always_retain        = true
   }
 }
 
