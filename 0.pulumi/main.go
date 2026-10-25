@@ -197,6 +197,19 @@ func main() {
 							"feature-gates": "UserNamespacesSupport=true",
 						},
 					},
+					// Single control plane: leader election only adds lease renewals that
+					// fail during etcd fsync stalls and crashloop these components.
+					// Re-enable before adding a second control plane node.
+					"controllerManager": map[string]interface{}{
+						"extraArgs": map[string]interface{}{
+							"leader-elect": "false",
+						},
+					},
+					"scheduler": map[string]interface{}{
+						"extraArgs": map[string]interface{}{
+							"leader-elect": "false",
+						},
+					},
 				},
 				"machine": map[string]interface{}{
 					"sysctls": map[string]interface{}{
