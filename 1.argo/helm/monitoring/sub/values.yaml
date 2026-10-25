@@ -1,11 +1,11 @@
 coroot:
   enabled: true
   operator:
-    version: "0.9.4"
+    version: "0.10.6"
 
 grafana:
   enabled: true
-  version: "12.1.1"
+  version: "14.0.1"
   datasources:
     clickhouse:
       - name: default

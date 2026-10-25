@@ -44,17 +44,18 @@ spec:
             lbipam.cilium.io/sharing-key: "weebo-gate"
             lbipam.cilium.io/ips: "{{ .Values.traefik.ips }}"
             lbipam.cilium.io/sharing-cross-namespace: "*"
-        logs:
-          general:
-            format: json
-          access:
-            enabled: true
-            format: json
-            fields:
-              headers:
-                defaultMode: keep
-                names:
-                  Authorization: redact
+        log:
+          format: json
+        accessLog:
+          enabled: true
+          format: json
+          fields:
+            headers:
+              # chart < 41 ignored this block (effective mode was drop); keep it
+              # that way so cookies / auth headers don't end up in access logs
+              defaultMode: drop
+              names:
+                Authorization: redact
         providers:
           kubernetesCRD:
             enabled: {{ .Values.traefik.kubeCRD.enabled }}
@@ -68,8 +69,8 @@ spec:
           kubernetesGateway:
             enabled: {{ .Values.traefik.gatewayAPI.enabled }}
         experimental:
-          {{- range $name, $plugin := .Values.traefik.plugins }}
           plugins:
+          {{- range $name, $plugin := .Values.traefik.plugins }}
             {{ $name }}:
               moduleName: {{ $plugin.moduleName }}
               version: {{ $plugin.version }}
