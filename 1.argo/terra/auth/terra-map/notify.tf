@@ -8,6 +8,14 @@ resource "random_password" "notify_database" {
   special = false
 }
 
+# Stable P-256 VAPID signing key for Web Push. The PKCS#8 form is written to
+# Vault below; keep this resource in Terraform state so upgrades do not rotate
+# the key and invalidate every browser subscription.
+resource "tls_private_key" "notify_vapid" {
+  algorithm   = "ECDSA"
+  ecdsa_curve = "P256"
+}
+
 resource "authentik_provider_oauth2" "notify" {
   name               = "weebo-notify"
   client_id          = "weebo-notify"
@@ -41,13 +49,14 @@ resource "vault_kv_secret_v2" "notify" {
   name  = "notify/auth"
   data_json = jsonencode(
     {
-      AUTHENTIK_CLIENT_ID     = authentik_provider_oauth2.notify.client_id,
-      AUTHENTIK_CLIENT_SECRET = authentik_provider_oauth2.notify.client_secret,
+      AUTHENTIK_CLIENT_ID      = authentik_provider_oauth2.notify.client_id,
+      AUTHENTIK_CLIENT_SECRET  = authentik_provider_oauth2.notify.client_secret,
       AUTHENTIK_URL            = "https://auth.batleforc.fr/application/o/${authentik_application.notify.slug}/",
       ATTACHMENTS_TOKEN_SECRET = random_password.notify_attachments.result,
+      VAPID_PRIVATE_KEY        = tls_private_key.notify_vapid.private_key_pem_pkcs8,
       POSTGRES_USER            = "notify",
       POSTGRES_PASSWORD        = random_password.notify_database.result,
-      DATABASE_URL              = "postgresql://notify:${random_password.notify_database.result}@notify-postgresql.notify.svc.cluster.local:5432/notify",
+      DATABASE_URL             = "postgresql://notify:${random_password.notify_database.result}@notify-postgresql.notify.svc.cluster.local:5432/notify",
     }
   )
 }
