@@ -35,3 +35,4 @@ configMapGenerator:
       - ./terra-map/lab.tf
       - ./terra-map/runner.tf
       - ./terra-map/rift.tf
+      - ./terra-map/notify.tf
