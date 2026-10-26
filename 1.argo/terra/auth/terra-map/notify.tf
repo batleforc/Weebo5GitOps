@@ -23,6 +23,12 @@ resource "authentik_provider_oauth2" "notify" {
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   signing_key        = data.authentik_certificate_key_pair.generated.id
   client_type        = "public"
+  # Authentik 2026.8 validates this list at /authorize. An empty list is not
+  # equivalent to the OAuth defaults for providers created by Terraform.
+  grant_types = [
+    "authorization_code",
+    "refresh_token",
+  ]
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
