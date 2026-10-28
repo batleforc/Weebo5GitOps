@@ -3,6 +3,13 @@ resource "random_password" "notify_attachments" {
   special = true
 }
 
+# HMAC key for [sinks] fingerprint_key (feeds and webhook sinks), >= 32 bytes.
+# Read at boot only: rotating it re-ids every webhook sink.
+resource "random_password" "notify_sink_fingerprint" {
+  length  = 64
+  special = false
+}
+
 resource "random_password" "notify_database" {
   length  = 32
   special = false
@@ -59,6 +66,7 @@ resource "vault_kv_secret_v2" "notify" {
       AUTHENTIK_CLIENT_SECRET  = authentik_provider_oauth2.notify.client_secret,
       AUTHENTIK_URL            = "https://auth.batleforc.fr/application/o/${authentik_application.notify.slug}/",
       ATTACHMENTS_TOKEN_SECRET = random_password.notify_attachments.result,
+      SINK_FINGERPRINT_KEY     = random_password.notify_sink_fingerprint.result,
       VAPID_PRIVATE_KEY        = tls_private_key.notify_vapid.private_key_pem_pkcs8,
       POSTGRES_USER            = "notify",
       POSTGRES_PASSWORD        = random_password.notify_database.result,
