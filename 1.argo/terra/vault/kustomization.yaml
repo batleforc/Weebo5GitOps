@@ -29,3 +29,4 @@ configMapGenerator:
       - ./terra-map/dns.tf
       - ./terra-map/dev.tf
       - ./terra-map/rift.tf
+      - ./terra-map/kura.tf

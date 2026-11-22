@@ -18,3 +18,4 @@ configMapGenerator:
       - ./terra-map/main.tf
       - ./terra-map/git-pages.tf
       - ./terra-map/rift.tf
+      - ./terra-map/kura.tf
