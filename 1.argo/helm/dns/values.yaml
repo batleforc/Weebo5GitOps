@@ -98,7 +98,7 @@ zone:
       $TTL 1h ;
       $ORIGIN weebo.fr.
       @       IN      SOA     maxleriche.net. maxleriche\.60.gmail.com. (
-                              2026101003; serial
+                              2026101007; serial
                               7200; refresh
                               3600; retry
                               1209600; expire
