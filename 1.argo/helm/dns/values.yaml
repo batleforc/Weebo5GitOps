@@ -12,7 +12,6 @@ zone:
                               3600 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
-      @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       @                   600     IN TXT              "google-site-verification=6V23ppVxZ_rzTlJ8QO01KYH1J0bTGRN5JPc6eKavqeU"
       @                   3600    TXT                 "v=spf1 -all"
@@ -105,7 +104,6 @@ zone:
                               3600 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
-      @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       weebo.fr.       600     IN TXT "v=spf1 -all"
       _dmarc          3600    TXT    "v=DMARC1; p=reject"
@@ -149,7 +147,6 @@ zone:
                               3600 ) ; minimum
       @                   IN      NS                  batleforc.fr.
       @                   IN      NS                  ns3082912.ip-94-23-38.eu.
-      @                   IN      NS                  sdns2.ovh.net.
       @                   3600    CAA       0  issue "letsencrypt.org"
       batlehub.dev.       3600    A                   94.23.38.81
       batlehub.dev.       3600    AAAA                2001:41d0:2:2751::1
@@ -169,7 +166,9 @@ zone:
       ovhmo-selector-1._domainkey.batlehub.dev.      3600    CNAME               ovhmo-selector-1._domainkey.4982726.fv.dkim.mail.ovh.net.
       ovhmo-selector-2._domainkey.batlehub.dev.      3600    CNAME               ovhmo-selector-2._domainkey.4982727.fv.dkim.mail.ovh.net.
 
-# DNS secondaire OVH (sdns2.ovh.net) autorisé à faire l'AXFR
+# DNS secondaire OVH (sdns2.ovh.net) autorisé à faire l'AXFR.
+# Seule maxleriche.net y est déclarée : ne pas remettre sdns2 en NS des autres zones tant qu'OVH
+# ne les sert pas (il répond REFUSED et bloque le self-check DNS-01 de cert-manager).
 secondaryDns:
   ips:
     - 213.251.188.141
@@ -183,7 +182,12 @@ forwarders:
 bind9:
   image: ubuntu/bind9
   tag: 9.20-26.04_stable
-  initImage: busybox:1.38.0
+  # Image avec shell + named-compilezone pour préparer les zones (files/prepare-zones.sh)
+  initImage: internetsystemsconsortium/bind9:9.20@sha256:978201d91548ec63c3b1c1befd5e6a3c9fa127f79f9058fd82d8e3493fe90ce1
+  # Volume persistant des zones : garde journal et enregistrements dynamiques entre les redémarrages
+  zoneStorage:
+    storageClassName: local-path
+    size: 256Mi
 
 tsig:
   # One-shot job: changing these images makes the Job spec immutable-conflict,

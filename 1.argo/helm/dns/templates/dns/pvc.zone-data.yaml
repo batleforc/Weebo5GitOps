@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dns-zone-data
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.bind9.zoneStorage.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.bind9.zoneStorage.size }}

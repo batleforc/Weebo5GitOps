@@ -7,6 +7,9 @@ metadata:
     app: dns-server
 spec:
   replicas: 1
+  # Un seul named à la fois sur le volume des zones (pas de double écriture journal/dump pendant un rollout)
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: dns-server
@@ -15,37 +18,30 @@ spec:
       annotations:
         checksum/config: '{{ include (print $.Template.BasePath "/dns/configmap.zone.yaml") . | sha256sum }}'
         checksum/named: '{{ include (print $.Template.BasePath "/dns/configmap.named.yaml") . | sha256sum }}'
+        checksum/prepare-zones: '{{ .Files.Get "files/prepare-zones.sh" | sha256sum }}'
       labels:
         app: dns-server
     spec:
       initContainers:
-        # Les ConfigMaps sont en lecture seule : on copie les zones dans un volume inscriptible
-        - name: copy-zones
-          # L'image bind9 n'a pas de shell
+        # Prépare les zones sur le volume persistant (voir files/prepare-zones.sh) :
+        # source inchangée -> zone live conservée ; source modifiée -> fusion avec les enregistrements dynamiques.
+        - name: prepare-zones
+          # L'image ubuntu/bind9 n'a pas de shell
           image: {{ .Values.bind9.initImage }}
           command:
-            - sh
-            - -c
-            - |
-              cp -L /zones-src/* /var/lib/bind/zones/
-              # Serial = date/heure du démarrage (YYMMDDHHMM, UTC) pour qu'il ne régresse pas après un
-              # redémarrage (updates dynamiques perdus) et que le secondaire OVH reprenne bien la zone.
-              # Précision à la minute : deux déploiements dans la même heure ont bien des serials différents.
-              # YYMMDDHHMM (> 2026101010) reste sous 2^32 jusqu'en 2042. On garde le serial du fichier s'il est plus grand.
-              NEW=$(date -u +%y%m%d%H%M)
-              for f in /var/lib/bind/zones/*; do
-                CUR=$(grep -oE '[0-9]+; *serial' "$f" | grep -oE '^[0-9]+')
-                if [ -n "$CUR" ] && [ "$NEW" -gt "$CUR" ]; then
-                  sed -i -E "s/[0-9]+(; *serial)/$NEW\1/" "$f"
-                fi
-                echo "$f: serial ${CUR} -> $(grep -oE '[0-9]+; *serial' "$f" | grep -oE '^[0-9]+')"
-              done
-              # L'utilisateur bind n'existe pas dans busybox : on ouvre les droits pour que named puisse écrire
-              chmod 0777 /var/lib/bind/zones
-              chmod 0666 /var/lib/bind/zones/*
+            - /bin/sh
+            - /scripts/prepare-zones.sh
+            - /zones-src
+            - /var/lib/bind/zones
+            {{- range $key, $value := .Values.zone }}
+            - "{{ $key }}={{ $value.zone }}"
+            {{- end }}
           volumeMounts:
             - name: zone-map
               mountPath: /zones-src
+              readOnly: true
+            - name: prepare-zones
+              mountPath: /scripts
               readOnly: true
             - name: zone-data
               mountPath: /var/lib/bind/zones
@@ -70,7 +66,7 @@ spec:
             - name: named-map
               mountPath: /etc/bind/named.conf
               subPath: named.conf
-            # Zones copiées par l'initContainer : modifiables par BIND (journal, dump des updates dynamiques)
+            # Zones préparées par l'initContainer, persistantes : BIND y écrit journal et dumps des updates dynamiques
             - name: zone-data
               mountPath: /var/lib/bind/zones
             # named (utilisateur bind) doit pouvoir écrire son pid et sa session key
@@ -112,7 +108,11 @@ spec:
           secret:
             secretName: tsig-key-secret
         - name: zone-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: dns-zone-data
+        - name: prepare-zones
+          configMap:
+            name: prepare-zones
         - name: run-named
           emptyDir: {}
         {{- if .Values.httpsNsServeur.enabled }}

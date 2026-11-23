@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prepare-zones
+  namespace: {{ .Release.Namespace }}
+data:
+  prepare-zones.sh: |
+{{ .Files.Get "files/prepare-zones.sh" | indent 4 }}
