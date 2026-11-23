@@ -118,7 +118,7 @@ resource "netbird_route" "lab-dns" {
 }
 
 resource "netbird_route" "lab-pod-4" {
-  network_id = "lab-network-pod-4"
+  network_id = "lab-network-pod"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
@@ -127,7 +127,7 @@ resource "netbird_route" "lab-pod-4" {
 }
 
 resource "netbird_route" "lab-pod-6" {
-  network_id = "lab-network-pod-6"
+  network_id = "lab-network-pod"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
@@ -136,7 +136,7 @@ resource "netbird_route" "lab-pod-6" {
 }
 
 resource "netbird_route" "lab-service-4" {
-  network_id = "lab-network-svc-4"
+  network_id = "lab-network-svc"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
@@ -145,12 +145,30 @@ resource "netbird_route" "lab-service-4" {
 }
 
 resource "netbird_route" "lab-service-6" {
-  network_id = "lab-network-svc-6"
+  network_id = "lab-network-svc"
   #access_control_groups = [data.netbird_group.weebo_admin.id]
   groups      = [data.netbird_group.weebo_admin.id]
   peer_groups = [netbird_group.lab.id]
   description = "Lab service server"
   network     = "fd00:10:128::/112"
+}
+
+resource "netbird_route" "lab-exit-node-v4" {
+  network_id = "lab-exit-node"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Kubernetes Exit Node Route"
+  network     = "0.0.0.0/0"
+}
+
+resource "netbird_route" "lab-exit-node-v6" {
+  network_id = "lab-exit-node"
+  #access_control_groups = [data.netbird_group.weebo_admin.id]
+  groups      = [data.netbird_group.weebo_admin.id]
+  peer_groups = [netbird_group.lab.id]
+  description = "Kubernetes Exit Node Route v6"
+  network     = "::/0"
 }
 
 resource "netbird_nameserver_group" "lab-dns" {
